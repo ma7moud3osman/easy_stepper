@@ -4,32 +4,16 @@ const lightPrimaryOlivia = Color(0xffCB9115);
 const lightAccentOlivia = Color(0xff1F1F1F);
 const lightPrimaryShadeOlivia = Color(0xffFFECC6);
 const buttonShadeColorOlivia = Color(0xffDDA52D);
-// const buttonShadeColorfuture_pharmacy = Color(0xFF3D1861);
 const lightPrimaryEzzo = Color(0xffe97e0a);
 const lightPrimaryMaster = Color(0xFF1BA55C);
 const lightPrimaryNaas = Color(0xFF006B11);
-const splashBackground = elix_cosmaticsSplash;
 
-const elix_cosmaticsSplash = Color(0xff1B1464);
 const shoeRoomSplash = Color(0xffffffff);
 const buttonColor = lightAccentOlivia;
 const disabledButtonColor = Color(0xffEDEDED);
 const iconGreyColor = Color(0xffBABABA);
 const quantityBorderColor = Color(0xff4B4B4B);
 final captionColor = const Color(0xff505050).withOpacity(0.6);
-
-const MaterialColor primarySwatchfuture_pharmacy = MaterialColor(0xFF58287E, {
-  50: Color(0xFFEBE5F0),
-  100: Color(0xFFCDBFD8),
-  200: Color(0xFFAC94BF),
-  300: Color(0xFF8A69A5),
-  400: Color(0xFF714891),
-  500: Color(0xFF58287E),
-  600: Color(0xFF502476),
-  700: Color(0xFF471E6B),
-  800: Color(0xFF3D1861),
-  900: Color(0xFF2D0F4E),
-});
 
 const primarySwatchOlivia = MaterialColor(
   0xffCB9115,
