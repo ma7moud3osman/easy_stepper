@@ -12,6 +12,8 @@ dependencies:
   dotted_line: ^3.1.0
   flutter:
     sdk: flutter
+  flutter_screenutil: ^5.6.0
+  intl: ^0.17.0
   lottie: ^1.4.2
 
 dev_dependencies:
@@ -22,10 +24,11 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
-flutter: 
+flutter:
 
   assets:
     - assets/stepper_loading.json
+
 #
 # For details regarding assets in packages, see
 # https://flutter.dev/assets-and-images/#from-packages
