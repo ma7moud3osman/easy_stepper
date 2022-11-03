@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class EasyStep extends StatelessWidget {
   const EasyStep({
@@ -9,7 +8,7 @@ class EasyStep extends StatelessWidget {
     required this.title,
     required this.isActive,
     required this.isFinished,
-    this.lottieJson = 'assets/stepper_loading.json',
+    this.loadingWidget,
     this.shiftLeft = false,
     this.activeBackgroundColor,
     this.finishedBackgroundColor,
@@ -27,7 +26,7 @@ class EasyStep extends StatelessWidget {
   final bool isActive;
   final bool isFinished;
   final bool shiftLeft;
-  final String lottieJson;
+  final Widget? loadingWidget;
   final Color? activeBackgroundColor;
   final Color? unreachedBackgroundColor;
   final Color? finishedBackgroundColor;
@@ -71,12 +70,8 @@ class EasyStep extends StatelessWidget {
               strokeWidth: 0.8,
               padding: const EdgeInsets.all(10),
               child: isActive
-                  ? LottieBuilder.asset(
-                      lottieJson,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    )
+                  ? loadingWidget ??
+                      const Center(child: CircularProgressIndicator())
                   : Center(child: icon),
             ),
           ),

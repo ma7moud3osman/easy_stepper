@@ -32,13 +32,7 @@ class EasyStepper extends StatelessWidget {
           final step = steps[index];
           return InkWell(
             onTap: () => onChangeStep(index),
-            child: EasyStep(
-              icon: step.icon,
-              title: step.title,
-              isActive: step.isActive,
-              isFinished: step.isFinished,
-              shiftLeft: step.shiftLeft,
-            ),
+            child: step,
           );
         },
         separatorBuilder: (_, index) => StepLine(
