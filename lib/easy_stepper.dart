@@ -77,6 +77,9 @@ class EasyStepper extends StatefulWidget {
   /// The radius of individual dot within the line that separates the steps.
   final double lineDotRadius;
 
+  /// The amount of padding around the stepper.
+  final double padding;
+
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;
 
@@ -109,6 +112,7 @@ class EasyStepper extends StatefulWidget {
     this.alignment = Alignment.center,
     this.lineLength = 40,
     this.lineDotRadius = 1,
+    this.padding = 8,
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
   }) : super(key: key);
@@ -173,6 +177,7 @@ class _EasyStepperState extends State<EasyStepper> {
             ? const NeverScrollableScrollPhysics()
             : const ClampingScrollPhysics(),
         controller: _scrollController,
+        padding: EdgeInsets.all(widget.padding),
         child: widget.direction == Axis.horizontal
             ? Row(
                 mainAxisSize: MainAxisSize.min,

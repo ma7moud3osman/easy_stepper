@@ -36,11 +36,15 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 ## Horizontal-Stepper
 
-![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-horizontal.gif)
+*__With Title:__
+![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-horizontal.gif)\
+
+*__Without Title:__
+![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_horizontal_2.gif)
 
 ## Vertical-Stepper
 
-![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-vertical.gif)
+![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif)  ![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif)
 
 
 

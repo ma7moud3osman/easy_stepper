@@ -104,7 +104,10 @@ class BaseStep extends StatelessWidget {
                               size: radius * 1.1,
                               color: isFinished
                                   ? finishedIconColor ?? Colors.white
-                                  : unreachedIconColor ?? Colors.grey.shade400,
+                                  : isActive
+                                      ? Colors.white
+                                      : unreachedIconColor ??
+                                          Colors.grey.shade400,
                             ),
                           ),
                         ),
