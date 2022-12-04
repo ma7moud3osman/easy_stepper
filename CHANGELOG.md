@@ -1,3 +1,9 @@
+## 0.0.2+2
+
+### Sunday, 4th December, 2022
+
+* Minor Fixes.
+
 ## 0.0.1+1
 
 ### Sunday, 4th December, 2022
