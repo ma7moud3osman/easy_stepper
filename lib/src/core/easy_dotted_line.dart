@@ -41,7 +41,7 @@ class EasyLine extends StatelessWidget {
           brush: Paint()..color = color,
           length: length,
           dotRadius: dotRadius,
-          spacing: lineType == LineType.normal ? 0 : spacing,
+          spacing: lineType == LineType.normal ? 0.0 : spacing,
           axis: axis,
         ),
       ),
@@ -69,11 +69,21 @@ class _DottedLinePainter extends CustomPainter {
     double start = 0.0;
 
     // Length of the line is calculated by dividing the supplied length [to] by dotRadius * space.
-    final int calculatedLength = length ~/ (dotRadius * (spacing + 0.0000001));
+
+    late final int calculatedLength;
+    if (spacing == 0) {
+      calculatedLength = length ~/ dotRadius;
+    } else {
+      calculatedLength = length ~/ (dotRadius * spacing);
+    }
 
     for (int i = 1; i < calculatedLength; i++) {
       // New start becomes:
-      start += dotRadius * (spacing + 0.0000001);
+      if (spacing == 0) {
+        start += dotRadius;
+      } else {
+        start += dotRadius * spacing;
+      }
 
       canvas.drawCircle(
         Offset(

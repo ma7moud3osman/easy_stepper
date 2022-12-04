@@ -5,6 +5,7 @@
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper)
+![BuyMeACoffee](https://www.buymeacoffee.com/ma7moud3osman)
 
 ## About
 
@@ -13,6 +14,21 @@ A fully customizable, beautiful and easy to use stepper.
 ## Description
 
 The stepper widgets help you to show or collect information from users using organized steps.
+
+## Install
+
+In the `pubspec.yaml` of your flutter project, add the following dependency:
+
+```yaml
+dependencies:
+  easy_stepper: <latest_version>
+```
+
+In your library add the following import:
+
+```dart
+import 'package:easy_stepper/easy_stepper.dart';
+```
 
 ## Getting started
 
@@ -28,6 +44,49 @@ The stepper widgets help you to show or collect information from users using org
 
 * To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
+Example:
+
+```dart
+    EasyStepper(
+         activeStep: activeStep,
+         lineLength: 90,
+         lineType: LineType.normal,
+         steps: const [
+           EasyStep(
+             icon: Icon(CupertinoIcons.cart),
+             activeIcon: Icon(CupertinoIcons.cart),
+             title: 'Cart',
+             finishIcon: Icon(Icons.check_circle_outline_rounded),
+           ),
+           EasyStep(
+             icon: Icon(CupertinoIcons.info),
+             activeIcon: Icon(CupertinoIcons.info),
+             title: 'Address',
+           ),
+           EasyStep(
+             icon: Icon(CupertinoIcons.cart_fill_badge_plus),
+             activeIcon: Icon(CupertinoIcons.cart_fill_badge_plus),
+             title: 'Checkout',
+           ),
+           EasyStep(
+             icon: Icon(CupertinoIcons.money_dollar),
+             activeIcon: Icon(CupertinoIcons.money_dollar),
+             title: 'Payment',
+           ),
+           EasyStep(
+             icon: Icon(Icons.file_present_rounded),
+             activeIcon: Icon(Icons.file_present_rounded),
+             title: 'Order Details',
+           ),
+           EasyStep(
+             icon: Icon(Icons.check_circle_outline),
+             activeIcon: Icon(Icons.check_circle_outline),
+             title: 'Finish',
+           ),
+         ],
+         onStepReached: (index) => setState(() => activeStep = index),
+    ),
+```
 
 
 ## Features
@@ -44,12 +103,22 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 * __Without Title:__  
 
-![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_horizontal_2.gif)
+![Horizontal-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_horizontal_2.gif)
+
+
+* __Normal Line:__  
+
+![Horizontal-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_line.gif)
+
+
+* __With Line Text:__  
+
+![Horizontal-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_text_line.gif)
 
 
 ## Vertical-Stepper
 
-![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif)       ![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif)
+![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif)       ![Vertical-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif)   ![Vertical-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_3.gif)       ![Vertical-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_line.gif)
 
 
 
