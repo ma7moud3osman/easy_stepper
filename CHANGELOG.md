@@ -1,3 +1,9 @@
+## 0.1.2
+
+### Sunday, 5th December, 2022
+
+* Fix: Fix Normal line bug.
+
 ## 0.1.1
 
 ### Sunday, 4th December, 2022
