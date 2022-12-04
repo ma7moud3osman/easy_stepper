@@ -1,8 +1,8 @@
 name: easy_stepper
 
-description: A fully customizable, beautiful and easy to use stepper.
+description: A fully customizable, beautiful and easy to use stepper. The stepper widgets help you to show or collect information from users using organized steps.
 
-version: 0.0.2+2
+version: 0.1.0
 
 homepage: https://github.com/ma7moud3osman
 repository: https://github.com/ma7moud3osman/easy_stepper.git
