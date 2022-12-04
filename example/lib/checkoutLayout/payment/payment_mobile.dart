@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:example/components/shared_widgets.dart';
 import 'package:example/components/text_field_with_label.dart';
 import 'package:example/constants/colors.dart';
@@ -70,7 +68,6 @@ class _PaymentMobileState extends State<PaymentMobile> {
               child: const Text('Add New Card'),
             ),
           ),
-          if (showNewCardView) addNewCardView(),
           SizedBox(height: vMediumPadding),
           Divider(
             color: Theme.of(context).colorScheme.primary,
@@ -131,25 +128,6 @@ class _PaymentMobileState extends State<PaymentMobile> {
           SizedBox(height: vVeryLargeMargin),
         ],
       ),
-    );
-  }
-
-  Column addNewCardView() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: vMediumPadding),
-        const SmallHeadline(title: 'Add New Card'),
-        SizedBox(height: vMediumPadding),
-        CardViewItem(
-          cardType: 'Bank Cards',
-          cardDetails: cardDetails,
-          onCardSaved: () {
-            setState(() => showNewCardView = false);
-            log('Card Details : $cardDetails ');
-          },
-        ),
-      ],
     );
   }
 

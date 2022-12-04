@@ -1,39 +1,61 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# easy_stepper
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+![Pub Version (including pre-releases)](https://img.shields.io/pub/v/easy_stepper?include_prereleases)
+![GitHub issues](https://img.shields.io/github/issues-raw/ma7moud3osman/easy_stepper)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
+![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+## About
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A fully customizable, beautiful and easy to use stepper.
 
-## Features
+## Description
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+The stepper widgets help you to show or collect information from users using organized steps.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+* Simply import `package:easy_stepper/easy_stepper.dart`.
 
-## Usage
+* __Important:__ The `direction` argument controls whether the stepper is displayed horizontally or vertically. A horizontal Stepper can be wrapped within a Column with no issues. However, if wrapped within a row, it _must also be_ wrapped within the built-in _Expanded_ widget. The same applies to the vertical Stepper.
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+* __Validation:__ To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
 
-```dart
-const like = 'sample';
-```
+* __Controlling Steppers:__ All steppers are controlled using the `activeStep` property. You can control a stepper by tapping individual steps.
 
-## Additional information
+    * See examples __[here](https://pub.dev/packages/easy_stepper/example)__.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+* To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
+
+
+
+## Features
+
+Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. [See Example](https://pub.dev/packages/easy_stepper/example).
+
+## Horizontal-Stepper
+
+![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-horizontal.gif)
+
+## Vertical-Stepper
+
+![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-vertical.gif)
+
+
+
+## Feedback
+
+* Please file an issue __[here](https://github.com/ma7moud3osman/easy_stepper/issues).__
+
+* For more information please send me an email or connect with me.
+
+## Connect with me
+
+[![GitHub](https://github.com/ma7moud3osman/showcase/blob/main/icons/github.png)](https://github.com/ma7moud3osman)  [![LinkedIn](https://github.com/ma7moud3osman/showcase/blob/main/icons/linkedin.png)](https://www.linkedin.com/in/ma7moud3osman/)  [![Facebook](https://github.com/ma7moud3osman/showcase/blob/main/icons/facebook.png)](https://www.facebook.com/ma7moud3osmn/) [![Twitter](https://github.com/ma7moud3osman/showcase/blob/main/icons/twitter.png)](https://twitter.com/MaHmOuD_A_OsMaN) 
+
+## Please Support
+
+* ![Like](https://github.com/ma7moud3osman/showcase/blob/main/icons/thumbs_up.png) Please __Like__ to __support__!
+
+* [Buy me a Coffee](https://www.buymeacoffee.com/ma7moud3osman)

@@ -1,3 +1,7 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+### Sunday, 4th December, 2022
+
+* Initial release.
+
+* Added IconStepper.
