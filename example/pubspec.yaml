@@ -10,13 +10,13 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
-  dotted_border: ^2.0.0+3
-  dotted_line: ^3.1.0
   easy_stepper:
-    path: ../
+    git:
+      url: https://github.com/ma7moud3osman/easy_stepper
+      
+
   flutter:
     sdk: flutter
-  flutter_screenutil: ^5.6.0
   intl: ^0.17.0
 
 dev_dependencies:
@@ -26,4 +26,4 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  uses-material-design: true
+  uses-material-design: true 

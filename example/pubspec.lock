@@ -65,25 +65,20 @@ packages:
     source: hosted
     version: "1.0.5"
   dotted_border:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: dotted_border
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0+3"
-  dotted_line:
-    dependency: "direct main"
-    description:
-      name: dotted_line
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.0"
   easy_stepper:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: c910d0db5356ad88490ff404e250f7c62e29535b
+      url: "https://github.com/ma7moud3osman/easy_stepper"
+    source: git
     version: "0.0.1+1"
   fake_async:
     dependency: transitive
@@ -104,13 +99,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  flutter_screenutil:
-    dependency: "direct main"
-    description:
-      name: flutter_screenutil
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.6.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
