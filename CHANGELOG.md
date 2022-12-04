@@ -3,7 +3,9 @@
 ### Sunday, 4th December, 2022
 
 * Feature: Add text for step line.
-* Remove Dotted Border Package.
+* Feature: Add line types [Normal , Dotted].
+* Feature: Add Active & Finished Icons.
+* Remove dotted_border Package.
 
 
 ## 0.1.0

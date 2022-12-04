@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EasyDottedLine extends StatelessWidget {
+class EasyLine extends StatelessWidget {
   /// Width of the dotted line.
   final double length;
 
@@ -13,14 +13,19 @@ class EasyDottedLine extends StatelessWidget {
   /// Spacing between the dots in the dotted line.
   final double spacing;
 
+  /// The type of the line [normal, dotted].
+  final LineType lineType;
+
+  /// Line Axis.
   final Axis axis;
 
-  const EasyDottedLine({
+  const EasyLine({
     super.key,
     this.length = 50.0,
     this.color = Colors.grey,
     this.dotRadius = 1.5,
     this.spacing = 3.0,
+    this.lineType = LineType.dotted,
     this.axis = Axis.horizontal,
   });
 
@@ -36,7 +41,7 @@ class EasyDottedLine extends StatelessWidget {
           brush: Paint()..color = color,
           length: length,
           dotRadius: dotRadius,
-          spacing: spacing,
+          spacing: lineType == LineType.normal ? 0 : spacing,
           axis: axis,
         ),
       ),
@@ -64,11 +69,11 @@ class _DottedLinePainter extends CustomPainter {
     double start = 0.0;
 
     // Length of the line is calculated by dividing the supplied length [to] by dotRadius * space.
-    final int calculatedLength = length ~/ (dotRadius * spacing);
+    final int calculatedLength = length ~/ (dotRadius * (spacing + 0.0000001));
 
     for (int i = 1; i < calculatedLength; i++) {
       // New start becomes:
-      start += dotRadius * spacing;
+      start += dotRadius * (spacing + 0.0000001);
 
       canvas.drawCircle(
         Offset(
@@ -83,4 +88,9 @@ class _DottedLinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+
+enum LineType {
+  normal,
+  dotted,
 }

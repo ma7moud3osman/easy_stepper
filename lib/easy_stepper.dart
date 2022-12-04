@@ -35,6 +35,9 @@ class EasyStepper extends StatefulWidget {
   /// The color of a step text and icon when it is reached.
   final Color? activeStepTextColor;
 
+  /// The color of the step icon when it is reached.
+  final Color? activeStepIconColor;
+
   /// The border color of a step when it is reached.
   final Color? activeStepBorderColor;
 
@@ -77,6 +80,12 @@ class EasyStepper extends StatefulWidget {
   /// The radius of individual dot within the line that separates the steps.
   final double lineDotRadius;
 
+  /// The space between individual dot within the line that separates the steps.
+  final double lineSpace;
+
+  /// The type of the line [normal, dotted].
+  final LineType lineType;
+
   /// The amount of padding around the stepper.
   final double padding;
 
@@ -90,6 +99,7 @@ class EasyStepper extends StatefulWidget {
     Key? key,
     required this.activeStep,
     required this.steps,
+    this.lineType = LineType.dotted,
     this.enableStepTapping = true,
     this.direction = Axis.horizontal,
     this.onStepReached,
@@ -98,6 +108,7 @@ class EasyStepper extends StatefulWidget {
     this.unreachedStepIconColor = const Color.fromRGBO(189, 189, 189, 1),
     this.unreachedStepBorderColor = const Color.fromRGBO(189, 189, 189, 1),
     this.activeStepTextColor = Colors.green,
+    this.activeStepIconColor = Colors.white,
     this.activeStepBackgroundColor = Colors.green,
     this.activeStepBorderColor = Colors.green,
     this.finishedStepTextColor = Colors.black,
@@ -112,6 +123,7 @@ class EasyStepper extends StatefulWidget {
     this.alignment = Alignment.center,
     this.lineLength = 40,
     this.lineDotRadius = 1,
+    this.lineSpace = 5,
     this.padding = 8,
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
@@ -214,12 +226,14 @@ class _EasyStepperState extends State<EasyStepper> {
     final step = widget.steps[index];
     return BaseStep(
       step: step,
+      radius: widget.stepRadius,
       showTitle: widget.showTitle,
       isActive: index == widget.activeStep,
       isFinished: index < widget.activeStep,
       activeStepBackgroundColor: widget.activeStepBackgroundColor,
       activeStepBorderColor: widget.activeStepBorderColor,
       activeTextColor: widget.activeStepTextColor,
+      activeIconColor: widget.activeStepIconColor,
       finishedBackgroundColor: widget.finishedStepBackgroundColor,
       finishedBorderColor: widget.finishedStepBorderColor,
       finishedTextColor: widget.finishedStepTextColor,
@@ -251,20 +265,28 @@ class _EasyStepperState extends State<EasyStepper> {
                   top: axis == Axis.horizontal ? widget.stepRadius : 0,
                   bottom: axis == Axis.vertical && widget.showTitle ? 10 : 0,
                 ),
-                child: EasyDottedLine(
+                child: EasyLine(
                   length: widget.lineLength,
                   color: widget.lineColor ?? Colors.blue,
                   dotRadius: widget.lineDotRadius,
-                  spacing: 5.0,
+                  spacing: widget.lineSpace,
                   axis: axis,
+                  lineType: widget.lineType,
                 ),
               ),
               if (axis == Axis.horizontal &&
-                  widget.steps[index].lineText != null)
-                Text(
-                  widget.steps[index].lineText!,
-                  style: Theme.of(context).textTheme.overline,
+                  widget.steps[index].lineText != null) ...[
+                const SizedBox(height: 5),
+                SizedBox(
+                  width: widget.lineLength,
+                  child: Text(
+                    widget.steps[index].lineText!,
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.overline,
+                  ),
                 ),
+              ],
             ],
           )
         : const Offstage();

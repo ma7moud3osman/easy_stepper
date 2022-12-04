@@ -10,9 +10,11 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
-  easy_stepper:
-    git:
-      url: https://github.com/ma7moud3osman/easy_stepper
+  easy_stepper: 
+    path: ../
+    # git:
+    #   url: https://github.com/ma7moud3osman/easy_stepper
+    #   version: 0.1.1
       
 
   flutter:

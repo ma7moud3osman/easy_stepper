@@ -19,6 +19,8 @@ class _MyAppState extends State<MyApp> {
     const Icon(CupertinoIcons.info),
     const Icon(CupertinoIcons.cart_fill_badge_plus),
     const Icon(CupertinoIcons.money_dollar),
+    const Icon(Icons.file_present_rounded),
+    const Icon(Icons.check_circle_outline),
     const Icon(Icons.check_circle_outline),
   ];
 
@@ -28,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Example',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
       home: Scaffold(
         body: SafeArea(
@@ -38,10 +40,14 @@ class _MyAppState extends State<MyApp> {
               children: [
                 EasyStepper(
                   activeStep: activeStep,
+                  lineLength: 90,
+                  lineType: LineType.normal,
                   steps: const [
                     EasyStep(
                       icon: Icon(CupertinoIcons.cart),
                       title: 'Cart',
+                      finishIcon: Icon(Icons.check_circle_outline_rounded),
+                      lineText: 'First Line',
                     ),
                     EasyStep(
                       icon: Icon(CupertinoIcons.info),
@@ -54,6 +60,10 @@ class _MyAppState extends State<MyApp> {
                     EasyStep(
                       icon: Icon(CupertinoIcons.money_dollar),
                       title: 'Payment',
+                    ),
+                    EasyStep(
+                      icon: Icon(Icons.file_present_rounded),
+                      title: 'Order Details',
                     ),
                     EasyStep(
                       icon: Icon(Icons.check_circle_outline),

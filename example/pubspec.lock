@@ -64,22 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  dotted_border:
-    dependency: transitive
-    description:
-      name: dotted_border
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0+3"
   easy_stepper:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a1a53747891d216dd75bfcebd4dea3be6cafac77
-      url: "https://github.com/ma7moud3osman/easy_stepper"
-    source: git
-    version: "0.1.0"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.1.1"
   fake_async:
     dependency: transitive
     description:
@@ -160,20 +151,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
-  path_drawing:
-    dependency: transitive
-    description:
-      name: path_drawing
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   pointycastle:
     dependency: transitive
     description:

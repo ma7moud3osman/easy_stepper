@@ -21,6 +21,7 @@ class BaseStep extends StatelessWidget {
     required this.finishedBorderColor,
     required this.unreachedBorderColor,
     required this.activeTextColor,
+    required this.activeIconColor,
     required this.finishedTextColor,
     required this.unreachedTextColor,
     required this.unreachedIconColor,
@@ -39,6 +40,7 @@ class BaseStep extends StatelessWidget {
   final Color? unreachedBorderColor;
   final Color? finishedBorderColor;
   final Color? activeTextColor;
+  final Color? activeIconColor;
   final Color? unreachedTextColor;
   final Color? unreachedIconColor;
   final Color? finishedTextColor;
@@ -79,7 +81,7 @@ class BaseStep extends StatelessWidget {
                           ? finishedBorderColor ?? Colors.transparent
                           : unreachedBorderColor ?? Colors.grey.shade400,
                   strokeWidth: 0.8,
-                  child: isActive
+                  child: isActive && step.activeIcon == null
                       ? Center(
                           child: LottieBuilder.asset(
                             activeStepBackgroundColor != null &&
@@ -98,12 +100,16 @@ class BaseStep extends StatelessWidget {
                           height: radius * 2,
                           child: Center(
                             child: Icon(
-                              step.icon.icon,
+                              isActive && step.activeIcon != null
+                                  ? step.activeIcon!.icon
+                                  : isFinished && step.finishIcon != null
+                                      ? step.finishIcon!.icon
+                                      : step.icon.icon,
                               size: radius * 1.1,
                               color: isFinished
                                   ? finishedIconColor ?? Colors.white
                                   : isActive
-                                      ? Colors.white
+                                      ? activeIconColor ?? Colors.white
                                       : unreachedIconColor ??
                                           Colors.grey.shade400,
                             ),
@@ -128,6 +134,7 @@ class BaseStep extends StatelessWidget {
                               ? finishedTextColor ?? Colors.black
                               : unreachedTextColor ?? Colors.grey.shade400,
                       height: 1,
+                      fontSize: radius * 0.55,
                     ),
               ),
             ),
