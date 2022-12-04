@@ -213,8 +213,7 @@ class _EasyStepperState extends State<EasyStepper> {
   BaseStep _buildStep(int index) {
     final step = widget.steps[index];
     return BaseStep(
-      icon: step.icon,
-      title: step.title,
+      step: step,
       showTitle: widget.showTitle,
       isActive: index == widget.activeStep,
       isFinished: index < widget.activeStep,
@@ -245,18 +244,28 @@ class _EasyStepperState extends State<EasyStepper> {
 
   Widget _buildDottedLine(int index, Axis axis) {
     return index < widget.steps.length - 1
-        ? Padding(
-            padding: EdgeInsets.only(
-              top: axis == Axis.horizontal ? widget.stepRadius : 0,
-              bottom: axis == Axis.vertical && widget.showTitle ? 10 : 0,
-            ),
-            child: EasyDottedLine(
-              length: widget.lineLength,
-              color: widget.lineColor ?? Colors.blue,
-              dotRadius: widget.lineDotRadius,
-              spacing: 5.0,
-              axis: axis,
-            ),
+        ? Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: axis == Axis.horizontal ? widget.stepRadius : 0,
+                  bottom: axis == Axis.vertical && widget.showTitle ? 10 : 0,
+                ),
+                child: EasyDottedLine(
+                  length: widget.lineLength,
+                  color: widget.lineColor ?? Colors.blue,
+                  dotRadius: widget.lineDotRadius,
+                  spacing: 5.0,
+                  axis: axis,
+                ),
+              ),
+              if (axis == Axis.horizontal &&
+                  widget.steps[index].lineText != null)
+                Text(
+                  widget.steps[index].lineText!,
+                  style: Theme.of(context).textTheme.overline,
+                ),
+            ],
           )
         : const Offstage();
   }

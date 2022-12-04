@@ -1,5 +1,5 @@
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
+import 'package:easy_stepper/easy_stepper.dart';
+import 'package:easy_stepper/src/core/easy_border.dart';
 import 'package:lottie/lottie.dart';
 
 /// Callback is fired when a step is reached.
@@ -8,8 +8,7 @@ typedef OnStepReached = void Function(int index);
 class BaseStep extends StatelessWidget {
   const BaseStep({
     Key? key,
-    required this.icon,
-    required this.title,
+    required this.step,
     required this.isActive,
     required this.isFinished,
     required this.onStepSelected,
@@ -27,8 +26,7 @@ class BaseStep extends StatelessWidget {
     required this.unreachedIconColor,
     required this.finishedIconColor,
   }) : super(key: key);
-  final Icon icon;
-  final String? title;
+  final EasyStep step;
   final bool isActive;
   final bool isFinished;
   final VoidCallback? onStepSelected;
@@ -73,7 +71,7 @@ class BaseStep extends StatelessWidget {
                           : unreachedBackgroundColor ?? Colors.transparent,
                 ),
                 alignment: Alignment.center,
-                child: DottedBorder(
+                child: EasyBorder(
                   borderType: BorderType.Circle,
                   color: isActive
                       ? activeStepBorderColor ?? Colors.white
@@ -81,7 +79,7 @@ class BaseStep extends StatelessWidget {
                           ? finishedBorderColor ?? Colors.transparent
                           : unreachedBorderColor ?? Colors.grey.shade400,
                   strokeWidth: 0.8,
-                  child: isActive && title != 'Finish'
+                  child: isActive
                       ? Center(
                           child: LottieBuilder.asset(
                             activeStepBackgroundColor != null &&
@@ -100,7 +98,7 @@ class BaseStep extends StatelessWidget {
                           height: radius * 2,
                           child: Center(
                             child: Icon(
-                              icon.icon,
+                              step.icon.icon,
                               size: radius * 1.1,
                               color: isFinished
                                   ? finishedIconColor ?? Colors.white
@@ -120,7 +118,7 @@ class BaseStep extends StatelessWidget {
             SizedBox(
               width: radius * 2.5,
               child: Text(
-                title ?? '',
+                step.title ?? '',
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
