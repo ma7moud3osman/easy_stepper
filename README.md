@@ -5,7 +5,7 @@
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper)
-![BuyMeACoffee](https://www.buymeacoffee.com/ma7moud3osman)
+[BuyMeACoffee](https://www.buymeacoffee.com/ma7moud3osman)
 
 ## About
 
@@ -127,6 +127,13 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 * Please file an issue __[here](https://github.com/ma7moud3osman/easy_stepper/issues).__
 
 * For more information please send me an email or connect with me.
+
+## Contributions
+
+Feel free to contribute to this project.
+
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/ma7moud3osman/easy_stepper/issues).  
+If you fixed a bug or implemented a feature, please send a [pull request](https://github.com/ma7moud3osman/easy_stepper/pulls).
 
 ## Connect with me
 
