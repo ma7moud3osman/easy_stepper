@@ -1,3 +1,11 @@
+## 0.1.1
+
+### Sunday, 4th December, 2022
+
+* Feature: Add text for step line.
+* Remove Dotted Border Package.
+
+
 ## 0.1.0
 
 ### Sunday, 4th December, 2022
