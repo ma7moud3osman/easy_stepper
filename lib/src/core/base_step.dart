@@ -85,8 +85,8 @@ class BaseStep extends StatelessWidget {
                       ? Center(
                           child: Lottie.asset(
                             activeStepBackgroundColor != null && activeStepBackgroundColor!.computeLuminance() > 0.35
-                                ? 'assets/loading_black.json'
-                                : 'assets/loading_white.json',
+                                ? "packages/easy_stepper/assets/loading_black.json"
+                                : "packages/easy_stepper/assets/loading_white.json",
                             width: radius * 1.6,
                             height: radius * 1.6,
                             fit: BoxFit.contain,
