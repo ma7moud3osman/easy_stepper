@@ -54,8 +54,8 @@ class BaseStep extends StatelessWidget {
       child: Column(
         children: [
           Material(
-            borderRadius: BorderRadius.circular(60),
             color: Colors.transparent,
+            shape: const CircleBorder(),
             clipBehavior: Clip.antiAlias,
             child: InkWell(
               onTap: onStepSelected,
@@ -83,13 +83,10 @@ class BaseStep extends StatelessWidget {
                   strokeWidth: 0.8,
                   child: isActive && step.activeIcon == null
                       ? Center(
-                          child: LottieBuilder.asset(
-                            activeStepBackgroundColor != null &&
-                                    activeStepBackgroundColor!
-                                            .computeLuminance() >
-                                        0.35
-                                ? 'assets/animations/loading_black.json'
-                                : 'assets/animations/loading_white.json',
+                          child: Lottie.asset(
+                            activeStepBackgroundColor != null && activeStepBackgroundColor!.computeLuminance() > 0.35
+                                ? 'assets/loading_black.json'
+                                : 'assets/loading_white.json',
                             width: radius * 1.6,
                             height: radius * 1.6,
                             fit: BoxFit.contain,
@@ -110,8 +107,7 @@ class BaseStep extends StatelessWidget {
                                   ? finishedIconColor ?? Colors.white
                                   : isActive
                                       ? activeIconColor ?? Colors.white
-                                      : unreachedIconColor ??
-                                          Colors.grey.shade400,
+                                      : unreachedIconColor ?? Colors.grey.shade400,
                             ),
                           ),
                         ),

@@ -282,9 +282,7 @@ class DashOffset {
   final _DashOffsetType _dashOffsetType;
 
   double _calculate(double length) {
-    return _dashOffsetType == _DashOffsetType.Absolute
-        ? _rawVal
-        : length * _rawVal;
+    return _dashOffsetType == _DashOffsetType.Absolute ? _rawVal : length * _rawVal;
   }
 
   @override
@@ -293,9 +291,7 @@ class DashOffset {
       return true;
     }
 
-    return other is DashOffset &&
-        other._rawVal == _rawVal &&
-        other._dashOffsetType == _dashOffsetType;
+    return other is DashOffset && other._rawVal == _rawVal && other._dashOffsetType == _dashOffsetType;
   }
 
   @override

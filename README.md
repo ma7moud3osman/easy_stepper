@@ -5,7 +5,6 @@
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper)
-[BuyMeACoffee](https://www.buymeacoffee.com/ma7moud3osman)
 
 ## About
 
@@ -55,8 +54,8 @@ Example:
            EasyStep(
              icon: Icon(CupertinoIcons.cart),
              activeIcon: Icon(CupertinoIcons.cart),
-             title: 'Cart',
              finishIcon: Icon(Icons.check_circle_outline_rounded),
+             title: 'Cart',
            ),
            EasyStep(
              icon: Icon(CupertinoIcons.info),
@@ -118,7 +117,7 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 ## Vertical-Stepper
 
-![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif)       ![Vertical-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif)   ![Vertical-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_3.gif)       ![Vertical-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_line.gif)
+![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif)       ![Vertical-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif)    ![Vertical-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_line.gif)   ![Vertical-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_3.gif)   
 
 
 
