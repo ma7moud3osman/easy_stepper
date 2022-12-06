@@ -84,7 +84,10 @@ class BaseStep extends StatelessWidget {
                   child: isActive && step.activeIcon == null
                       ? Center(
                           child: Lottie.asset(
-                            activeStepBackgroundColor != null && activeStepBackgroundColor!.computeLuminance() > 0.35
+                            activeStepBackgroundColor != null &&
+                                    activeStepBackgroundColor!
+                                            .computeLuminance() >
+                                        0.35
                                 ? "packages/easy_stepper/assets/loading_black.json"
                                 : "packages/easy_stepper/assets/loading_white.json",
                             width: radius * 1.6,
@@ -107,7 +110,8 @@ class BaseStep extends StatelessWidget {
                                   ? finishedIconColor ?? Colors.white
                                   : isActive
                                       ? activeIconColor ?? Colors.white
-                                      : unreachedIconColor ?? Colors.grey.shade400,
+                                      : unreachedIconColor ??
+                                          Colors.grey.shade400,
                             ),
                           ),
                         ),
