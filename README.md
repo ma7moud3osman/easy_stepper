@@ -103,6 +103,7 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 ![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-horizontal.gif)
 
+![horizontal_dotted](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_dotted.gif)
 
 
 * __Without Title:__  
@@ -110,12 +111,9 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 ![Horizontal-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_horizontal_2.gif)
 
 
-* __Normal Line:__  
-
-![Horizontal-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_line.gif)
-
-
 * __With Line Text:__  
+
+![horizontal_with_text](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_with_text.gif)
 
 ![Horizontal-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_text_line.gif)
 
