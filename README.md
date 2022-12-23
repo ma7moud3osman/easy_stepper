@@ -133,10 +133,11 @@ If you fixed a bug or implemented a feature, please send a [pull request](https:
 
 ## Connect with me
 
-[![GitHub](https://github.com/ma7moud3osman/showcase/blob/main/icons/github.png)](https://github.com/ma7moud3osman)  [![LinkedIn](https://github.com/ma7moud3osman/showcase/blob/main/icons/linkedin.png)](https://www.linkedin.com/in/ma7moud3osman/)  [![Twitter](https://github.com/ma7moud3osman/showcase/blob/main/icons/twitter.png)](https://twitter.com/MaHmOuD_A_OsMaN) 
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ma7moud3osman)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ma7moud3osman/)  [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/MaHmOuD_A_OsMaN) 
+![Love](http://ForTheBadge.com/images/badges/built-with-love.svg)
 
 ## Support
 
 * ![Like](https://github.com/ma7moud3osman/showcase/blob/main/icons/thumbs_up.png) Please __Like__ to __support__!
 
-* ![https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black](https://www.buymeacoffee.com/ma7moud3osman)
+* [![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/ma7moud3osman)
