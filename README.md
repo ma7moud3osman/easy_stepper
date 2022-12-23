@@ -139,4 +139,4 @@ If you fixed a bug or implemented a feature, please send a [pull request](https:
 
 * ![Like](https://github.com/ma7moud3osman/showcase/blob/main/icons/thumbs_up.png) Please __Like__ to __support__!
 
-* [https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black](https://www.buymeacoffee.com/ma7moud3osman)
+* ![https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black](https://www.buymeacoffee.com/ma7moud3osman)
