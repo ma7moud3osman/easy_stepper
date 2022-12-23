@@ -1,4 +1,4 @@
-[Easy Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/logo.png)
+![Easy Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/logo.png)
 
 ## About
 
