@@ -21,6 +21,8 @@ class _MyAppState extends State<MyApp> {
       title: 'Example',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          backgroundColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
           primarySwatch: Colors.purple,
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.purple,
