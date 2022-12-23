@@ -2,13 +2,13 @@
 
 # easy_stepper
 
-![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub.dev&color=blue)
+![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub&color=blue)
 ![GitHub Stars](https://img.shields.io/github/stars/ma7moud3osman/easy_stepper?color=yellow&label=Stars)
-![Pub Points](https://img.shields.io/pub/points/easy_stepper?color=2E8B57&label=pub%20points)
+![Pub Points](https://img.shields.io/pub/points/easy_stepper?color=2E8B57)
 ![GitHub opened issues](https://img.shields.io/github/issues/ma7moud3osman/easy_stepper?color=red)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper?label=size)
 ![GitHub forks](https://img.shields.io/github/forks/ma7moud3osman/easy_stepper)
 ![License](https://img.shields.io/badge/License-MIT-purple.svg)
 
