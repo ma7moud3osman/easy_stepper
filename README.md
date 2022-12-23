@@ -2,14 +2,14 @@
 
 ## About
 
-![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub&color=blue)
-![GitHub Stars](https://img.shields.io/github/stars/ma7moud3osman/easy_stepper?color=yellow&label=Stars)
-![Pub Points](https://img.shields.io/pub/points/easy_stepper?color=2E8B57)
-![GitHub opened issues](https://img.shields.io/github/issues/ma7moud3osman/easy_stepper?color=red)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
-![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
+[![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub&color=blue)](https://pub.dev/packages/easy_stepper/versions)
+[![GitHub Stars](https://img.shields.io/github/stars/ma7moud3osman/easy_stepper?color=yellow&label=Stars)](https://github.com/ma7moud3osman/easy_stepper/stargazers)
+[![Pub Points](https://img.shields.io/pub/points/easy_stepper?color=2E8B57)](https://pub.dev/packages/easy_stepper/score)
+[![GitHub opened issues](https://img.shields.io/github/issues/ma7moud3osman/easy_stepper?color=red)](https://github.com/ma7moud3osman/easy_stepper/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)](https://github.com/ma7moud3osman/easy_stepper/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)](https://github.com/ma7moud3osman/easy_stepper/commits/main)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper?label=size)
-![GitHub forks](https://img.shields.io/github/forks/ma7moud3osman/easy_stepper)
+[![GitHub forks](https://img.shields.io/github/forks/ma7moud3osman/easy_stepper)](https://github.com/ma7moud3osman/easy_stepper/network/members)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](https://github.com/ma7moud3osman/easy_stepper/blob/main/LICENSE)
 
 
@@ -134,10 +134,15 @@ If you fixed a bug or implemented a feature, please send a [pull request](https:
 ## Connect with me
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ma7moud3osman)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ma7moud3osman/)  [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/MaHmOuD_A_OsMaN) 
-![Love](http://ForTheBadge.com/images/badges/built-with-love.svg)
+
 
 ## Support
 
 * ![Like](https://github.com/ma7moud3osman/showcase/blob/main/icons/thumbs_up.png) Please __Like__ to __support__!
 
 * [![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/ma7moud3osman)
+
+##
+(https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+(https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+(http://ForTheBadge.com/images/badges/built-with-love.svg)
