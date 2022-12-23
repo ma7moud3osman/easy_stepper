@@ -10,7 +10,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper?label=size)
 ![GitHub forks](https://img.shields.io/github/forks/ma7moud3osman/easy_stepper)
-![License](https://img.shields.io/badge/License-MIT-purple.svg)
+[![License](https://img.shields.io/badge/License-MIT-purple.svg)](https://github.com/ma7moud3osman/easy_stepper/blob/main/LICENSE)
 
 
 A fully customizable, beautiful and easy to use stepper widgets with different variations.
