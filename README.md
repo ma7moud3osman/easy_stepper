@@ -1,6 +1,6 @@
 ![Easy Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/logo.png)
 
-# easy_stepper
+## About
 
 ![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub&color=blue)
 ![GitHub Stars](https://img.shields.io/github/stars/ma7moud3osman/easy_stepper?color=yellow&label=Stars)
@@ -12,7 +12,6 @@
 ![GitHub forks](https://img.shields.io/github/forks/ma7moud3osman/easy_stepper)
 ![License](https://img.shields.io/badge/License-MIT-purple.svg)
 
-## About
 
 A fully customizable, beautiful and easy to use stepper widgets with different variations.
 
