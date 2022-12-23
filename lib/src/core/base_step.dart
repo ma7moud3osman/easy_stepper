@@ -26,6 +26,8 @@ class BaseStep extends StatelessWidget {
     required this.unreachedTextColor,
     required this.unreachedIconColor,
     required this.finishedIconColor,
+    required this.lottieAnimation,
+    this.borderThickness,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -45,6 +47,8 @@ class BaseStep extends StatelessWidget {
   final Color? unreachedIconColor;
   final Color? finishedTextColor;
   final Color? finishedIconColor;
+  final double? borderThickness;
+  final String? lottieAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -67,29 +71,35 @@ class BaseStep extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isFinished
-                      ? finishedBackgroundColor ?? Colors.black
+                      ? finishedBackgroundColor ??
+                          Theme.of(context).colorScheme.primary
                       : isActive
-                          ? activeStepBackgroundColor ?? Colors.green
+                          ? activeStepBackgroundColor ??
+                              Theme.of(context).colorScheme.secondary
                           : unreachedBackgroundColor ?? Colors.transparent,
                 ),
                 alignment: Alignment.center,
                 child: EasyBorder(
                   borderType: BorderType.Circle,
                   color: isActive
-                      ? activeStepBorderColor ?? Colors.white
+                      ? activeStepBorderColor ??
+                          Theme.of(context).scaffoldBackgroundColor
                       : isFinished
                           ? finishedBorderColor ?? Colors.transparent
                           : unreachedBorderColor ?? Colors.grey.shade400,
-                  strokeWidth: 0.8,
+                  strokeWidth: borderThickness ?? 0.8,
                   child: isActive && step.activeIcon == null
                       ? Center(
                           child: Lottie.asset(
-                            activeStepBackgroundColor != null &&
-                                    activeStepBackgroundColor!
-                                            .computeLuminance() >
-                                        0.35
-                                ? "packages/easy_stepper/assets/loading_black.json"
-                                : "packages/easy_stepper/assets/loading_white.json",
+                            lottieAnimation ??
+                                (activeStepBackgroundColor != null &&
+                                            activeStepBackgroundColor!
+                                                    .computeLuminance() >
+                                                0.35 ||
+                                        activeStepBackgroundColor ==
+                                            Colors.transparent
+                                    ? "packages/easy_stepper/assets/loading_black.json"
+                                    : "packages/easy_stepper/assets/loading_white.json"),
                             width: radius * 1.6,
                             height: radius * 1.6,
                             fit: BoxFit.contain,
@@ -129,9 +139,11 @@ class BaseStep extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       color: isActive
-                          ? activeTextColor ?? Colors.green
+                          ? activeTextColor ??
+                              Theme.of(context).colorScheme.secondary
                           : isFinished
-                              ? finishedTextColor ?? Colors.black
+                              ? finishedTextColor ??
+                                  Theme.of(context).colorScheme.primary
                               : unreachedTextColor ?? Colors.grey.shade400,
                       height: 1,
                       fontSize: radius * 0.55,

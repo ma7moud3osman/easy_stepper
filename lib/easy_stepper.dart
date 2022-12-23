@@ -89,11 +89,29 @@ class EasyStepper extends StatefulWidget {
   /// The amount of padding around the stepper.
   final double padding;
 
+  @Deprecated(
+      "use 'stepAnimationCurve' instead, This feature was deprecated after v0.1.4+1")
+
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;
 
+  /// The curve of the animation to show when a step is reached.
+  final Curve? stepAnimationCurve;
+
+  @Deprecated(
+      "use 'stepAnimationDuration' instead, This feature was deprecated after v0.1.4+1")
+
   /// The duration of the animation effect to show when a step is reached.
   final Duration stepReachedAnimationDuration;
+
+  /// The duration of the animation effect to show when a step is reached.
+  final Duration? stepAnimationDuration;
+
+  ///The thickness of the step border.
+  final double? borderThickness;
+
+  ///The loading animation shows when the step is active. Hence, use lottie json files only by adding its path.
+  final String? loadingAnimation;
 
   const EasyStepper({
     Key? key,
@@ -103,19 +121,19 @@ class EasyStepper extends StatefulWidget {
     this.enableStepTapping = true,
     this.direction = Axis.horizontal,
     this.onStepReached,
-    this.unreachedStepBackgroundColor = Colors.transparent,
-    this.unreachedStepTextColor = const Color.fromRGBO(189, 189, 189, 1),
-    this.unreachedStepIconColor = const Color.fromRGBO(189, 189, 189, 1),
-    this.unreachedStepBorderColor = const Color.fromRGBO(189, 189, 189, 1),
-    this.activeStepTextColor = Colors.green,
-    this.activeStepIconColor = Colors.white,
-    this.activeStepBackgroundColor = Colors.green,
-    this.activeStepBorderColor = Colors.green,
-    this.finishedStepTextColor = Colors.black,
-    this.finishedStepBackgroundColor = Colors.black,
-    this.finishedStepBorderColor = Colors.black,
-    this.finishedStepIconColor = Colors.white,
-    this.lineColor = Colors.grey,
+    this.unreachedStepBackgroundColor,
+    this.unreachedStepTextColor,
+    this.unreachedStepIconColor,
+    this.unreachedStepBorderColor,
+    this.activeStepTextColor,
+    this.activeStepIconColor,
+    this.activeStepBackgroundColor,
+    this.activeStepBorderColor,
+    this.finishedStepTextColor,
+    this.finishedStepBackgroundColor,
+    this.finishedStepBorderColor,
+    this.finishedStepIconColor,
+    this.lineColor,
     this.stepRadius = 30,
     this.steppingEnabled = true,
     this.disableScroll = false,
@@ -125,8 +143,12 @@ class EasyStepper extends StatefulWidget {
     this.lineDotRadius = 1,
     this.lineSpace = 5,
     this.padding = 8,
-    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationEffect = Curves.linear,
+    this.stepAnimationCurve,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.stepAnimationDuration,
+    this.borderThickness,
+    this.loadingAnimation,
   }) : super(key: key);
 
   @override
@@ -165,9 +187,10 @@ class _EasyStepperState extends State<EasyStepper> {
     // ! Provide detailed explanation.
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
-        i * ((widget.stepRadius * 2) + widget.lineLength),
-        duration: widget.stepReachedAnimationDuration,
-        curve: widget.stepReachedAnimationEffect,
+        i * ((widget.stepRadius * 1) + widget.lineLength),
+        duration:
+            widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
+        curve: widget.stepAnimationCurve ?? widget.stepReachedAnimationEffect,
       );
 
       if (_selectedIndex == i) break;
@@ -183,22 +206,28 @@ class _EasyStepperState extends State<EasyStepper> {
 
     return Align(
       alignment: widget.alignment,
-      child: SingleChildScrollView(
-        scrollDirection: widget.direction,
-        physics: widget.disableScroll
-            ? const NeverScrollableScrollPhysics()
-            : const ClampingScrollPhysics(),
-        controller: _scrollController,
-        padding: EdgeInsets.all(widget.padding),
-        child: widget.direction == Axis.horizontal
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: _buildEasySteps(),
-              )
-            : Column(
-                children: _buildEasySteps(),
-              ),
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          overscroll.disallowIndicator();
+          return false;
+        },
+        child: SingleChildScrollView(
+          scrollDirection: widget.direction,
+          physics: widget.disableScroll
+              ? const NeverScrollableScrollPhysics()
+              : const ClampingScrollPhysics(),
+          controller: _scrollController,
+          padding: EdgeInsets.all(widget.padding),
+          child: widget.direction == Axis.horizontal
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: _buildEasySteps(),
+                )
+              : Column(
+                  children: _buildEasySteps(),
+                ),
+        ),
       ),
     );
   }
@@ -228,6 +257,7 @@ class _EasyStepperState extends State<EasyStepper> {
       step: step,
       radius: widget.stepRadius,
       showTitle: widget.showTitle,
+      borderThickness: widget.borderThickness,
       isActive: index == widget.activeStep,
       isFinished: index < widget.activeStep,
       activeStepBackgroundColor: widget.activeStepBackgroundColor,
@@ -242,6 +272,7 @@ class _EasyStepperState extends State<EasyStepper> {
       unreachedBorderColor: widget.unreachedStepBorderColor,
       unreachedTextColor: widget.unreachedStepTextColor,
       unreachedIconColor: widget.unreachedStepIconColor,
+      lottieAnimation: widget.loadingAnimation,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled) {
@@ -262,7 +293,9 @@ class _EasyStepperState extends State<EasyStepper> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: axis == Axis.horizontal ? widget.stepRadius : 0,
+                  top: axis == Axis.horizontal
+                      ? (widget.stepRadius - widget.lineDotRadius)
+                      : 0,
                   bottom: axis == Axis.vertical && widget.showTitle ? 10 : 0,
                 ),
                 child: EasyLine(

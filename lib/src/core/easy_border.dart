@@ -17,7 +17,7 @@ class EasyBorder extends StatelessWidget {
   final PathBuilder? customPath;
 
   EasyBorder({
-    super.key,
+    key,
     required this.child,
     this.color = Colors.black,
     this.strokeWidth = 1,
@@ -28,7 +28,7 @@ class EasyBorder extends StatelessWidget {
     this.radius = const Radius.circular(0),
     this.strokeCap = StrokeCap.butt,
     this.customPath,
-  }) {
+  }) : super(key: key) {
     assert(_isValidDashPattern(dashPattern), 'Invalid dash pattern');
   }
 

@@ -20,31 +20,47 @@ class EasyLine extends StatelessWidget {
   final Axis axis;
 
   const EasyLine({
-    super.key,
+    key,
     this.length = 50.0,
     this.color = Colors.grey,
     this.dotRadius = 1.5,
     this.spacing = 3.0,
     this.lineType = LineType.dotted,
     this.axis = Axis.horizontal,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // If this is not applied, top half of the dot gets offscreen, hence, hidden.
-      margin: EdgeInsets.only(top: dotRadius),
-      width: axis == Axis.horizontal ? length : 0.0,
-      height: axis == Axis.vertical ? length : 0.0,
-      child: CustomPaint(
-        painter: _DottedLinePainter(
-          brush: Paint()..color = color,
-          length: length,
-          dotRadius: dotRadius,
-          spacing: lineType == LineType.normal ? 0.0 : spacing,
-          axis: axis,
-        ),
-      ),
+      margin: EdgeInsets.only(top: lineType == LineType.dotted ? dotRadius : 0),
+      width: axis == Axis.horizontal
+          ? length
+          : lineType == LineType.normal
+              ? dotRadius * 2
+              : 0,
+      height: axis == Axis.vertical
+          ? length
+          : lineType == LineType.normal
+              ? dotRadius * 2
+              : 0,
+      decoration: lineType == LineType.normal
+          ? BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(100),
+            )
+          : null,
+      child: lineType == LineType.dotted
+          ? CustomPaint(
+              painter: _DottedLinePainter(
+                brush: Paint()..color = color,
+                length: length,
+                dotRadius: dotRadius,
+                spacing: lineType == LineType.normal ? 0.0 : spacing,
+                axis: axis,
+              ),
+            )
+          : null,
     );
   }
 }
@@ -101,6 +117,9 @@ class _DottedLinePainter extends CustomPainter {
 }
 
 enum LineType {
+  ///Straight line with solid color. Hence, choose normal line ignoring line space.
   normal,
+
+  /// Dotted line with space between dots.
   dotted,
 }
