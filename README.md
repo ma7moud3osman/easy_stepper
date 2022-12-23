@@ -1,14 +1,20 @@
+![Easy Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/logo.png)
+
 # easy_stepper
 
-![Pub Version (including pre-releases)](https://img.shields.io/pub/v/easy_stepper?include_prereleases)
-![GitHub issues](https://img.shields.io/github/issues-raw/ma7moud3osman/easy_stepper)
+![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub.dev&color=blue)
+![GitHub Stars](https://img.shields.io/github/stars/ma7moud3osman/easy_stepper?color=yellow&label=Stars)
+![Pub Points](https://img.shields.io/pub/points/easy_stepper?color=2E8B57&label=pub%20points)
+![GitHub opened issues](https://img.shields.io/github/issues/ma7moud3osman/easy_stepper?color=red)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ma7moud3osman/easy_stepper)
+![GitHub forks](https://img.shields.io/github/forks/ma7moud3osman/easy_stepper)
+![License](https://img.shields.io/badge/License-MIT-purple.svg)
 
 ## About
 
-A fully customizable, beautiful and easy to use stepper.
+A fully customizable, beautiful and easy to use stepper widgets with different variations.
 
 ## Description
 
@@ -121,12 +127,6 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 
 
-## Feedback
-
-* Please file an issue __[here](https://github.com/ma7moud3osman/easy_stepper/issues).__
-
-* For more information please send me an email or connect with me.
-
 ## Contributions
 
 Feel free to contribute to this project.
@@ -136,9 +136,9 @@ If you fixed a bug or implemented a feature, please send a [pull request](https:
 
 ## Connect with me
 
-[![GitHub](https://github.com/ma7moud3osman/showcase/blob/main/icons/github.png)](https://github.com/ma7moud3osman)  [![LinkedIn](https://github.com/ma7moud3osman/showcase/blob/main/icons/linkedin.png)](https://www.linkedin.com/in/ma7moud3osman/)  [![Facebook](https://github.com/ma7moud3osman/showcase/blob/main/icons/facebook.png)](https://www.facebook.com/ma7moud3osmn/) [![Twitter](https://github.com/ma7moud3osman/showcase/blob/main/icons/twitter.png)](https://twitter.com/MaHmOuD_A_OsMaN) 
+[![GitHub](https://github.com/ma7moud3osman/showcase/blob/main/icons/github.png)](https://github.com/ma7moud3osman)  [![LinkedIn](https://github.com/ma7moud3osman/showcase/blob/main/icons/linkedin.png)](https://www.linkedin.com/in/ma7moud3osman/)  [![Twitter](https://github.com/ma7moud3osman/showcase/blob/main/icons/twitter.png)](https://twitter.com/MaHmOuD_A_OsMaN) 
 
-## Please Support
+## Support
 
 * ![Like](https://github.com/ma7moud3osman/showcase/blob/main/icons/thumbs_up.png) Please __Like__ to __support__!
 
