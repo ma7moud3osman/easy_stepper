@@ -4,7 +4,6 @@
 
 [![Pub Version](https://img.shields.io/pub/v/easy_stepper.svg?label=pub&color=blue)](https://pub.dev/packages/easy_stepper/versions)
 [![GitHub Stars](https://img.shields.io/github/stars/ma7moud3osman/easy_stepper?color=yellow&label=Stars)](https://github.com/ma7moud3osman/easy_stepper/stargazers)
-[![Pub Points](https://img.shields.io/pub/points/easy_stepper?color=2E8B57)](https://pub.dev/packages/easy_stepper/score)
 [![GitHub opened issues](https://img.shields.io/github/issues/ma7moud3osman/easy_stepper?color=red)](https://github.com/ma7moud3osman/easy_stepper/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/ma7moud3osman/easy_stepper)](https://github.com/ma7moud3osman/easy_stepper/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ma7moud3osman/easy_stepper)](https://github.com/ma7moud3osman/easy_stepper/commits/main)
@@ -142,7 +141,7 @@ If you fixed a bug or implemented a feature, please send a [pull request](https:
 
 * [![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/ma7moud3osman)
 
-##
+## Built with
 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)

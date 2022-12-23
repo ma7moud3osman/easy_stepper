@@ -189,7 +189,9 @@ class _EasyStepperState extends State<EasyStepper> {
       _scrollController!.animateTo(
         i * ((widget.stepRadius * 1) + widget.lineLength),
         duration:
+            // ignore: deprecated_member_use_from_same_package
             widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
+        // ignore: deprecated_member_use_from_same_package
         curve: widget.stepAnimationCurve ?? widget.stepReachedAnimationEffect,
       );
 

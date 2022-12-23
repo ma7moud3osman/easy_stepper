@@ -1,3 +1,12 @@
+## 0.2.1
+
+### Saturday, 24th December, 2022
+
+* Upgrade to lottie 2.1.0
+* Update example
+* Match the dart formatter
+* Update README.md file
+
 ## 0.2.0
 
 ### Friday, 23th December, 2022
