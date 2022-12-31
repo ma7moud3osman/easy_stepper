@@ -5,6 +5,8 @@ import 'package:lottie/lottie.dart';
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
+enum StepShape { circle, rRectangle }
+
 class BaseStep extends StatelessWidget {
   const BaseStep({
     Key? key,
@@ -27,7 +29,10 @@ class BaseStep extends StatelessWidget {
     required this.unreachedIconColor,
     required this.finishedIconColor,
     required this.lottieAnimation,
-    this.borderThickness,
+    required this.padding,
+    required this.stepShape,
+    required this.stepRadius,
+    required this.borderThickness,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -47,20 +52,26 @@ class BaseStep extends StatelessWidget {
   final Color? unreachedIconColor;
   final Color? finishedTextColor;
   final Color? finishedIconColor;
-  final double? borderThickness;
+  final double borderThickness;
   final String? lottieAnimation;
+  final double? padding;
+  final StepShape stepShape;
+  final double? stepRadius;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: showTitle ? radius * 2.5 : radius * 2,
+      width: (radius * 2) + (padding ?? 0),
       height: showTitle ? radius * 3.5 : radius * 2,
       child: Column(
         children: [
           Material(
             color: Colors.transparent,
-            shape: const CircleBorder(),
+            shape: stepShape == StepShape.circle ? const CircleBorder() : null,
             clipBehavior: Clip.antiAlias,
+            borderRadius: stepShape != StepShape.circle
+                ? BorderRadius.circular(stepRadius ?? 0)
+                : null,
             child: InkWell(
               onTap: onStepSelected,
               canRequestFocus: false,
@@ -69,37 +80,46 @@ class BaseStep extends StatelessWidget {
                 width: radius * 2,
                 height: radius * 2,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: stepShape == StepShape.circle
+                      ? BoxShape.circle
+                      : BoxShape.rectangle,
+                  borderRadius: stepShape != StepShape.circle
+                      ? BorderRadius.circular(stepRadius ?? 0)
+                      : null,
                   color: isFinished
                       ? finishedBackgroundColor ??
                           Theme.of(context).colorScheme.primary
                       : isActive
-                          ? activeStepBackgroundColor ??
-                              Theme.of(context).colorScheme.secondary
+                          ? activeStepBackgroundColor ?? Colors.transparent
                           : unreachedBackgroundColor ?? Colors.transparent,
                 ),
                 alignment: Alignment.center,
                 child: EasyBorder(
-                  borderType: BorderType.Circle,
+                  borderType: stepShape == StepShape.circle
+                      ? BorderType.Circle
+                      : BorderType.RRect,
+                  radius: stepShape != StepShape.circle
+                      ? Radius.circular(stepRadius ?? 0)
+                      : const Radius.circular(0),
                   color: isActive
                       ? activeStepBorderColor ??
-                          Theme.of(context).scaffoldBackgroundColor
+                          Theme.of(context).colorScheme.primary
                       : isFinished
                           ? finishedBorderColor ?? Colors.transparent
                           : unreachedBorderColor ?? Colors.grey.shade400,
-                  strokeWidth: borderThickness ?? 0.8,
+                  strokeWidth: borderThickness,
                   child: isActive && step.activeIcon == null
                       ? Center(
                           child: Lottie.asset(
                             lottieAnimation ??
-                                (activeStepBackgroundColor != null &&
+                                (((activeStepBackgroundColor != null &&
                                             activeStepBackgroundColor!
-                                                    .computeLuminance() >
-                                                0.35 ||
-                                        activeStepBackgroundColor ==
-                                            Colors.transparent
-                                    ? "packages/easy_stepper/assets/loading_black.json"
-                                    : "packages/easy_stepper/assets/loading_white.json"),
+                                                    .computeLuminance() <
+                                                0.35) &&
+                                        activeStepBackgroundColor !=
+                                            Colors.transparent)
+                                    ? "packages/easy_stepper/assets/loading_white.json"
+                                    : "packages/easy_stepper/assets/loading_black.json"),
                             width: radius * 1.6,
                             height: radius * 1.6,
                             fit: BoxFit.contain,
@@ -115,11 +135,12 @@ class BaseStep extends StatelessWidget {
                                   : isFinished && step.finishIcon != null
                                       ? step.finishIcon!.icon
                                       : step.icon.icon,
-                              size: radius * 1.1,
+                              size: radius * 0.9,
                               color: isFinished
                                   ? finishedIconColor ?? Colors.white
                                   : isActive
-                                      ? activeIconColor ?? Colors.white
+                                      ? activeIconColor ??
+                                          Theme.of(context).colorScheme.primary
                                       : unreachedIconColor ??
                                           Colors.grey.shade400,
                             ),
@@ -132,21 +153,22 @@ class BaseStep extends StatelessWidget {
           if (showTitle) const SizedBox(height: 10),
           if (showTitle)
             SizedBox(
-              width: radius * 2.5,
+              width: (radius * 2) + (padding ?? 0),
               child: Text(
                 step.title ?? '',
                 maxLines: 2,
                 textAlign: TextAlign.center,
+                softWrap: true,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       color: isActive
                           ? activeTextColor ??
-                              Theme.of(context).colorScheme.secondary
+                              Theme.of(context).colorScheme.primary
                           : isFinished
                               ? finishedTextColor ??
                                   Theme.of(context).colorScheme.primary
                               : unreachedTextColor ?? Colors.grey.shade400,
                       height: 1,
-                      fontSize: radius * 0.55,
+                      fontSize: radius * 0.45,
                     ),
               ),
             ),

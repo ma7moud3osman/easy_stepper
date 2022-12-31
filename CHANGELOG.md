@@ -1,3 +1,13 @@
+## 0.3.0
+
+### Saturday, 31th December, 2022
+
+* Add New Rect & RRect Shapes To Stepper.
+* Now We Can Control The line padding.
+* Update example App.
+* Fix Minor Bugs.
+* Update README.md file.
+
 ## 0.2.1
 
 ### Saturday, 24th December, 2022

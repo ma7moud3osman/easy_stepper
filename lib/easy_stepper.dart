@@ -89,17 +89,11 @@ class EasyStepper extends StatefulWidget {
   /// The amount of padding around the stepper.
   final double padding;
 
-  @Deprecated(
-      "use 'stepAnimationCurve' instead, This feature was deprecated after v0.1.4+1")
-
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;
 
   /// The curve of the animation to show when a step is reached.
   final Curve? stepAnimationCurve;
-
-  @Deprecated(
-      "use 'stepAnimationDuration' instead, This feature was deprecated after v0.1.4+1")
 
   /// The duration of the animation effect to show when a step is reached.
   final Duration stepReachedAnimationDuration;
@@ -108,7 +102,13 @@ class EasyStepper extends StatefulWidget {
   final Duration? stepAnimationDuration;
 
   ///The thickness of the step border.
-  final double? borderThickness;
+  final double borderThickness;
+
+  ///The shape of the step [Circle, Rectangle, Triangle].
+  final StepShape stepShape;
+
+  ///The radius of the step border. Hence, stepBorderRadius ignored if stepShape is Circle.
+  final double? stepBorderRadius;
 
   ///The loading animation shows when the step is active. Hence, use lottie json files only by adding its path.
   final String? loadingAnimation;
@@ -143,12 +143,16 @@ class EasyStepper extends StatefulWidget {
     this.lineDotRadius = 1,
     this.lineSpace = 5,
     this.padding = 8,
-    this.stepReachedAnimationEffect = Curves.linear,
+    @Deprecated("use 'stepAnimationCurve' instead, This feature was deprecated after v0.1.4+1")
+        this.stepReachedAnimationEffect = Curves.linear,
     this.stepAnimationCurve,
-    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    @Deprecated("use 'stepAnimationDuration' instead, This feature was deprecated after v0.1.4+1")
+        this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.stepAnimationDuration,
-    this.borderThickness,
+    this.borderThickness = 0.8,
     this.loadingAnimation,
+    this.stepShape = StepShape.circle,
+    this.stepBorderRadius,
   }) : super(key: key);
 
   @override
@@ -187,11 +191,11 @@ class _EasyStepperState extends State<EasyStepper> {
     // ! Provide detailed explanation.
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
-        i * ((widget.stepRadius * 1) + widget.lineLength),
+        i *
+            ((widget.stepRadius * 1 + (widget.padding / 2)) +
+                widget.lineLength),
         duration:
-            // ignore: deprecated_member_use_from_same_package
             widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
-        // ignore: deprecated_member_use_from_same_package
         curve: widget.stepAnimationCurve ?? widget.stepReachedAnimationEffect,
       );
 
@@ -275,6 +279,9 @@ class _EasyStepperState extends State<EasyStepper> {
       unreachedTextColor: widget.unreachedStepTextColor,
       unreachedIconColor: widget.unreachedStepIconColor,
       lottieAnimation: widget.loadingAnimation,
+      padding: widget.padding,
+      stepShape: widget.stepShape,
+      stepRadius: widget.stepBorderRadius,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled) {
