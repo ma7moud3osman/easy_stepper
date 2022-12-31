@@ -123,8 +123,7 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 * __Round Rectangle Border:__  
 
 ![RRect_Horizontal_Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/RRect_Horizontal_Stepper.gif)
-
-![Horizontal-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_text_line.gif)
+ 
 
 
 ## Vertical-Stepper
