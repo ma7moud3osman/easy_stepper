@@ -50,45 +50,48 @@ import 'package:easy_stepper/easy_stepper.dart';
 Example:
 
 ```dart
-    EasyStepper(
-         activeStep: activeStep,
-         lineLength: 90,
-         lineType: LineType.normal,
-         steps: const [
-           EasyStep(
-             icon: Icon(CupertinoIcons.cart),
-             activeIcon: Icon(CupertinoIcons.cart),
-             finishIcon: Icon(Icons.check_circle_outline_rounded),
-             title: 'Cart',
-           ),
-           EasyStep(
-             icon: Icon(CupertinoIcons.info),
-             activeIcon: Icon(CupertinoIcons.info),
-             title: 'Address',
-           ),
-           EasyStep(
-             icon: Icon(CupertinoIcons.cart_fill_badge_plus),
-             activeIcon: Icon(CupertinoIcons.cart_fill_badge_plus),
-             title: 'Checkout',
-           ),
-           EasyStep(
-             icon: Icon(CupertinoIcons.money_dollar),
-             activeIcon: Icon(CupertinoIcons.money_dollar),
-             title: 'Payment',
-           ),
-           EasyStep(
-             icon: Icon(Icons.file_present_rounded),
-             activeIcon: Icon(Icons.file_present_rounded),
-             title: 'Order Details',
-           ),
-           EasyStep(
-             icon: Icon(Icons.check_circle_outline),
-             activeIcon: Icon(Icons.check_circle_outline),
-             title: 'Finish',
-           ),
-         ],
-         onStepReached: (index) => setState(() => activeStep = index),
-    ),
+     EasyStepper(
+       activeStep: activeStep,
+       lineLength: 70,
+       stepShape: StepShape.rRectangle,
+       stepBorderRadius: 15,
+       borderThickness: 2,
+       padding: 20,
+       stepRadius: 28,
+       finishedStepBorderColor: Colors.deepOrange,
+       finishedStepTextColor: Colors.deepOrange,
+       finishedStepBackgroundColor: Colors.deepOrange,
+       activeStepIconColor: Colors.deepOrange,
+       loadingAnimation: 'assets/loading_circle.json',
+       steps: const [
+         EasyStep(
+           icon: Icon(Icons.add_task_rounded),
+           title: 'Order Placed',
+         ),
+         EasyStep(
+           icon: Icon(Icons.category_rounded),
+           title: 'Preparing',
+         ),
+         EasyStep(
+           icon: Icon(Icons.local_shipping_rounded),
+           title: 'Shipping',
+         ),
+         EasyStep(
+           icon: Icon(Icons.door_back_door_outlined),
+           title: 'On The Way',
+         ),
+         EasyStep(
+           icon: Icon(Icons.check_circle_outline_outlined),
+           title: 'Delivered',
+         ),
+         EasyStep(
+           icon: Icon(Icons.reviews_outlined),
+           activeIcon: Icon(Icons.reviews_rounded),
+           title: 'Add Review',
+         ),
+       ],
+       onStepReached: (index) => setState(() => activeStep = index),
+     ),
 ```
 
 
@@ -112,7 +115,14 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 * __With Line Text:__  
 
-![horizontal_with_text](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_with_text.gif)
+![horizontal_with_text](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/Horizontal_with_text.gif)
+
+![Horizontal-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_text_line.gif)
+
+
+* __Round Rectangle Border:__  
+
+![RRect_Horizontal_Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/RRect_Horizontal_Stepper.gif)
 
 ![Horizontal-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_text_line.gif)
 
