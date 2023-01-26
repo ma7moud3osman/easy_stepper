@@ -1,3 +1,10 @@
+## 0.3.1
+
+### Friday, 27th January, 2023
+
+* Added options to customize step border type for different states.
+* Show or hide the step border. Thanks to [Seth-Pharès Gnavo](https://github.com/ma7moud3osman/easy_stepper/issues/3)
+
 ## 0.3.0
 
 ### Saturday, 31th December, 2022

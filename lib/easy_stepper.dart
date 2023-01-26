@@ -29,6 +29,9 @@ class EasyStepper extends StatefulWidget {
   /// The color of the step border when it is not reached.
   final Color? unreachedStepBorderColor;
 
+  /// The type of the step border  when it is not reached [normal, dotted].
+  final BorderType? unreachedStepBorderType;
+
   /// The color of a step background when it is reached.
   final Color? activeStepBackgroundColor;
 
@@ -41,6 +44,9 @@ class EasyStepper extends StatefulWidget {
   /// The border color of a step when it is reached.
   final Color? activeStepBorderColor;
 
+  /// The type of the step border  when it is reached [normal, dotted].
+  final BorderType? activeStepBorderType;
+
   /// The color of the step background when it is finished.
   final Color? finishedStepBackgroundColor;
 
@@ -52,6 +58,9 @@ class EasyStepper extends StatefulWidget {
 
   /// The color of the step icon when it is finished.
   final Color? finishedStepIconColor;
+
+  /// The type of the step border  when it is finished [normal, dotted].
+  final BorderType? finishedStepBorderType;
 
   /// The color of the line that separates the steps.
   final Color? lineColor;
@@ -110,6 +119,15 @@ class EasyStepper extends StatefulWidget {
   ///The radius of the step border. Hence, stepBorderRadius ignored if stepShape is Circle.
   final double? stepBorderRadius;
 
+  /// The type of the step border for all states (Unreached, Active & Finished) [normal, dotted].
+  final BorderType defaultStepBorderType;
+
+  /// The Pattern of the border dashes when BorderType set to [BorderType.dotted].
+  final List<double> dashPattern;
+
+  /// Show or Hide step border.
+  final bool showStepBorder;
+
   ///The loading animation shows when the step is active. Hence, use lottie json files only by adding its path.
   final String? loadingAnimation;
 
@@ -153,6 +171,12 @@ class EasyStepper extends StatefulWidget {
     this.loadingAnimation,
     this.stepShape = StepShape.circle,
     this.stepBorderRadius,
+    this.defaultStepBorderType = BorderType.dotted,
+    this.unreachedStepBorderType,
+    this.activeStepBorderType,
+    this.finishedStepBorderType,
+    this.dashPattern = const [3, 1],
+    this.showStepBorder = true,
   }) : super(key: key);
 
   @override
@@ -266,6 +290,7 @@ class _EasyStepperState extends State<EasyStepper> {
       borderThickness: widget.borderThickness,
       isActive: index == widget.activeStep,
       isFinished: index < widget.activeStep,
+      isUnreached: index > widget.activeStep,
       activeStepBackgroundColor: widget.activeStepBackgroundColor,
       activeStepBorderColor: widget.activeStepBorderColor,
       activeTextColor: widget.activeStepTextColor,
@@ -282,6 +307,9 @@ class _EasyStepperState extends State<EasyStepper> {
       padding: widget.padding,
       stepShape: widget.stepShape,
       stepRadius: widget.stepBorderRadius,
+      borderType: _handleBorderType(index),
+      dashPattern: widget.dashPattern,
+      showStepBorder: widget.showStepBorder,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled) {
@@ -294,6 +322,21 @@ class _EasyStepperState extends State<EasyStepper> {
             }
           : null,
     );
+  }
+
+  BorderType _handleBorderType(int index) {
+    if (index == widget.activeStep) {
+      //Active Step
+      return widget.activeStepBorderType ?? widget.defaultStepBorderType;
+    } else if (index > widget.activeStep) {
+      //Unreached Step
+      return widget.unreachedStepBorderType ?? widget.defaultStepBorderType;
+    } else if (index < widget.activeStep) {
+      //Finished Step
+      return widget.finishedStepBorderType ?? widget.defaultStepBorderType;
+    } else {
+      return widget.defaultStepBorderType;
+    }
   }
 
   Widget _buildDottedLine(int index, Axis axis) {

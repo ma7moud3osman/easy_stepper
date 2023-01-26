@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 export 'package:easy_stepper/src/core/base_step.dart';
-export 'package:easy_stepper/src/core/easy_dotted_line.dart';
+export 'package:easy_stepper/src/core/easy_line.dart';
 export 'package:easy_stepper/src/easy_step.dart';
 export 'package:flutter/material.dart';
 

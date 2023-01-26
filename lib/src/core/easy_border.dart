@@ -11,7 +11,7 @@ class EasyBorder extends StatelessWidget {
   final double strokeWidth;
   final Color color;
   final List<double> dashPattern;
-  final BorderType borderType;
+  final BorderShape borderShape;
   final Radius radius;
   final StrokeCap strokeCap;
   final PathBuilder? customPath;
@@ -21,7 +21,7 @@ class EasyBorder extends StatelessWidget {
     required this.child,
     this.color = Colors.black,
     this.strokeWidth = 1,
-    this.borderType = BorderType.Rect,
+    this.borderShape = BorderShape.Rect,
     this.dashPattern = const <double>[3, 1],
     this.padding = const EdgeInsets.all(2),
     this.borderPadding = EdgeInsets.zero,
@@ -43,7 +43,7 @@ class EasyBorder extends StatelessWidget {
               strokeWidth: strokeWidth,
               radius: radius,
               color: color,
-              borderType: borderType,
+              borderShape: borderShape,
               dashPattern: dashPattern,
               customPath: customPath,
               strokeCap: strokeCap,
@@ -71,7 +71,7 @@ class EasyBorder extends StatelessWidget {
 }
 
 /// The different supported BorderTypes
-enum BorderType { Circle, RRect, Rect, Oval }
+enum BorderShape { Circle, RRect, Rect, Oval }
 
 typedef PathBuilder = Path Function(Size);
 
@@ -79,7 +79,7 @@ class _DashPainter extends CustomPainter {
   final double strokeWidth;
   final List<double> dashPattern;
   final Color color;
-  final BorderType borderType;
+  final BorderShape borderShape;
   final Radius radius;
   final StrokeCap strokeCap;
   final PathBuilder? customPath;
@@ -89,7 +89,7 @@ class _DashPainter extends CustomPainter {
     this.strokeWidth = 2,
     this.dashPattern = const <double>[3, 1],
     this.color = Colors.black,
-    this.borderType = BorderType.Rect,
+    this.borderShape = BorderShape.Rect,
     this.radius = const Radius.circular(0),
     this.strokeCap = StrokeCap.butt,
     this.customPath,
@@ -130,20 +130,20 @@ class _DashPainter extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 
-  /// Returns a [Path] based on the the [borderType] parameter
+  /// Returns a [Path] based on the the [borderShape] parameter
   Path _getPath(Size size) {
     Path path;
-    switch (borderType) {
-      case BorderType.Circle:
+    switch (borderShape) {
+      case BorderShape.Circle:
         path = _getCirclePath(size);
         break;
-      case BorderType.RRect:
+      case BorderShape.RRect:
         path = _getRRectPath(size, radius);
         break;
-      case BorderType.Rect:
+      case BorderShape.Rect:
         path = _getRectPath(size);
         break;
-      case BorderType.Oval:
+      case BorderShape.Oval:
         path = _getOvalPath(size);
         break;
     }
@@ -219,13 +219,13 @@ class _DashPainter extends CustomPainter {
         oldDelegate.color != color ||
         oldDelegate.dashPattern != dashPattern ||
         oldDelegate.padding != padding ||
-        oldDelegate.borderType != borderType;
+        oldDelegate.borderShape != borderShape;
   }
 }
 
 /// Creates a new path that is drawn from the segments of `source`.
 ///
-/// Dash intervals are controled by the `dashArray` - see [CircularIntervalList]
+/// Dash intervals are controlled by the `dashArray` - see [CircularIntervalList]
 /// for examples.
 ///
 /// `dashOffset` specifies an initial starting point for the dashing.
