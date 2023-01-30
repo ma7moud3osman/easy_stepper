@@ -141,7 +141,7 @@ class BaseStep extends StatelessWidget {
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 softWrap: true,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: isActive
                           ? activeTextColor ??
                               Theme.of(context).colorScheme.primary

@@ -368,7 +368,7 @@ class _EasyStepperState extends State<EasyStepper> {
                     widget.steps[index].lineText!,
                     maxLines: 3,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.overline,
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),
               ],
