@@ -39,6 +39,7 @@ class BaseStep extends StatelessWidget {
     required this.borderType,
     required this.dashPattern,
     required this.showStepBorder,
+    required this.showLoadingAnimation,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -67,6 +68,7 @@ class BaseStep extends StatelessWidget {
   final BorderType borderType;
   final List<double> dashPattern;
   final bool showStepBorder;
+  final bool showLoadingAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -122,13 +124,13 @@ class BaseStep extends StatelessWidget {
                         dashPattern: borderType == BorderType.normal
                             ? [1, 0]
                             : dashPattern,
-                        child: isActive && step.activeIcon == null
-                            ? _buildDefaultActiveIcon()
-                            : _buildCustomIcon(context),
+                        child: isActive && showLoadingAnimation
+                            ? _buildLoadingIcon()
+                            : _buildIcon(context),
                       )
-                    : isActive && step.activeIcon == null
-                        ? _buildDefaultActiveIcon()
-                        : _buildCustomIcon(context),
+                    : isActive && showLoadingAnimation
+                        ? _buildLoadingIcon()
+                        : _buildIcon(context),
               ),
             ),
           ),
@@ -159,7 +161,7 @@ class BaseStep extends StatelessWidget {
     );
   }
 
-  SizedBox _buildCustomIcon(BuildContext context) {
+  SizedBox _buildIcon(BuildContext context) {
     return SizedBox(
       width: radius * 2,
       height: radius * 2,
@@ -181,7 +183,7 @@ class BaseStep extends StatelessWidget {
     );
   }
 
-  Center _buildDefaultActiveIcon() {
+  Center _buildLoadingIcon() {
     return Center(
       child: Lottie.asset(
         lottieAnimation ??

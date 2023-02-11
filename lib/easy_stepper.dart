@@ -131,6 +131,10 @@ class EasyStepper extends StatefulWidget {
   ///The loading animation shows when the step is active. Hence, use lottie json files only by adding its path.
   final String? loadingAnimation;
 
+  /// Show or hide the loading animation inside `Step` widget.
+  /// Defaults to `False`
+  final bool showLoadingAnimation;
+
   const EasyStepper({
     Key? key,
     required this.activeStep,
@@ -177,6 +181,7 @@ class EasyStepper extends StatefulWidget {
     this.finishedStepBorderType,
     this.dashPattern = const [3, 1],
     this.showStepBorder = true,
+    this.showLoadingAnimation = false,
   }) : super(key: key);
 
   @override
@@ -310,6 +315,7 @@ class _EasyStepperState extends State<EasyStepper> {
       borderType: _handleBorderType(index),
       dashPattern: widget.dashPattern,
       showStepBorder: widget.showStepBorder,
+      showLoadingAnimation: widget.showLoadingAnimation,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled) {
