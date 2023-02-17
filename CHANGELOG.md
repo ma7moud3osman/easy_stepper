@@ -1,3 +1,9 @@
+## 0.3.2
+
+### Friday, 17th February, 2023
+
+* Adding `showLoadingAnimation` : show or hide the loading animation inside the step . Thanks to [OmarYehiaDev](https://github.com/ma7moud3osman/easy_stepper/pull/6) 
+
 ## 0.3.1
 
 ### Friday, 27th January, 2023

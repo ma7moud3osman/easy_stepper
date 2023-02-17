@@ -62,8 +62,7 @@ Example:
        finishedStepTextColor: Colors.deepOrange,
        finishedStepBackgroundColor: Colors.deepOrange,
        activeStepIconColor: Colors.deepOrange,
-       loadingAnimation: 'assets/loading_circle.json',
-       showLoadingAnimation: true,
+       loadingAnimation: 'assets/loading_circle.json', 
        steps: const [
          EasyStep(
            icon: Icon(Icons.add_task_rounded),

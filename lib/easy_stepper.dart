@@ -132,7 +132,7 @@ class EasyStepper extends StatefulWidget {
   final String? loadingAnimation;
 
   /// Show or hide the loading animation inside `Step` widget.
-  /// Defaults to `False`
+  /// Defaults to `True`
   final bool showLoadingAnimation;
 
   const EasyStepper({
@@ -181,7 +181,7 @@ class EasyStepper extends StatefulWidget {
     this.finishedStepBorderType,
     this.dashPattern = const [3, 1],
     this.showStepBorder = true,
-    this.showLoadingAnimation = false,
+    this.showLoadingAnimation = true,
   }) : super(key: key);
 
   @override

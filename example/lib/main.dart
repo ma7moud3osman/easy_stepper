@@ -47,7 +47,6 @@ class _MyAppState extends State<MyApp> {
                   finishedStepBackgroundColor: Colors.deepOrange,
                   activeStepIconColor: Colors.deepOrange,
                   loadingAnimation: 'assets/loading_circle.json',
-                  showLoadingAnimation: true,
                   steps: const [
                     EasyStep(
                       icon: Icon(Icons.add_task_rounded),
@@ -131,6 +130,7 @@ class _MyAppState extends State<MyApp> {
                   unreachedStepIconColor: Colors.black87,
                   unreachedStepBorderColor: Colors.black54,
                   unreachedStepTextColor: Colors.black,
+                  showLoadingAnimation: false,
                   steps: const [
                     EasyStep(
                       icon: Icon(Icons.my_location),
