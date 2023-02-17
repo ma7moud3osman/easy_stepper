@@ -21,12 +21,12 @@ class _MyAppState extends State<MyApp> {
       title: 'Example',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        backgroundColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.purple,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.purple,
           accentColor: Colors.deepOrange,
+          backgroundColor: Colors.white,
         ),
       ),
       home: Scaffold(
@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
                   finishedStepBackgroundColor: Colors.deepOrange,
                   activeStepIconColor: Colors.deepOrange,
                   loadingAnimation: 'assets/loading_circle.json',
+                  showLoadingAnimation: true,
                   steps: const [
                     EasyStep(
                       icon: Icon(Icons.add_task_rounded),
