@@ -7,16 +7,16 @@ export 'package:flutter/material.dart';
 
 class EasyStep {
   /// The icon displayed in the step, you can change size & color for different status from main stepper.
-  final Icon icon;
+  final Widget icon;
 
   /// The icon displayed in the step, when this step is finished. if null the main icon remain displayed.
-  final Icon? finishIcon;
+  final Widget? finishIcon;
 
   /// The icon displayed in the step, when this step is active. if null the default loading widget displayed.
-  final Icon? activeIcon;
+  final Widget? activeIcon;
 
   /// The title of the step.
-  final String? title;
+  final Widget? title;
 
   /// The text appear under the step line, Hence: last step does not have a line
   final String? lineText;
