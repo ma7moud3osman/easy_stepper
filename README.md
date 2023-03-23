@@ -139,6 +139,12 @@ Feel free to contribute to this project.
 If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/ma7moud3osman/easy_stepper/issues).  
 If you fixed a bug or implemented a feature, please send a [pull request](https://github.com/ma7moud3osman/easy_stepper/pulls).
 
+<a href="https://github.com/ma7moud3osman/easy_stepper/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ma7moud3osman/easy_stepper" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 ## Connect with me
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ma7moud3osman)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ma7moud3osman/)  [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/MaHmOuD_A_OsMaN) 
