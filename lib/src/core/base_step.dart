@@ -138,23 +138,24 @@ class BaseStep extends StatelessWidget {
           if (showTitle)
             SizedBox(
               width: (radius * 2) + (padding ?? 0),
-              child: Text(
-                step.title ?? '',
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                softWrap: true,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: isActive
-                          ? activeTextColor ??
-                              Theme.of(context).colorScheme.primary
-                          : isFinished
-                              ? finishedTextColor ??
+              child: step.customTitle ??
+                  Text(
+                    step.title ?? '',
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: isActive
+                              ? activeTextColor ??
                                   Theme.of(context).colorScheme.primary
-                              : unreachedTextColor ?? Colors.grey.shade400,
-                      height: 1,
-                      fontSize: radius * 0.45,
-                    ),
-              ),
+                              : isFinished
+                                  ? finishedTextColor ??
+                                      Theme.of(context).colorScheme.primary
+                                  : unreachedTextColor ?? Colors.grey.shade400,
+                          height: 1,
+                          fontSize: radius * 0.45,
+                        ),
+                  ),
             ),
         ],
       ),
@@ -166,19 +167,20 @@ class BaseStep extends StatelessWidget {
       width: radius * 2,
       height: radius * 2,
       child: Center(
-        child: Icon(
-          isActive && step.activeIcon != null
-              ? step.activeIcon!.icon
-              : isFinished && step.finishIcon != null
-                  ? step.finishIcon!.icon
-                  : step.icon.icon,
-          size: radius * 0.9,
-          color: isFinished
-              ? finishedIconColor ?? Colors.white
-              : isActive
-                  ? activeIconColor ?? Theme.of(context).colorScheme.primary
-                  : unreachedIconColor ?? Colors.grey.shade400,
-        ),
+        child: step.customStep ??
+            Icon(
+              isActive && step.activeIcon != null
+                  ? step.activeIcon!.icon
+                  : isFinished && step.finishIcon != null
+                      ? step.finishIcon!.icon
+                      : step.icon!.icon,
+              size: radius * 0.9,
+              color: isFinished
+                  ? finishedIconColor ?? Colors.white
+                  : isActive
+                      ? activeIconColor ?? Theme.of(context).colorScheme.primary
+                      : unreachedIconColor ?? Colors.grey.shade400,
+            ),
       ),
     );
   }

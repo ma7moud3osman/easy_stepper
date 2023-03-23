@@ -370,12 +370,13 @@ class _EasyStepperState extends State<EasyStepper> {
                 const SizedBox(height: 5),
                 SizedBox(
                   width: widget.lineLength,
-                  child: Text(
-                    widget.steps[index].lineText!,
-                    maxLines: 3,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
+                  child: widget.steps[index].customLineWidget ??
+                      Text(
+                        widget.steps[index].lineText!,
+                        maxLines: 3,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.labelSmall,
+                      ),
                 ),
               ],
             ],

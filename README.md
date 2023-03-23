@@ -99,6 +99,100 @@ Example:
 
 Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. [See Example](https://pub.dev/packages/easy_stepper/example).
 
+## Custom-Stepper
+
+* __With Image:__  
+
+![dash-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/dash_stepper.gif)
+
+Example:
+
+```dart
+ EasyStepper(
+                  activeStep: activeStep,
+                  lineLength: 50,
+                  stepShape: StepShape.rRectangle,
+                  stepBorderRadius: 15,
+                  borderThickness: 2,
+                  padding: 20,
+                  stepRadius: 28,
+                  finishedStepBorderColor: Colors.deepOrange,
+                  finishedStepTextColor: Colors.deepOrange,
+                  finishedStepBackgroundColor: Colors.deepOrange,
+                  activeStepIconColor: Colors.deepOrange,
+                  showLoadingAnimation: false,
+                  steps: [
+                    EasyStep(
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 0 ? 1 : 0.3,
+                          child: Image.asset('assets/1.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 1',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    EasyStep(
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 1 ? 1 : 0.3,
+                          child: Image.asset('assets/2.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 2',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    EasyStep(
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 2 ? 1 : 0.3,
+                          child: Image.asset('assets/3.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 3',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    EasyStep(
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 3 ? 1 : 0.3,
+                          child: Image.asset('assets/4.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 4',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    EasyStep(
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 4 ? 1 : 0.3,
+                          child: Image.asset('assets/5.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 5',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                  onStepReached: (index) => setState(() => activeStep = index),
+                ),
+```
+
+
 ## Horizontal-Stepper
 
 * __With Title:__  

@@ -1,3 +1,12 @@
+## 0.4.0
+
+### Friday, 24th March, 2023
+
+* Adding `customStep`, `customTitle` & `customLineWidget` : Now you can create your own step widget with all customizations . Thanks to [darshanjain64](https://github.com/ma7moud3osman/easy_stepper/pull/7) 
+* Update Example App
+* Update README.md
+
+
 ## 0.3.2
 
 ### Friday, 17th February, 2023

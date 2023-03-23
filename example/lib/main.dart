@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
               children: [
                 EasyStepper(
                   activeStep: activeStep,
-                  lineLength: 70,
+                  lineLength: 50,
                   stepShape: StepShape.rRectangle,
                   stepBorderRadius: 15,
                   borderThickness: 2,
@@ -46,32 +46,72 @@ class _MyAppState extends State<MyApp> {
                   finishedStepTextColor: Colors.deepOrange,
                   finishedStepBackgroundColor: Colors.deepOrange,
                   activeStepIconColor: Colors.deepOrange,
-                  loadingAnimation: 'assets/loading_circle.json',
-                  steps: const [
+                  showLoadingAnimation: false,
+                  steps: [
                     EasyStep(
-                      icon: Icon(Icons.add_task_rounded),
-                      title: 'Order Placed',
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 0 ? 1 : 0.3,
+                          child: Image.asset('assets/1.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 1',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     EasyStep(
-                      icon: Icon(Icons.category_rounded),
-                      title: 'Preparing',
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 1 ? 1 : 0.3,
+                          child: Image.asset('assets/2.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 2',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     EasyStep(
-                      icon: Icon(Icons.local_shipping_rounded),
-                      title: 'Shipping',
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 2 ? 1 : 0.3,
+                          child: Image.asset('assets/3.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 3',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     EasyStep(
-                      icon: Icon(Icons.door_back_door_outlined),
-                      title: 'On The Way',
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 3 ? 1 : 0.3,
+                          child: Image.asset('assets/4.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 4',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     EasyStep(
-                      icon: Icon(Icons.check_circle_outline_outlined),
-                      title: 'Delivered',
-                    ),
-                    EasyStep(
-                      icon: Icon(Icons.reviews_outlined),
-                      activeIcon: Icon(Icons.reviews_rounded),
-                      title: 'Add Review',
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 4 ? 1 : 0.3,
+                          child: Image.asset('assets/5.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 5',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ],
                   onStepReached: (index) => setState(() => activeStep = index),
