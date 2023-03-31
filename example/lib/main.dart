@@ -123,7 +123,7 @@ class _MyAppState extends State<MyApp> {
                   lineDotRadius: 3,
                   lineSpace: 4,
                   lineType: LineType.normal,
-                  lineColor: Colors.purple.shade300,
+                  defaultLineColor: Colors.purple.shade300,
                   borderThickness: 10,
                   padding: 15,
                   loadingAnimation: 'assets/loading_circle.json',
