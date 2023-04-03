@@ -63,7 +63,17 @@ class EasyStepper extends StatefulWidget {
   final BorderType? finishedStepBorderType;
 
   /// The color of the line that separates the steps.
-  final Color? lineColor;
+  /// If null, [Theme.of(context).colorScheme.primary] will be used.
+  final Color? defaultLineColor;
+
+  /// The color of the line that branches out from unreached steps.
+  final Color? unreachedLineColor;
+
+  /// The color of the line that branches out from active step.
+  final Color? activeLineColor;
+
+  /// The color of the line that branches out from finished steps.
+  final Color? finishedLineColor;
 
   /// The radius of a step.
   final double stepRadius;
@@ -155,7 +165,10 @@ class EasyStepper extends StatefulWidget {
     this.finishedStepBackgroundColor,
     this.finishedStepBorderColor,
     this.finishedStepIconColor,
-    this.lineColor,
+    this.defaultLineColor,
+    this.unreachedLineColor,
+    this.activeLineColor,
+    this.finishedLineColor,
     this.stepRadius = 30,
     this.steppingEnabled = true,
     this.disableScroll = false,
@@ -345,6 +358,24 @@ class _EasyStepperState extends State<EasyStepper> {
     }
   }
 
+  Color _getLineColor(int index) {
+    Color? preferredColor;
+    if (index == widget.activeStep) {
+      //Active Step
+      preferredColor = widget.activeLineColor;
+    } else if (index > widget.activeStep) {
+      //Unreached Step
+      preferredColor = widget.unreachedLineColor;
+    } else if (index < widget.activeStep) {
+      //Finished Step
+      preferredColor = widget.finishedLineColor;
+    }
+
+    return preferredColor ??
+        widget.defaultLineColor ??
+        Theme.of(context).colorScheme.primary;
+  }
+
   Widget _buildDottedLine(int index, Axis axis) {
     return index < widget.steps.length - 1
         ? Column(
@@ -358,7 +389,7 @@ class _EasyStepperState extends State<EasyStepper> {
                 ),
                 child: EasyLine(
                   length: widget.lineLength,
-                  color: widget.lineColor ?? Colors.blue,
+                  color: _getLineColor(index),
                   dotRadius: widget.lineDotRadius,
                   spacing: widget.lineSpace,
                   axis: axis,
