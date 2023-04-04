@@ -47,53 +47,6 @@ import 'package:easy_stepper/easy_stepper.dart';
 
 * To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
-Example:
-
-```dart
-     EasyStepper(
-       activeStep: activeStep,
-       lineLength: 70,
-       stepShape: StepShape.rRectangle,
-       stepBorderRadius: 15,
-       borderThickness: 2,
-       padding: 20,
-       stepRadius: 28,
-       finishedStepBorderColor: Colors.deepOrange,
-       finishedStepTextColor: Colors.deepOrange,
-       finishedStepBackgroundColor: Colors.deepOrange,
-       activeStepIconColor: Colors.deepOrange,
-       loadingAnimation: 'assets/loading_circle.json', 
-       steps: const [
-         EasyStep(
-           icon: Icon(Icons.add_task_rounded),
-           title: 'Order Placed',
-         ),
-         EasyStep(
-           icon: Icon(Icons.category_rounded),
-           title: 'Preparing',
-         ),
-         EasyStep(
-           icon: Icon(Icons.local_shipping_rounded),
-           title: 'Shipping',
-         ),
-         EasyStep(
-           icon: Icon(Icons.door_back_door_outlined),
-           title: 'On The Way',
-         ),
-         EasyStep(
-           icon: Icon(Icons.check_circle_outline_outlined),
-           title: 'Delivered',
-         ),
-         EasyStep(
-           icon: Icon(Icons.reviews_outlined),
-           activeIcon: Icon(Icons.reviews_rounded),
-           title: 'Add Review',
-         ),
-       ],
-       onStepReached: (index) => setState(() => activeStep = index),
-     ),
-```
-
 
 ## Features
 
