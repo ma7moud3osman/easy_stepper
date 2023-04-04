@@ -40,6 +40,8 @@ class BaseStep extends StatelessWidget {
     required this.dashPattern,
     required this.showStepBorder,
     required this.showLoadingAnimation,
+    required this.textDirection,
+    required this.lineLength,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -69,95 +71,116 @@ class BaseStep extends StatelessWidget {
   final List<double> dashPattern;
   final bool showStepBorder;
   final bool showLoadingAnimation;
+  final TextDirection textDirection;
+  final double lineLength;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: (radius * 2) + (padding ?? 0),
-      height: showTitle ? radius * 3.5 : radius * 2,
-      child: Column(
-        children: [
-          Material(
-            color: Colors.transparent,
-            shape: stepShape == StepShape.circle ? const CircleBorder() : null,
-            clipBehavior: Clip.antiAlias,
-            borderRadius: stepShape != StepShape.circle
-                ? BorderRadius.circular(stepRadius ?? 0)
-                : null,
-            child: InkWell(
-              onTap: onStepSelected,
-              canRequestFocus: false,
-              radius: radius,
-              child: Container(
-                width: radius * 2,
-                height: radius * 2,
-                decoration: BoxDecoration(
-                  shape: stepShape == StepShape.circle
-                      ? BoxShape.circle
-                      : BoxShape.rectangle,
-                  borderRadius: stepShape != StepShape.circle
-                      ? BorderRadius.circular(stepRadius ?? 0)
-                      : null,
-                  color: isFinished
-                      ? finishedBackgroundColor ??
-                          Theme.of(context).colorScheme.primary
-                      : isActive
-                          ? activeStepBackgroundColor ?? Colors.transparent
-                          : unreachedBackgroundColor ?? Colors.transparent,
-                ),
-                alignment: Alignment.center,
-                child: showStepBorder
-                    ? EasyBorder(
-                        borderShape: stepShape == StepShape.circle
-                            ? BorderShape.Circle
-                            : BorderShape.RRect,
-                        radius: stepShape != StepShape.circle
-                            ? Radius.circular(stepRadius ?? 0)
-                            : const Radius.circular(0),
-                        color: isActive
-                            ? activeStepBorderColor ??
-                                Theme.of(context).colorScheme.primary
-                            : isFinished
-                                ? finishedBorderColor ?? Colors.transparent
-                                : unreachedBorderColor ?? Colors.grey.shade400,
-                        strokeWidth: borderThickness,
-                        dashPattern: borderType == BorderType.normal
-                            ? [1, 0]
-                            : dashPattern,
-                        child: isActive && showLoadingAnimation
-                            ? _buildLoadingIcon()
-                            : _buildIcon(context),
-                      )
-                    : isActive && showLoadingAnimation
-                        ? _buildLoadingIcon()
-                        : _buildIcon(context),
-              ),
-            ),
-          ),
-          if (showTitle) const SizedBox(height: 10),
-          if (showTitle)
-            SizedBox(
-              width: (radius * 2) + (padding ?? 0),
-              child: step.customTitle ??
-                  Text(
-                    step.title ?? '',
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+      height: showTitle ? radius * 2.5 + 25 : radius * 1.5 + 15,
+      child: InkWell(
+        onTap: onStepSelected,
+        canRequestFocus: false,
+        child: Stack(
+          clipBehavior: Clip.none,
+          textDirection: textDirection,
+          alignment: Alignment.topCenter,
+          children: [
+            Material(
+              color: Colors.transparent,
+              shape:
+                  stepShape == StepShape.circle ? const CircleBorder() : null,
+              clipBehavior: Clip.antiAlias,
+              borderRadius: stepShape != StepShape.circle
+                  ? BorderRadius.circular(stepRadius ?? 0)
+                  : null,
+              child: InkWell(
+                onTap: onStepSelected,
+                canRequestFocus: false,
+                radius: radius,
+                child: Container(
+                  width: radius * 2,
+                  height: radius * 2,
+                  decoration: BoxDecoration(
+                    shape: stepShape == StepShape.circle
+                        ? BoxShape.circle
+                        : BoxShape.rectangle,
+                    borderRadius: stepShape != StepShape.circle
+                        ? BorderRadius.circular(stepRadius ?? 0)
+                        : null,
+                    color: isFinished
+                        ? finishedBackgroundColor ??
+                            Theme.of(context).colorScheme.primary
+                        : isActive
+                            ? activeStepBackgroundColor ?? Colors.transparent
+                            : unreachedBackgroundColor ?? Colors.transparent,
+                  ),
+                  alignment: Alignment.center,
+                  child: showStepBorder
+                      ? EasyBorder(
+                          borderShape: stepShape == StepShape.circle
+                              ? BorderShape.Circle
+                              : BorderShape.RRect,
+                          radius: stepShape != StepShape.circle
+                              ? Radius.circular(stepRadius ?? 0)
+                              : const Radius.circular(0),
                           color: isActive
-                              ? activeTextColor ??
+                              ? activeStepBorderColor ??
                                   Theme.of(context).colorScheme.primary
                               : isFinished
-                                  ? finishedTextColor ??
-                                      Theme.of(context).colorScheme.primary
-                                  : unreachedTextColor ?? Colors.grey.shade400,
-                          height: 1,
-                          fontSize: radius * 0.45,
-                        ),
+                                  ? finishedBorderColor ?? Colors.transparent
+                                  : unreachedBorderColor ??
+                                      Colors.grey.shade400,
+                          strokeWidth: borderThickness,
+                          dashPattern: borderType == BorderType.normal
+                              ? [1, 0]
+                              : dashPattern,
+                          child: isActive && showLoadingAnimation
+                              ? _buildLoadingIcon()
+                              : _buildIcon(context),
+                        )
+                      : isActive && showLoadingAnimation
+                          ? _buildLoadingIcon()
+                          : _buildIcon(context),
+                ),
+              ),
+            ),
+            if (showTitle) _buildStepTitle(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStepTitle(BuildContext context) {
+    return Positioned.directional(
+      textDirection: textDirection,
+      top: step.topTitle ? -20 : (radius * 2.35),
+      // bottom: radius * 0.3,
+      // end: (radius * 1.3) - ((step.title?.length ?? 5) * 4),
+      // start: (radius * 1.3) - ((step.title?.length ?? 5) * 4),
+      child: SizedBox(
+        width: (radius * 2) + (padding ?? 0) + (lineLength / 1.0),
+        child: step.customTitle ??
+            Text(
+              step.title ?? '',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              softWrap: false,
+              overflow: TextOverflow.visible,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: isActive
+                        ? activeTextColor ??
+                            Theme.of(context).colorScheme.primary
+                        : isFinished
+                            ? finishedTextColor ??
+                                Theme.of(context).colorScheme.primary
+                            : unreachedTextColor ?? Colors.grey.shade400,
+                    height: 1,
+                    // fontSize: radius * 0.45,
                   ),
             ),
-        ],
       ),
     );
   }

@@ -1,3 +1,15 @@
+## 0.5.0
+
+### Tuesday,  4th April, 2023
+
+* __Breaking Change:__ `lineColor` replaced by `defaultLineColor`, 
+    and now you can add more customization for line colors `unreachedLineColor`, `activeLineColor` & `finishedLineColor`.
+    Thanks to [adar2378](https://github.com/ma7moud3osman/easy_stepper/pull/8) 
+* Added `topTitle` property to setting the title above or below the step icon. Thanks to [AbdulazizAlnahhas](https://github.com/ma7moud3osman/easy_stepper/issues/9) 
+* Fix minor bugs.
+* Update Example App
+* Update README.md
+
 ## 0.4.0
 
 ### Friday, 24th March, 2023

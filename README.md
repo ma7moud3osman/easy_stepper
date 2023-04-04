@@ -99,6 +99,98 @@ Example:
 
 Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. [See Example](https://pub.dev/packages/easy_stepper/example).
 
+ 
+
+* __Top And Bottom Title:__  
+
+![topAndBottomTitle](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/topAndBottomTitle.gif)
+
+Example:
+
+```dart
+    EasyStepper(
+        activeStep: activeStep,
+        lineLength: 70,
+        lineSpace: 0,
+        lineType: LineType.normal,
+        defaultLineColor: Colors.white,
+        finishedLineColor: Colors.orange,
+        activeStepTextColor: Colors.black87,
+        finishedStepTextColor: Colors.black87,
+        internalPadding: 0,
+        showLoadingAnimation: false,
+        stepRadius: 8,
+        showStepBorder: false,
+        lineDotRadius: 1.5,
+        steps: [
+          EasyStep(
+            customStep: CircleAvatar(
+              radius: 8,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 7,
+                backgroundColor:
+                    activeStep >= 0 ? Colors.orange : Colors.white,
+              ),
+            ),
+            title: 'Waiting',
+          ),
+          EasyStep(
+            customStep: CircleAvatar(
+              radius: 8,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 7,
+                backgroundColor:
+                    activeStep >= 1 ? Colors.orange : Colors.white,
+              ),
+            ),
+            title: 'Order Received',
+            topTitle: true,
+          ),
+          EasyStep(
+            customStep: CircleAvatar(
+              radius: 8,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 7,
+                backgroundColor:
+                    activeStep >= 2 ? Colors.orange : Colors.white,
+              ),
+            ),
+            title: 'Preparing',
+          ),
+          EasyStep(
+            customStep: CircleAvatar(
+              radius: 8,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 7,
+                backgroundColor:
+                    activeStep >= 3 ? Colors.orange : Colors.white,
+              ),
+            ),
+            title: 'On Way',
+            topTitle: true,
+          ),
+          EasyStep(
+            customStep: CircleAvatar(
+              radius: 8,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 7,
+                backgroundColor:
+                    activeStep >= 4 ? Colors.orange : Colors.white,
+              ),
+            ),
+            title: 'Delivered',
+          ),
+        ],
+        onStepReached: (index) =>
+            setState(() => activeStep = index),
+    ),
+```
+
 ## Custom-Stepper
 
 * __With Image:__  

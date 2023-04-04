@@ -40,7 +40,9 @@ class _MyAppState extends State<MyApp> {
                   stepShape: StepShape.rRectangle,
                   stepBorderRadius: 15,
                   borderThickness: 2,
-                  padding: 20,
+                  internalPadding: 10,
+                  padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 30, vertical: 20),
                   stepRadius: 28,
                   finishedStepBorderColor: Colors.deepOrange,
                   finishedStepTextColor: Colors.deepOrange,
@@ -116,7 +118,7 @@ class _MyAppState extends State<MyApp> {
                   ],
                   onStepReached: (index) => setState(() => activeStep = index),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
                 EasyStepper(
                   activeStep: activeStep,
                   lineLength: 100,
@@ -125,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                   lineType: LineType.normal,
                   defaultLineColor: Colors.purple.shade300,
                   borderThickness: 10,
-                  padding: 15,
+                  internalPadding: 15,
                   loadingAnimation: 'assets/loading_circle.json',
                   steps: const [
                     EasyStep(
@@ -159,6 +161,93 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ],
                   onStepReached: (index) => setState(() => activeStep = index),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  color: Colors.grey.shade200,
+                  clipBehavior: Clip.none,
+                  child: EasyStepper(
+                    activeStep: activeStep,
+                    lineLength: 70,
+                    lineSpace: 0,
+                    lineType: LineType.normal,
+                    defaultLineColor: Colors.white,
+                    finishedLineColor: Colors.orange,
+                    activeStepTextColor: Colors.black87,
+                    finishedStepTextColor: Colors.black87,
+                    internalPadding: 0,
+                    showLoadingAnimation: false,
+                    stepRadius: 8,
+                    showStepBorder: false,
+                    lineDotRadius: 1.5,
+                    steps: [
+                      EasyStep(
+                        customStep: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor:
+                                activeStep >= 0 ? Colors.orange : Colors.white,
+                          ),
+                        ),
+                        title: 'Waiting',
+                      ),
+                      EasyStep(
+                        customStep: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor:
+                                activeStep >= 1 ? Colors.orange : Colors.white,
+                          ),
+                        ),
+                        title: 'Order Received',
+                        topTitle: true,
+                      ),
+                      EasyStep(
+                        customStep: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor:
+                                activeStep >= 2 ? Colors.orange : Colors.white,
+                          ),
+                        ),
+                        title: 'Preparing',
+                      ),
+                      EasyStep(
+                        customStep: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor:
+                                activeStep >= 3 ? Colors.orange : Colors.white,
+                          ),
+                        ),
+                        title: 'On Way',
+                        topTitle: true,
+                      ),
+                      EasyStep(
+                        customStep: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor:
+                                activeStep >= 4 ? Colors.orange : Colors.white,
+                          ),
+                        ),
+                        title: 'Delivered',
+                      ),
+                    ],
+                    onStepReached: (index) =>
+                        setState(() => activeStep = index),
+                  ),
                 ),
                 const SizedBox(height: 50),
                 EasyStepper(

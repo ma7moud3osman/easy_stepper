@@ -105,8 +105,11 @@ class EasyStepper extends StatefulWidget {
   /// The type of the line [normal, dotted].
   final LineType lineType;
 
+  /// The amount of padding around every step.
+  final double internalPadding;
+
   /// The amount of padding around the stepper.
-  final double padding;
+  final EdgeInsetsDirectional padding;
 
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;
@@ -145,6 +148,9 @@ class EasyStepper extends StatefulWidget {
   /// Defaults to `True`
   final bool showLoadingAnimation;
 
+  /// Text Direction of the app.
+  final TextDirection textDirection;
+
   const EasyStepper({
     Key? key,
     required this.activeStep,
@@ -177,7 +183,9 @@ class EasyStepper extends StatefulWidget {
     this.lineLength = 40,
     this.lineDotRadius = 1,
     this.lineSpace = 5,
-    this.padding = 8,
+    this.padding =
+        const EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 10),
+    this.internalPadding = 8,
     @Deprecated("use 'stepAnimationCurve' instead, This feature was deprecated after v0.1.4+1")
         this.stepReachedAnimationEffect = Curves.linear,
     this.stepAnimationCurve,
@@ -195,6 +203,7 @@ class EasyStepper extends StatefulWidget {
     this.dashPattern = const [3, 1],
     this.showStepBorder = true,
     this.showLoadingAnimation = true,
+    this.textDirection = TextDirection.ltr,
   }) : super(key: key);
 
   @override
@@ -234,7 +243,7 @@ class _EasyStepperState extends State<EasyStepper> {
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
         i *
-            ((widget.stepRadius * 1 + (widget.padding / 2)) +
+            ((widget.stepRadius * 1 + (widget.internalPadding / 2)) +
                 widget.lineLength),
         duration:
             widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
@@ -265,7 +274,7 @@ class _EasyStepperState extends State<EasyStepper> {
               ? const NeverScrollableScrollPhysics()
               : const ClampingScrollPhysics(),
           controller: _scrollController,
-          padding: EdgeInsets.all(widget.padding),
+          padding: widget.padding,
           child: widget.direction == Axis.horizontal
               ? Row(
                   mainAxisSize: MainAxisSize.min,
@@ -322,13 +331,15 @@ class _EasyStepperState extends State<EasyStepper> {
       unreachedTextColor: widget.unreachedStepTextColor,
       unreachedIconColor: widget.unreachedStepIconColor,
       lottieAnimation: widget.loadingAnimation,
-      padding: widget.padding,
+      padding: widget.internalPadding,
       stepShape: widget.stepShape,
       stepRadius: widget.stepBorderRadius,
       borderType: _handleBorderType(index),
       dashPattern: widget.dashPattern,
       showStepBorder: widget.showStepBorder,
       showLoadingAnimation: widget.showLoadingAnimation,
+      textDirection: widget.textDirection,
+      lineLength: widget.lineLength,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled) {
