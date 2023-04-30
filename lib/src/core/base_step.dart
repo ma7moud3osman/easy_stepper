@@ -42,6 +42,7 @@ class BaseStep extends StatelessWidget {
     required this.showLoadingAnimation,
     required this.textDirection,
     required this.lineLength,
+    required this.enabled,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -73,6 +74,7 @@ class BaseStep extends StatelessWidget {
   final bool showLoadingAnimation;
   final TextDirection textDirection;
   final double lineLength;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,7 @@ class BaseStep extends StatelessWidget {
       width: (radius * 2) + (padding ?? 0),
       height: showTitle ? radius * 2.5 + 25 : radius * 1.5 + 15,
       child: InkWell(
-        onTap: onStepSelected,
+        onTap: enabled ? onStepSelected : null,
         canRequestFocus: false,
         child: Stack(
           clipBehavior: Clip.none,

@@ -96,7 +96,7 @@ class EasyStepper extends StatefulWidget {
   /// The length of the line that separates the steps.
   final double lineLength;
 
-  /// The radius of individual dot within the line that separates the steps.
+  /// The radius of individual dot within the line that separates the steps, if `lineType` set to `normal` this property is used to change the line thickness.
   final double lineDotRadius;
 
   /// The space between individual dot within the line that separates the steps.
@@ -340,9 +340,11 @@ class _EasyStepperState extends State<EasyStepper> {
       showLoadingAnimation: widget.showLoadingAnimation,
       textDirection: widget.textDirection,
       lineLength: widget.lineLength,
+      enabled: widget.steps[index].enabled,
       onStepSelected: widget.enableStepTapping
           ? () {
-              if (widget.steppingEnabled) {
+              if (widget.steppingEnabled && widget.steps[index].enabled ||
+                  index < _selectedIndex) {
                 setState(() {
                   _selectedIndex = index;
 

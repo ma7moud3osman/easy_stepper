@@ -33,6 +33,9 @@ class EasyStep {
   /// Show the title above the step icon. Default `false`.
   final bool topTitle;
 
+  /// enable/disable stepping for this step, Default `true`.
+  final bool enabled;
+
   /// Create a new Step with custom icon and optional title
   const EasyStep({
     this.icon,
@@ -44,5 +47,6 @@ class EasyStep {
     this.customTitle,
     this.customLineWidget,
     this.topTitle = false,
+    this.enabled = true,
   }) : assert(icon != null || customStep != null);
 }

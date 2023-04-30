@@ -1,3 +1,11 @@
+## 0.5.1
+
+### Sunday,  30th April, 2023
+
+* Added `enabled` property for `EasyStep` to enable/disable specific step despite `steppingEnabled = true`. Thanks to [thfr69](https://github.com/ma7moud3osman/easy_stepper/issues/12) 
+* Update Example App
+* Update README.md
+
 ## 0.5.0
 
 ### Tuesday,  4th April, 2023

@@ -14,6 +14,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int activeStep = 0;
+  final dashImages = [
+    'assets/1.png',
+    'assets/2.png',
+    'assets/3.png',
+    'assets/4.png',
+    'assets/5.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +82,7 @@ class _MyAppState extends State<MyApp> {
                         'Dash 2',
                         textAlign: TextAlign.center,
                       ),
+                      enabled: false,
                     ),
                     EasyStep(
                       customStep: ClipRRect(
@@ -117,6 +125,20 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ],
                   onStepReached: (index) => setState(() => activeStep = index),
+                ),
+                SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        dashImages[activeStep],
+                        height: 150,
+                      ),
+                      const SizedBox(height: 5),
+                      Text('Dash ${activeStep + 1}')
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 20),
                 EasyStepper(
