@@ -96,8 +96,11 @@ class EasyStepper extends StatefulWidget {
   /// The length of the line that separates the steps.
   final double lineLength;
 
-  /// The radius of individual dot within the line that separates the steps, if `lineType` set to `normal` this property is used to change the line thickness.
-  final double lineDotRadius;
+  /// The radius of individual dot within the line that separates the steps, if `lineType` set to `normal` this property is used to change the
+  final double? lineDotRadius;
+
+  /// The thickness of the line that separates the steps.
+  final double lineThickness;
 
   /// The space between individual dot within the line that separates the steps.
   final double lineSpace;
@@ -181,7 +184,9 @@ class EasyStepper extends StatefulWidget {
     this.showTitle = true,
     this.alignment = Alignment.center,
     this.lineLength = 40,
-    this.lineDotRadius = 1,
+    @Deprecated("use 'lineThickness' instead, This feature was deprecated after v0.5.1")
+        this.lineDotRadius,
+    this.lineThickness = 1,
     this.lineSpace = 5,
     this.padding =
         const EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 10),
@@ -396,14 +401,15 @@ class _EasyStepperState extends State<EasyStepper> {
               Padding(
                 padding: EdgeInsets.only(
                   top: axis == Axis.horizontal
-                      ? (widget.stepRadius - widget.lineDotRadius)
+                      ? (widget.stepRadius -
+                          (widget.lineDotRadius ?? widget.lineThickness))
                       : 0,
                   bottom: axis == Axis.vertical && widget.showTitle ? 10 : 0,
                 ),
                 child: EasyLine(
                   length: widget.lineLength,
                   color: _getLineColor(index),
-                  dotRadius: widget.lineDotRadius,
+                  thickness: widget.lineDotRadius ?? widget.lineThickness,
                   spacing: widget.lineSpace,
                   axis: axis,
                   lineType: widget.lineType,

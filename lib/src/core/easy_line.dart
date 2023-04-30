@@ -8,7 +8,7 @@ class EasyLine extends StatelessWidget {
   final Color color;
 
   /// Radius of each dot in the dotted line.
-  final double dotRadius;
+  final double thickness;
 
   /// Spacing between the dots in the dotted line.
   final double spacing;
@@ -23,7 +23,7 @@ class EasyLine extends StatelessWidget {
     key,
     this.length = 50.0,
     this.color = Colors.grey,
-    this.dotRadius = 1.5,
+    this.thickness = 1.5,
     this.spacing = 3.0,
     this.lineType = LineType.dotted,
     this.axis = Axis.horizontal,
@@ -33,16 +33,16 @@ class EasyLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // If this is not applied, top half of the dot gets offscreen, hence, hidden.
-      margin: EdgeInsets.only(top: lineType == LineType.dotted ? dotRadius : 0),
+      margin: EdgeInsets.only(top: lineType == LineType.dotted ? thickness : 0),
       width: axis == Axis.horizontal
           ? length
           : lineType == LineType.normal
-              ? dotRadius * 2
+              ? thickness * 2
               : 0,
       height: axis == Axis.vertical
           ? length
           : lineType == LineType.normal
-              ? dotRadius * 2
+              ? thickness * 2
               : 0,
       decoration: lineType == LineType.normal
           ? BoxDecoration(
@@ -55,7 +55,7 @@ class EasyLine extends StatelessWidget {
               painter: _DottedLinePainter(
                 brush: Paint()..color = color,
                 length: length,
-                dotRadius: dotRadius,
+                dotRadius: thickness,
                 spacing: lineType == LineType.normal ? 0.0 : spacing,
                 axis: axis,
               ),
