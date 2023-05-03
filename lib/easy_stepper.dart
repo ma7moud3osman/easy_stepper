@@ -87,6 +87,9 @@ class EasyStepper extends StatefulWidget {
   /// The index of currently active step.
   final int activeStep;
 
+  /// The index of highest reached step
+  final int? maxReachedStep;
+
   /// Whether show step title or not.
   final bool showTitle;
 
@@ -158,6 +161,7 @@ class EasyStepper extends StatefulWidget {
     Key? key,
     required this.activeStep,
     required this.steps,
+    this.maxReachedStep,
     this.lineType = LineType.dotted,
     this.enableStepTapping = true,
     this.direction = Axis.horizontal,
@@ -323,6 +327,7 @@ class _EasyStepperState extends State<EasyStepper> {
       isActive: index == widget.activeStep,
       isFinished: index < widget.activeStep,
       isUnreached: index > widget.activeStep,
+      isAlreadyReached: widget.maxReachedStep != null ? index <= widget.maxReachedStep! : false,
       activeStepBackgroundColor: widget.activeStepBackgroundColor,
       activeStepBorderColor: widget.activeStepBorderColor,
       activeTextColor: widget.activeStepTextColor,
