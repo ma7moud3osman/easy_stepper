@@ -14,6 +14,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int activeStep = 0;
+  int activeStep2 = 0;
+  int reachedStep = 0;
+  int upperBound = 5;
   final dashImages = [
     'assets/1.png',
     'assets/2.png',
@@ -183,6 +186,86 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ],
                   onStepReached: (index) => setState(() => activeStep = index),
+                ),
+                const SizedBox(height: 20),
+                ///example with steptapping only on already reached steps
+                SizedBox(
+                  height: 120,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(flex: 1, child: _previousStep()),
+                      Expanded(flex: 15,
+                        child: EasyStepper(
+                          activeStep: activeStep2,
+                          maxReachedStep: reachedStep,
+                          lineLength: 100,
+                          lineSpace: 4,
+                          lineType: LineType.normal,
+                          activeStepBorderColor: Colors.purple,
+                          activeStepIconColor: Colors.purple,
+                          activeStepTextColor: Colors.purple,
+                          activeLineColor: Colors.grey.withOpacity(0.5),
+                          activeStepBackgroundColor: Colors.white,
+                          unreachedStepBackgroundColor: Colors.grey.withOpacity(0.5),
+                          unreachedStepBorderColor: Colors.grey.withOpacity(0.5),
+                          unreachedStepIconColor: Colors.grey,
+                          unreachedStepTextColor: Colors.grey.withOpacity(0.5),
+                          unreachedLineColor: Colors.grey.withOpacity(0.5),
+                          finishedStepBackgroundColor: Colors.deepOrange,
+                          finishedStepBorderColor: Colors.grey.withOpacity(0.5),
+                          finishedStepIconColor: Colors.grey,
+                          finishedStepTextColor: Colors.deepOrange,
+                          finishedLineColor: Colors.deepOrange,
+                          borderThickness: 10,
+                          internalPadding: 15,
+                          showLoadingAnimation: false,
+                          steps: [
+                            EasyStep(
+                              icon: Icon(CupertinoIcons.cart),
+                              title: 'Cart',
+                              lineText: 'Add Address Info',
+                              enabled: _allowTabStepping(0),
+                            ),
+                            EasyStep(
+                              icon: Icon(CupertinoIcons.info),
+                              title: 'Address',
+                              lineText: 'Go To Checkout',
+                              enabled: _allowTabStepping(1),
+                            ),
+                            EasyStep(
+                              icon: Icon(CupertinoIcons.cart_fill_badge_plus),
+                              title: 'Checkout',
+                              lineText: 'Choose Payment Method',
+                              enabled: _allowTabStepping(2),
+                            ),
+                            EasyStep(
+                              icon: Icon(CupertinoIcons.money_dollar),
+                              title: 'Payment',
+                              lineText: 'Confirm Order Items',
+                              enabled: _allowTabStepping(3),
+                            ),
+                            EasyStep(
+                              icon: Icon(Icons.file_present_rounded),
+                              title: 'Order Details',
+                              lineText: 'Submit Order',
+                              enabled: _allowTabStepping(4),
+                            ),
+                            EasyStep(
+                              icon: Icon(Icons.check_circle_outline),
+                              title: 'Finish',
+                              enabled: _allowTabStepping(5),
+                            ),
+                          ],
+                          onStepReached: (index) => setState(() {
+                            activeStep2 = index;
+                          }),
+                        ),
+                      ),
+                      Expanded(flex: 1, child: _nextStep()),
+                    ],
+                  ),
+
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -466,4 +549,37 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+
+  bool _allowTabStepping(int index) => index <= reachedStep;
+
+  /// Returns the next button.
+  Widget _nextStep() {
+    return IconButton(
+      onPressed: () {
+        if (activeStep2 < upperBound) {
+          setState(() {
+            ++activeStep2;
+            if(reachedStep < activeStep2) {
+              reachedStep = activeStep2;
+            }
+          });
+        }
+      },
+      icon: const Icon(Icons.arrow_forward_ios),
+    );
+  }
+
+  /// Returns the previous button.
+  Widget _previousStep() {
+    return IconButton(
+      onPressed: () {
+        if (activeStep2 > 0) {
+          setState(() => --activeStep2);
+        }
+      },
+      icon: const Icon(Icons.arrow_back_ios),
+    );
+  }
+
 }
