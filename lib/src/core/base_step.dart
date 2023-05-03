@@ -16,6 +16,7 @@ class BaseStep extends StatelessWidget {
     required this.isActive,
     required this.isFinished,
     required this.isUnreached,
+    required this.isAlreadyReached,
     required this.onStepSelected,
     required this.showTitle,
     required this.radius,
@@ -48,6 +49,7 @@ class BaseStep extends StatelessWidget {
   final bool isActive;
   final bool isFinished;
   final bool isUnreached;
+  final bool isAlreadyReached;
   final VoidCallback? onStepSelected;
   final double radius;
   final bool showTitle;
@@ -111,12 +113,7 @@ class BaseStep extends StatelessWidget {
                     borderRadius: stepShape != StepShape.circle
                         ? BorderRadius.circular(stepRadius ?? 0)
                         : null,
-                    color: isFinished
-                        ? finishedBackgroundColor ??
-                            Theme.of(context).colorScheme.primary
-                        : isActive
-                            ? activeStepBackgroundColor ?? Colors.transparent
-                            : unreachedBackgroundColor ?? Colors.transparent,
+                      color: _handleColor(context, isFinished, isActive, isAlreadyReached)
                   ),
                   alignment: Alignment.center,
                   child: showStepBorder
@@ -127,13 +124,7 @@ class BaseStep extends StatelessWidget {
                           radius: stepShape != StepShape.circle
                               ? Radius.circular(stepRadius ?? 0)
                               : const Radius.circular(0),
-                          color: isActive
-                              ? activeStepBorderColor ??
-                                  Theme.of(context).colorScheme.primary
-                              : isFinished
-                                  ? finishedBorderColor ?? Colors.transparent
-                                  : unreachedBorderColor ??
-                                      Colors.grey.shade400,
+                          color: _handleBorderColor(context, isFinished, isActive, isAlreadyReached),
                           strokeWidth: borderThickness,
                           dashPattern: borderType == BorderType.normal
                               ? [1, 0]
@@ -153,6 +144,37 @@ class BaseStep extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color _handleColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached)  {
+    if (isActive) {
+      return activeStepBackgroundColor ?? Colors.transparent;
+    } else {
+      if(isFinished) {
+        return finishedBackgroundColor ??
+            Theme.of(context).colorScheme.primary;
+      } else if(isAlreadyReached) {
+        return finishedBackgroundColor ??
+            Theme.of(context).colorScheme.primary;
+      } else {
+        return unreachedBackgroundColor ?? Colors.transparent;
+      }
+    }
+  }
+
+  Color _handleBorderColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached) {
+    if (isActive) {
+      return activeStepBorderColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if(isFinished) {
+        return finishedBorderColor ?? Colors.transparent;
+      } else if(isAlreadyReached) {
+        return finishedBorderColor ?? Colors.transparent;
+      } else {
+        return unreachedBorderColor ??
+            Colors.grey.shade400;
+      }
+    }
   }
 
   Widget _buildStepTitle(BuildContext context) {
