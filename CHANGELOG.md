@@ -1,3 +1,18 @@
+## 0.5.2+1
+
+### Thursday,  4th May, 2023
+
+* Update README.md
+
+## 0.5.2
+
+### Thursday,  4th May, 2023
+
+* Add `maxReachedStep` & `isAlreadyReached` to the Stepper in order to navigate only between already reached steps by step tapping. Thanks to [
+Thorsten Fritzsche](https://github.com/ma7moud3osman/easy_stepper/pull/16)
+* Add `lineThickness` instead of `lineDotRadius` (Deprecated).
+* Update Example App 
+
 ## 0.5.1
 
 ### Sunday,  30th April, 2023

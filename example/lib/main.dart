@@ -147,7 +147,7 @@ class _MyAppState extends State<MyApp> {
                 EasyStepper(
                   activeStep: activeStep,
                   lineLength: 100,
-                  lineDotRadius: 3,
+                  lineThickness: 3,
                   lineSpace: 4,
                   lineType: LineType.normal,
                   defaultLineColor: Colors.purple.shade300,
@@ -188,14 +188,16 @@ class _MyAppState extends State<MyApp> {
                   onStepReached: (index) => setState(() => activeStep = index),
                 ),
                 const SizedBox(height: 20),
-                ///example with steptapping only on already reached steps
+
+                ///example with step tapping only on already reached steps
                 SizedBox(
                   height: 120,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(flex: 1, child: _previousStep()),
-                      Expanded(flex: 15,
+                      Expanded(
+                        flex: 15,
                         child: EasyStepper(
                           activeStep: activeStep2,
                           maxReachedStep: reachedStep,
@@ -207,8 +209,10 @@ class _MyAppState extends State<MyApp> {
                           activeStepTextColor: Colors.purple,
                           activeLineColor: Colors.grey.withOpacity(0.5),
                           activeStepBackgroundColor: Colors.white,
-                          unreachedStepBackgroundColor: Colors.grey.withOpacity(0.5),
-                          unreachedStepBorderColor: Colors.grey.withOpacity(0.5),
+                          unreachedStepBackgroundColor:
+                              Colors.grey.withOpacity(0.5),
+                          unreachedStepBorderColor:
+                              Colors.grey.withOpacity(0.5),
                           unreachedStepIconColor: Colors.grey,
                           unreachedStepTextColor: Colors.grey.withOpacity(0.5),
                           unreachedLineColor: Colors.grey.withOpacity(0.5),
@@ -222,37 +226,38 @@ class _MyAppState extends State<MyApp> {
                           showLoadingAnimation: false,
                           steps: [
                             EasyStep(
-                              icon: Icon(CupertinoIcons.cart),
+                              icon: const Icon(CupertinoIcons.cart),
                               title: 'Cart',
                               lineText: 'Add Address Info',
                               enabled: _allowTabStepping(0),
                             ),
                             EasyStep(
-                              icon: Icon(CupertinoIcons.info),
+                              icon: const Icon(CupertinoIcons.info),
                               title: 'Address',
                               lineText: 'Go To Checkout',
                               enabled: _allowTabStepping(1),
                             ),
                             EasyStep(
-                              icon: Icon(CupertinoIcons.cart_fill_badge_plus),
+                              icon: const Icon(
+                                  CupertinoIcons.cart_fill_badge_plus),
                               title: 'Checkout',
                               lineText: 'Choose Payment Method',
                               enabled: _allowTabStepping(2),
                             ),
                             EasyStep(
-                              icon: Icon(CupertinoIcons.money_dollar),
+                              icon: const Icon(CupertinoIcons.money_dollar),
                               title: 'Payment',
                               lineText: 'Confirm Order Items',
                               enabled: _allowTabStepping(3),
                             ),
                             EasyStep(
-                              icon: Icon(Icons.file_present_rounded),
+                              icon: const Icon(Icons.file_present_rounded),
                               title: 'Order Details',
                               lineText: 'Submit Order',
                               enabled: _allowTabStepping(4),
                             ),
                             EasyStep(
-                              icon: Icon(Icons.check_circle_outline),
+                              icon: const Icon(Icons.check_circle_outline),
                               title: 'Finish',
                               enabled: _allowTabStepping(5),
                             ),
@@ -265,7 +270,6 @@ class _MyAppState extends State<MyApp> {
                       Expanded(flex: 1, child: _nextStep()),
                     ],
                   ),
-
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -285,7 +289,7 @@ class _MyAppState extends State<MyApp> {
                     showLoadingAnimation: false,
                     stepRadius: 8,
                     showStepBorder: false,
-                    lineDotRadius: 1.5,
+                    lineThickness: 1.5,
                     steps: [
                       EasyStep(
                         customStep: CircleAvatar(
@@ -358,7 +362,7 @@ class _MyAppState extends State<MyApp> {
                 EasyStepper(
                   activeStep: activeStep,
                   lineLength: 80,
-                  lineDotRadius: 1,
+                  lineThickness: 1,
                   lineSpace: 5,
                   stepRadius: 20,
                   unreachedStepIconColor: Colors.black87,
@@ -550,7 +554,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-
   bool _allowTabStepping(int index) => index <= reachedStep;
 
   /// Returns the next button.
@@ -560,7 +563,7 @@ class _MyAppState extends State<MyApp> {
         if (activeStep2 < upperBound) {
           setState(() {
             ++activeStep2;
-            if(reachedStep < activeStep2) {
+            if (reachedStep < activeStep2) {
               reachedStep = activeStep2;
             }
           });
@@ -581,5 +584,4 @@ class _MyAppState extends State<MyApp> {
       icon: const Icon(Icons.arrow_back_ios),
     );
   }
-
 }

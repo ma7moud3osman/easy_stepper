@@ -79,7 +79,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.5.1"
+    version: "0.5.2+1"
   fake_async:
     dependency: transitive
     description:
@@ -134,10 +134,10 @@ packages:
     dependency: transitive
     description:
       name: lottie
-      sha256: "14b489bf93af84727a07c87c73580a9413f9cbffa4ea2342f3f71447a674a3fb"
+      sha256: "23522951540d20a57a60202ed7022e6376bed206a4eee1c347a91f58bd57eb9f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   matcher:
     dependency: transitive
     description:
