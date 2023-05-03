@@ -177,6 +177,36 @@ class BaseStep extends StatelessWidget {
     }
   }
 
+  Color _handleTitleColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached) {
+    if (isActive) {
+      return activeTextColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if(isFinished) {
+        return finishedTextColor ?? Colors.transparent;
+      } else if(isAlreadyReached) {
+        return finishedTextColor ?? Colors.transparent;
+      } else {
+        return unreachedTextColor ??
+            Colors.grey.shade400;
+      }
+    }
+  }
+
+  Color _handleIconColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached) {
+    if (isActive) {
+      return activeIconColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if(isFinished) {
+        return finishedIconColor ?? Colors.white;
+      } else if(isAlreadyReached) {
+        return finishedIconColor ?? Colors.white;
+      } else {
+        return unreachedIconColor ??
+            Colors.grey.shade400;
+      }
+    }
+  }
+
   Widget _buildStepTitle(BuildContext context) {
     return Positioned.directional(
       textDirection: textDirection,
@@ -194,13 +224,7 @@ class BaseStep extends StatelessWidget {
               softWrap: false,
               overflow: TextOverflow.visible,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: isActive
-                        ? activeTextColor ??
-                            Theme.of(context).colorScheme.primary
-                        : isFinished
-                            ? finishedTextColor ??
-                                Theme.of(context).colorScheme.primary
-                            : unreachedTextColor ?? Colors.grey.shade400,
+                    color: _handleTitleColor(context, isFinished, isActive, isAlreadyReached),
                     height: 1,
                     // fontSize: radius * 0.45,
                   ),
@@ -222,11 +246,7 @@ class BaseStep extends StatelessWidget {
                       ? step.finishIcon!.icon
                       : step.icon!.icon,
               size: radius * 0.9,
-              color: isFinished
-                  ? finishedIconColor ?? Colors.white
-                  : isActive
-                      ? activeIconColor ?? Theme.of(context).colorScheme.primary
-                      : unreachedIconColor ?? Colors.grey.shade400,
+              color: _handleIconColor(context, isFinished, isActive, isAlreadyReached),
             ),
       ),
     );
