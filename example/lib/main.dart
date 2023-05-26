@@ -290,11 +290,13 @@ class _MyAppState extends State<MyApp> {
                   color: Colors.grey.shade200,
                   clipBehavior: Clip.none,
                   alignment: Alignment.center,
-                  padding: const EdgeInsetsDirectional.symmetric(vertical: 20),
+                  padding: const EdgeInsetsDirectional.symmetric(
+                      vertical: 20, horizontal: 20),
                   child: EasyStepper(
                     activeStep: activeStep,
-                    lineLength: 70,
+                    lineLength: 50,
                     lineSpace: 0,
+                    disableScroll: true,
                     lineType: LineType.normal,
                     defaultLineColor: Colors.white,
                     finishedLineColor: Colors.orange,

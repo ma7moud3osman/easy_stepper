@@ -160,6 +160,9 @@ class EasyStepper extends StatefulWidget {
   /// Text Direction of the app.
   final TextDirection textDirection;
 
+  /// Whether the stepper take the full width of the screen or not, this property work when `disableScroll = true`. default `True`.
+  final bool fitWidth;
+
   const EasyStepper({
     Key? key,
     required this.activeStep,
@@ -191,6 +194,7 @@ class EasyStepper extends StatefulWidget {
     this.showTitle = true,
     this.alignment = Alignment.center,
     this.lineLength = 40,
+    this.fitWidth = true,
     @Deprecated("use 'lineThickness' instead, This feature was deprecated after v0.5.1")
         this.lineDotRadius,
     this.lineThickness = 1,
@@ -284,23 +288,34 @@ class _EasyStepperState extends State<EasyStepper> {
           overscroll.disallowIndicator();
           return false;
         },
-        child: SingleChildScrollView(
-          scrollDirection: widget.direction,
-          physics: widget.disableScroll
-              ? const NeverScrollableScrollPhysics()
-              : const ClampingScrollPhysics(),
-          controller: _scrollController,
-          padding: widget.padding,
-          child: widget.direction == Axis.horizontal
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: _buildEasySteps(),
-                )
-              : Column(
-                  children: _buildEasySteps(),
-                ),
-        ),
+        child: widget.disableScroll
+            ? widget.direction == Axis.horizontal
+                ? FittedBox(
+                    fit: widget.fitWidth ? BoxFit.fitWidth : BoxFit.none,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: _buildEasySteps(),
+                    ),
+                  )
+                : Column(
+                    children: _buildEasySteps(),
+                  )
+            : SingleChildScrollView(
+                scrollDirection: widget.direction,
+                physics: const ClampingScrollPhysics(),
+                controller: _scrollController,
+                padding: widget.padding,
+                child: widget.direction == Axis.horizontal
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: _buildEasySteps(),
+                      )
+                    : Column(
+                        children: _buildEasySteps(),
+                      ),
+              ),
       ),
     );
   }
