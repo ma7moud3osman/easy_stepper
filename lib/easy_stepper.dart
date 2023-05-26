@@ -1,6 +1,7 @@
 library easy_stepper;
 
 import 'package:easy_stepper/src/easy_step.dart';
+import 'package:flutter/material.dart';
 
 export 'package:easy_stepper/src/easy_step.dart';
 
@@ -327,7 +328,9 @@ class _EasyStepperState extends State<EasyStepper> {
       isActive: index == widget.activeStep,
       isFinished: index < widget.activeStep,
       isUnreached: index > widget.activeStep,
-      isAlreadyReached: widget.maxReachedStep != null ? index <= widget.maxReachedStep! : false,
+      isAlreadyReached: widget.maxReachedStep != null
+          ? index <= widget.maxReachedStep!
+          : false,
       activeStepBackgroundColor: widget.activeStepBackgroundColor,
       activeStepBorderColor: widget.activeStepBorderColor,
       activeTextColor: widget.activeStepTextColor,
