@@ -1,3 +1,13 @@
+## 0.6.0
+
+### Friday,  26th May, 2023
+
+* Add `fitWidth` to `easy_stepper` to fill the full width of the screen when the `disableScroll = true`.  
+Thanks to [Maclaon](https://github.com/ma7moud3osman/easy_stepper/issues/18) & [Seamoon Pandey](https://github.com/ma7moud3osman/easy_stepper/issues/20)
+* Fix large title not showing correctly in the vertical stepper . Thanks to [Basem Osama](https://github.com/ma7moud3osman/easy_stepper/issues/19) 
+* Remove unnecessary `export` of `flutter/material.dart` from the package. Thanks to [ryanc16](https://github.com/ma7moud3osman/easy_stepper/issues/21) 
+* Update README.md
+
 ## 0.5.2+1
 
 ### Thursday,  4th May, 2023
