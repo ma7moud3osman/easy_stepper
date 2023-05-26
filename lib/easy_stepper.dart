@@ -1,5 +1,7 @@
 library easy_stepper;
 
+import 'dart:math';
+
 import 'package:easy_stepper/src/easy_step.dart';
 import 'package:flutter/material.dart';
 
@@ -253,8 +255,12 @@ class _EasyStepperState extends State<EasyStepper> {
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
         i *
-            ((widget.stepRadius * 1 + (widget.internalPadding / 2)) +
-                widget.lineLength),
+            (widget.stepRadius +
+                widget.internalPadding +
+                widget.lineLength +
+                (widget.direction == Axis.vertical
+                    ? widget.padding.vertical
+                    : widget.padding.horizontal)),
         duration:
             widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
         curve: widget.stepAnimationCurve ?? widget.stepReachedAnimationEffect,
@@ -288,7 +294,7 @@ class _EasyStepperState extends State<EasyStepper> {
           child: widget.direction == Axis.horizontal
               ? Row(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: _buildEasySteps(),
                 )
               : Column(
@@ -344,7 +350,8 @@ class _EasyStepperState extends State<EasyStepper> {
       unreachedTextColor: widget.unreachedStepTextColor,
       unreachedIconColor: widget.unreachedStepIconColor,
       lottieAnimation: widget.loadingAnimation,
-      padding: widget.internalPadding,
+      padding: max(widget.internalPadding,
+          (widget.direction == Axis.vertical ? widget.padding.horizontal : 0)),
       stepShape: widget.stepShape,
       stepRadius: widget.stepBorderRadius,
       borderType: _handleBorderType(index),
@@ -354,6 +361,7 @@ class _EasyStepperState extends State<EasyStepper> {
       textDirection: widget.textDirection,
       lineLength: widget.lineLength,
       enabled: widget.steps[index].enabled,
+      direction: widget.direction,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled && widget.steps[index].enabled ||

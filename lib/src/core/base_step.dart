@@ -45,6 +45,7 @@ class BaseStep extends StatelessWidget {
     required this.textDirection,
     required this.lineLength,
     required this.enabled,
+    required this.direction,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -78,6 +79,7 @@ class BaseStep extends StatelessWidget {
   final TextDirection textDirection;
   final double lineLength;
   final bool enabled;
+  final Axis direction;
 
   @override
   Widget build(BuildContext context) {
@@ -211,12 +213,11 @@ class BaseStep extends StatelessWidget {
   Widget _buildStepTitle(BuildContext context) {
     return Positioned.directional(
       textDirection: textDirection,
-      top: step.topTitle ? -20 : (radius * 2.35),
-      // bottom: radius * 0.3,
-      // end: (radius * 1.3) - ((step.title?.length ?? 5) * 4),
-      // start: (radius * 1.3) - ((step.title?.length ?? 5) * 4),
+      top: step.topTitle ? -(radius * 2.35) : (radius * 2.35),
       child: SizedBox(
-        width: (radius * 2) + (padding ?? 0) + (lineLength / 1.0),
+        width: (radius * 2) +
+            (padding ?? 0) +
+            (direction == Axis.horizontal ? lineLength : 0),
         child: step.customTitle ??
             Text(
               step.title ?? '',

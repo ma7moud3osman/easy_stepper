@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     'assets/3.png',
     'assets/4.png',
     'assets/5.png',
+    'assets/5.png',
   ];
 
   @override
@@ -86,7 +87,6 @@ class _MyAppState extends State<MyApp> {
                         'Dash 2',
                         textAlign: TextAlign.center,
                       ),
-                      enabled: false,
                     ),
                     EasyStep(
                       customStep: ClipRRect(
@@ -124,6 +124,19 @@ class _MyAppState extends State<MyApp> {
                       ),
                       customTitle: const Text(
                         'Dash 5',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    EasyStep(
+                      customStep: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Opacity(
+                          opacity: activeStep >= 5 ? 1 : 0.3,
+                          child: Image.asset('assets/5.png'),
+                        ),
+                      ),
+                      customTitle: const Text(
+                        'Dash 6',
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -274,9 +287,10 @@ class _MyAppState extends State<MyApp> {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
                   color: Colors.grey.shade200,
                   clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsetsDirectional.symmetric(vertical: 20),
                   child: EasyStepper(
                     activeStep: activeStep,
                     lineLength: 70,
@@ -286,7 +300,9 @@ class _MyAppState extends State<MyApp> {
                     finishedLineColor: Colors.orange,
                     activeStepTextColor: Colors.black87,
                     finishedStepTextColor: Colors.black87,
-                    internalPadding: 0,
+                    internalPadding: 10,
+                    padding: const EdgeInsetsDirectional.symmetric(
+                        vertical: 20, horizontal: 20),
                     showLoadingAnimation: false,
                     stepRadius: 8,
                     showStepBorder: false,
@@ -302,7 +318,7 @@ class _MyAppState extends State<MyApp> {
                                 activeStep >= 0 ? Colors.orange : Colors.white,
                           ),
                         ),
-                        title: 'Waiting',
+                        title: 'Pending',
                       ),
                       EasyStep(
                         customStep: CircleAvatar(
@@ -314,7 +330,7 @@ class _MyAppState extends State<MyApp> {
                                 activeStep >= 1 ? Colors.orange : Colors.white,
                           ),
                         ),
-                        title: 'Order Received',
+                        title: 'Waiting',
                         topTitle: true,
                       ),
                       EasyStep(
@@ -327,7 +343,7 @@ class _MyAppState extends State<MyApp> {
                                 activeStep >= 2 ? Colors.orange : Colors.white,
                           ),
                         ),
-                        title: 'Preparing',
+                        title: 'Order Received',
                       ),
                       EasyStep(
                         customStep: CircleAvatar(
@@ -339,7 +355,7 @@ class _MyAppState extends State<MyApp> {
                                 activeStep >= 3 ? Colors.orange : Colors.white,
                           ),
                         ),
-                        title: 'On Way',
+                        title: 'Preparing',
                         topTitle: true,
                       ),
                       EasyStep(
@@ -352,7 +368,20 @@ class _MyAppState extends State<MyApp> {
                                 activeStep >= 4 ? Colors.orange : Colors.white,
                           ),
                         ),
+                        title: 'On Way',
+                      ),
+                      EasyStep(
+                        customStep: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor:
+                                activeStep >= 5 ? Colors.orange : Colors.white,
+                          ),
+                        ),
                         title: 'Delivered',
+                        topTitle: true,
                       ),
                     ],
                     onStepReached: (index) =>
@@ -392,17 +421,21 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(
                   height: 450,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       EasyStepper(
-                        lineType: LineType.normal,
+                        lineType: LineType.dotted,
                         activeStep: activeStep,
                         direction: Axis.vertical,
                         unreachedStepIconColor: Colors.white,
                         unreachedStepBorderColor: Colors.black54,
                         finishedStepBackgroundColor: Colors.deepPurple,
                         unreachedStepBackgroundColor: Colors.deepOrange,
-                        showTitle: false,
+                        finishedStepTextColor: Colors.black,
+                        showTitle: true,
+                        lineLength: 40,
+                        lineThickness: 2,
+                        internalPadding: 60,
                         onStepReached: (index) =>
                             setState(() => activeStep = index),
                         steps: const [
@@ -425,17 +458,12 @@ class _MyAppState extends State<MyApp> {
                           EasyStep(
                             icon: Icon(Icons.money),
                             activeIcon: Icon(Icons.money),
-                            title: 'Payment',
+                            title: 'Waiting for payment',
                           ),
                           EasyStep(
                             icon: Icon(Icons.local_shipping_outlined),
                             activeIcon: Icon(Icons.local_shipping_outlined),
                             title: 'Shipping',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.file_copy_outlined),
-                            activeIcon: Icon(Icons.file_copy_outlined),
-                            title: 'Order Details',
                           ),
                           EasyStep(
                             icon: Icon(Icons.check_circle_outline),
@@ -481,61 +509,6 @@ class _MyAppState extends State<MyApp> {
                             icon: Icon(Icons.local_shipping_outlined),
                             activeIcon: Icon(Icons.local_shipping_outlined),
                             title: 'Shipping',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.file_copy_outlined),
-                            activeIcon: Icon(Icons.file_copy_outlined),
-                            title: 'Order Details',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.check_circle_outline),
-                            activeIcon: Icon(Icons.check_circle_outline),
-                            title: 'Finish',
-                          ),
-                        ],
-                      ),
-                      EasyStepper(
-                        lineType: LineType.normal,
-                        activeStep: activeStep,
-                        direction: Axis.vertical,
-                        unreachedStepIconColor: Colors.white,
-                        unreachedStepBorderColor: Colors.black54,
-                        finishedStepBackgroundColor: Colors.deepPurple,
-                        unreachedStepBackgroundColor: Colors.deepOrange,
-                        showTitle: false,
-                        onStepReached: (index) =>
-                            setState(() => activeStep = index),
-                        steps: const [
-                          EasyStep(
-                            icon: Icon(CupertinoIcons.cart),
-                            title: 'Cart',
-                            activeIcon: Icon(CupertinoIcons.cart),
-                            lineText: 'Cart Line',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.file_present),
-                            activeIcon: Icon(Icons.file_present),
-                            title: 'Address',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.filter_center_focus_sharp),
-                            activeIcon: Icon(Icons.filter_center_focus_sharp),
-                            title: 'Checkout',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.money),
-                            activeIcon: Icon(Icons.money),
-                            title: 'Payment',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.local_shipping_outlined),
-                            activeIcon: Icon(Icons.local_shipping_outlined),
-                            title: 'Shipping',
-                          ),
-                          EasyStep(
-                            icon: Icon(Icons.file_copy_outlined),
-                            activeIcon: Icon(Icons.file_copy_outlined),
-                            title: 'Order Details',
                           ),
                           EasyStep(
                             icon: Icon(Icons.check_circle_outline),
