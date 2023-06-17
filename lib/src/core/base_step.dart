@@ -85,7 +85,7 @@ class BaseStep extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: (radius * 2) + (padding ?? 0),
-      height: showTitle ? radius * 2.5 + 25 : radius * 1.5 + 15,
+      height: showTitle ? radius * 2.5 + 25 : radius * 1.5,
       child: InkWell(
         onTap: enabled ? onStepSelected : null,
         canRequestFocus: false,
