@@ -61,6 +61,7 @@ class _MyAppState extends State<MyApp> {
                   finishedStepBackgroundColor: Colors.deepOrange,
                   activeStepIconColor: Colors.deepOrange,
                   showLoadingAnimation: false,
+                  showScrollbar: false,
                   steps: [
                     EasyStep(
                       customStep: ClipRRect(
@@ -238,6 +239,7 @@ class _MyAppState extends State<MyApp> {
                           borderThickness: 10,
                           internalPadding: 15,
                           showLoadingAnimation: false,
+                          disableScroll: false,
                           steps: [
                             EasyStep(
                               icon: const Icon(CupertinoIcons.cart),
@@ -400,6 +402,8 @@ class _MyAppState extends State<MyApp> {
                   unreachedStepIconColor: Colors.black87,
                   unreachedStepBorderColor: Colors.black54,
                   unreachedStepTextColor: Colors.black,
+                  finishedStepTextColor: Colors.purple,
+                  activeStepTextColor: Colors.purple,
                   showLoadingAnimation: false,
                   steps: const [
                     EasyStep(

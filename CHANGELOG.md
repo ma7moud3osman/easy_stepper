@@ -1,3 +1,13 @@
+## 0.6.2
+
+### Sunday,  18th Jun, 2023
+
+* Add `showScrollbar` to `easy_stepper` to Show or Hide `Scrollbar` in Web or Desktop.  
+Thanks to [Francesco Bussolino](https://github.com/ma7moud3osman/easy_stepper/issues/23)
+* Remove blank space when showTitle is false during vertical direction . Thanks to [Martin Jablečník](https://github.com/ma7moud3osman/easy_stepper/pull/22) 
+* Update Example App
+* Update README.md
+
 ## 0.6.0
 
 ### Friday,  26th May, 2023
