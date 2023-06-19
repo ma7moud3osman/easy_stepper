@@ -121,7 +121,7 @@ class EasyStepper extends StatefulWidget {
   final double internalPadding;
 
   /// The amount of padding around the stepper.
-  final EdgeInsetsDirectional padding;
+  final EdgeInsetsGeometry padding;
 
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;

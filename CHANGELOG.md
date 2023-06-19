@@ -1,3 +1,9 @@
+## 0.7.2
+
+### Monday,  19th Jun, 2023
+
+* Minor fix.  
+
 ## 0.7.1
 
 ### Monday,  19th Jun, 2023
