@@ -265,16 +265,12 @@ class _EasyStepperState extends State<EasyStepper> {
 
   /// Controls the step scrolling.
   void _afterLayout(_) {
-    // ! Provide detailed explanation.
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
         i *
-            (widget.stepRadius +
+            ((widget.stepRadius * 2) +
                 widget.internalPadding +
-                widget.lineLength +
-                (widget.direction == Axis.vertical
-                    ? widget.padding.vertical
-                    : widget.padding.horizontal)),
+                widget.lineLength),
         duration:
             widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
         curve: widget.stepAnimationCurve ?? widget.stepReachedAnimationEffect,

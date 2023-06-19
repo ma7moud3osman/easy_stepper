@@ -164,6 +164,9 @@ class _MyAppState extends State<MyApp> {
                   lineLength: 100,
                   lineThickness: 3,
                   lineSpace: 4,
+                  padding: EdgeInsetsDirectional.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 2.5,
+                  ),
                   lineType: LineType.normal,
                   defaultLineColor: Colors.purple.shade300,
                   borderThickness: 10,

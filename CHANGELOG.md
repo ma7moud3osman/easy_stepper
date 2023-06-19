@@ -1,3 +1,10 @@
+## 0.7.1
+
+### Monday,  19th Jun, 2023
+
+* Fix minor bugs in Stepper Scrolling.  
+
+
 ## 0.7.0
 
 ### Sunday,  18th Jun, 2023
