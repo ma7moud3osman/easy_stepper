@@ -100,7 +100,7 @@ class BaseStep extends StatelessWidget {
                   ? BorderRadius.circular(stepRadius ?? 0)
                   : null,
               child: InkWell(
-                onTap: onStepSelected,
+                onTap: enabled ? onStepSelected : null,
                 canRequestFocus: false,
                 radius: radius,
                 child: Container(
