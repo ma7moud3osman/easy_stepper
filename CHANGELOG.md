@@ -1,3 +1,10 @@
+## 0.7.3
+
+### Saturday,  22th Jul, 2023
+
+* [Specific reached steps] With this change, the user could disable certain steps in the stepper. Thanks to [thfr69](https://github.com/ma7moud3osman/easy_stepper/pull/24) 
+* Update example with external navigation (forward and back button) in the main.dart file.
+
 ## 0.7.2
 
 ### Monday,  19th Jun, 2023
