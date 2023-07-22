@@ -96,6 +96,9 @@ class EasyStepper extends StatefulWidget {
   /// The index of highest reached step
   final int? maxReachedStep;
 
+  /// A set of already reached steps
+  final Set<int>? reachedSteps;
+
   /// Whether show step title or not.
   final bool showTitle;
 
@@ -173,6 +176,7 @@ class EasyStepper extends StatefulWidget {
     Key? key,
     required this.activeStep,
     required this.steps,
+    this.reachedSteps,
     this.maxReachedStep,
     this.lineType = LineType.dotted,
     this.enableStepTapping = true,
@@ -230,7 +234,7 @@ class EasyStepper extends StatefulWidget {
     this.showStepBorder = true,
     this.showLoadingAnimation = true,
     this.textDirection = TextDirection.ltr,
-  }) : super(key: key);
+  }) : assert(maxReachedStep == null || reachedSteps == null, 'only "maxReachedStep" or "reachedSteps" allowed'), super(key: key);
 
   @override
   State<EasyStepper> createState() => _EasyStepperState();
@@ -379,9 +383,12 @@ class _EasyStepperState extends State<EasyStepper> {
       showTitle: widget.showTitle,
       borderThickness: widget.borderThickness,
       isActive: index == widget.activeStep,
-      isFinished: index < widget.activeStep,
+      isFinished: widget.reachedSteps != null
+          ? index < widget.activeStep && widget.reachedSteps!.contains(index)
+          : index < widget.activeStep,
       isUnreached: index > widget.activeStep,
-      isAlreadyReached: widget.maxReachedStep != null
+      isAlreadyReached: widget.reachedSteps != null ? widget.reachedSteps!.contains(index) :
+      widget.maxReachedStep != null
           ? index <= widget.maxReachedStep!
           : false,
       activeStepBackgroundColor: widget.activeStepBackgroundColor,
@@ -415,7 +422,6 @@ class _EasyStepperState extends State<EasyStepper> {
                   index < _selectedIndex) {
                 setState(() {
                   _selectedIndex = index;
-
                   widget.onStepReached?.call(_selectedIndex);
                 });
               }

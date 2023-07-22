@@ -103,7 +103,7 @@ class BaseStep extends StatelessWidget {
                   ? BorderRadius.circular(stepRadius ?? 0)
                   : null,
               child: InkWell(
-                onTap: onStepSelected,
+                onTap: enabled ? onStepSelected : null,
                 canRequestFocus: false,
                 radius: radius,
                 child: Container(
@@ -210,6 +210,36 @@ class BaseStep extends StatelessWidget {
     }
   }
 
+  Color _handleTitleColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached) {
+    if (isActive) {
+      return activeTextColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if(isFinished) {
+        return finishedTextColor ?? Colors.transparent;
+      } else if(isAlreadyReached) {
+        return finishedTextColor ?? Colors.transparent;
+      } else {
+        return unreachedTextColor ??
+            Colors.grey.shade400;
+      }
+    }
+  }
+
+  Color _handleIconColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached) {
+    if (isActive) {
+      return activeIconColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if(isFinished) {
+        return finishedIconColor ?? Colors.white;
+      } else if(isAlreadyReached) {
+        return finishedIconColor ?? Colors.white;
+      } else {
+        return unreachedIconColor ??
+            Colors.grey.shade400;
+      }
+    }
+  }
+
   Widget _buildStepTitle(BuildContext context) {
     return Positioned.directional(
       textDirection: textDirection,
@@ -226,8 +256,7 @@ class BaseStep extends StatelessWidget {
               softWrap: false,
               overflow: TextOverflow.visible,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: _handleTitleColor(
-                        context, isFinished, isActive, isAlreadyReached),
+                    color: _handleTitleColor(context, isFinished, isActive, isAlreadyReached),
                     height: 1,
                     // fontSize: radius * 0.45,
                   ),
@@ -249,8 +278,7 @@ class BaseStep extends StatelessWidget {
                       ? step.finishIcon!.icon
                       : step.icon!.icon,
               size: radius * 0.9,
-              color: _handleIconColor(
-                  context, isFinished, isActive, isAlreadyReached),
+              color: _handleIconColor(context, isFinished, isActive, isAlreadyReached),
             ),
       ),
     );
