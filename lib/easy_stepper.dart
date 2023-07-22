@@ -1,6 +1,12 @@
 library easy_stepper;
 
+import 'dart:io';
+import 'dart:math';
+
+import 'package:easy_stepper/src/core/custom_scroll_behavior.dart';
 import 'package:easy_stepper/src/easy_step.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 export 'package:easy_stepper/src/easy_step.dart';
 
@@ -118,7 +124,7 @@ class EasyStepper extends StatefulWidget {
   final double internalPadding;
 
   /// The amount of padding around the stepper.
-  final EdgeInsetsDirectional padding;
+  final EdgeInsetsGeometry padding;
 
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;
@@ -160,6 +166,12 @@ class EasyStepper extends StatefulWidget {
   /// Text Direction of the app.
   final TextDirection textDirection;
 
+  /// Show `Scrollbar` in Web or Desktop. default `True`.
+  final bool showScrollbar;
+
+  /// Whether the stepper take the full width of the screen or not, this property work when `disableScroll = true`. default `True`.
+  final bool fitWidth;
+
   const EasyStepper({
     Key? key,
     required this.activeStep,
@@ -192,18 +204,23 @@ class EasyStepper extends StatefulWidget {
     this.showTitle = true,
     this.alignment = Alignment.center,
     this.lineLength = 40,
-    @Deprecated("use 'lineThickness' instead, This feature was deprecated after v0.5.1")
-        this.lineDotRadius,
+    this.fitWidth = true,
+    this.showScrollbar = true,
+    @Deprecated(
+        "use 'lineThickness' instead, This feature was deprecated after v0.5.1")
+    this.lineDotRadius,
     this.lineThickness = 1,
     this.lineSpace = 5,
     this.padding =
         const EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 10),
     this.internalPadding = 8,
-    @Deprecated("use 'stepAnimationCurve' instead, This feature was deprecated after v0.1.4+1")
-        this.stepReachedAnimationEffect = Curves.linear,
+    @Deprecated(
+        "use 'stepAnimationCurve' instead, This feature was deprecated after v0.1.4+1")
+    this.stepReachedAnimationEffect = Curves.linear,
     this.stepAnimationCurve,
-    @Deprecated("use 'stepAnimationDuration' instead, This feature was deprecated after v0.1.4+1")
-        this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    @Deprecated(
+        "use 'stepAnimationDuration' instead, This feature was deprecated after v0.1.4+1")
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.stepAnimationDuration,
     this.borderThickness = 0.8,
     this.loadingAnimation,
@@ -252,11 +269,11 @@ class _EasyStepperState extends State<EasyStepper> {
 
   /// Controls the step scrolling.
   void _afterLayout(_) {
-    // ! Provide detailed explanation.
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
         i *
-            ((widget.stepRadius * 1 + (widget.internalPadding / 2)) +
+            ((widget.stepRadius * 2) +
+                widget.internalPadding +
                 widget.lineLength),
         duration:
             widget.stepAnimationDuration ?? widget.stepReachedAnimationDuration,
@@ -274,29 +291,66 @@ class _EasyStepperState extends State<EasyStepper> {
       WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     }
 
-    return Align(
-      alignment: widget.alignment,
-      child: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (OverscrollIndicatorNotification overscroll) {
-          overscroll.disallowIndicator();
-          return false;
-        },
-        child: SingleChildScrollView(
-          scrollDirection: widget.direction,
-          physics: widget.disableScroll
-              ? const NeverScrollableScrollPhysics()
-              : const ClampingScrollPhysics(),
-          controller: _scrollController,
-          padding: widget.padding,
-          child: widget.direction == Axis.horizontal
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _buildEasySteps(),
-                )
-              : Column(
-                  children: _buildEasySteps(),
-                ),
+    return ScrollConfiguration(
+      behavior: CustomScrollBehavior(),
+      child: Align(
+        alignment: widget.alignment,
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            overscroll.disallowIndicator();
+            return false;
+          },
+          child: widget.disableScroll
+              ? widget.direction == Axis.horizontal
+                  ? FittedBox(
+                      fit: widget.fitWidth ? BoxFit.fitWidth : BoxFit.none,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: _buildEasySteps(),
+                      ),
+                    )
+                  : Column(
+                      children: _buildEasySteps(),
+                    )
+              : ((kIsWeb ||
+                          Platform.isWindows ||
+                          Platform.isMacOS ||
+                          Platform.isLinux) &&
+                      widget.showScrollbar)
+                  ? Scrollbar(
+                      controller: _scrollController,
+                      child: SingleChildScrollView(
+                        scrollDirection: widget.direction,
+                        physics: const ClampingScrollPhysics(),
+                        controller: _scrollController,
+                        padding: widget.padding,
+                        child: widget.direction == Axis.horizontal
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: _buildEasySteps(),
+                              )
+                            : Column(
+                                children: _buildEasySteps(),
+                              ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      scrollDirection: widget.direction,
+                      physics: const ClampingScrollPhysics(),
+                      controller: _scrollController,
+                      padding: widget.padding,
+                      child: widget.direction == Axis.horizontal
+                          ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: _buildEasySteps(),
+                            )
+                          : Column(
+                              children: _buildEasySteps(),
+                            ),
+                    ),
         ),
       ),
     );
@@ -350,7 +404,8 @@ class _EasyStepperState extends State<EasyStepper> {
       unreachedTextColor: widget.unreachedStepTextColor,
       unreachedIconColor: widget.unreachedStepIconColor,
       lottieAnimation: widget.loadingAnimation,
-      padding: widget.internalPadding,
+      padding: max(widget.internalPadding,
+          (widget.direction == Axis.vertical ? widget.padding.horizontal : 0)),
       stepShape: widget.stepShape,
       stepRadius: widget.stepBorderRadius,
       borderType: _handleBorderType(index),
@@ -360,6 +415,7 @@ class _EasyStepperState extends State<EasyStepper> {
       textDirection: widget.textDirection,
       lineLength: widget.lineLength,
       enabled: widget.steps[index].enabled,
+      direction: widget.direction,
       onStepSelected: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled && widget.steps[index].enabled ||

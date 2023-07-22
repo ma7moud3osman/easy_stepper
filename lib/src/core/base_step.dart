@@ -1,5 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:easy_stepper/src/core/easy_border.dart';
+import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 /// Callback is fired when a step is reached.
@@ -44,6 +45,7 @@ class BaseStep extends StatelessWidget {
     required this.textDirection,
     required this.lineLength,
     required this.enabled,
+    required this.direction,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -77,12 +79,13 @@ class BaseStep extends StatelessWidget {
   final TextDirection textDirection;
   final double lineLength;
   final bool enabled;
+  final Axis direction;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: (radius * 2) + (padding ?? 0),
-      height: showTitle ? radius * 2.5 + 25 : radius * 1.5 + 15,
+      height: showTitle ? radius * 2.5 + 25 : radius * 2,
       child: InkWell(
         onTap: enabled ? onStepSelected : null,
         canRequestFocus: false,
@@ -107,14 +110,14 @@ class BaseStep extends StatelessWidget {
                   width: radius * 2,
                   height: radius * 2,
                   decoration: BoxDecoration(
-                    shape: stepShape == StepShape.circle
-                        ? BoxShape.circle
-                        : BoxShape.rectangle,
-                    borderRadius: stepShape != StepShape.circle
-                        ? BorderRadius.circular(stepRadius ?? 0)
-                        : null,
-                      color: _handleColor(context, isFinished, isActive, isAlreadyReached)
-                  ),
+                      shape: stepShape == StepShape.circle
+                          ? BoxShape.circle
+                          : BoxShape.rectangle,
+                      borderRadius: stepShape != StepShape.circle
+                          ? BorderRadius.circular(stepRadius ?? 0)
+                          : null,
+                      color: _handleColor(
+                          context, isFinished, isActive, isAlreadyReached)),
                   alignment: Alignment.center,
                   child: showStepBorder
                       ? EasyBorder(
@@ -124,7 +127,8 @@ class BaseStep extends StatelessWidget {
                           radius: stepShape != StepShape.circle
                               ? Radius.circular(stepRadius ?? 0)
                               : const Radius.circular(0),
-                          color: _handleBorderColor(context, isFinished, isActive, isAlreadyReached),
+                          color: _handleBorderColor(
+                              context, isFinished, isActive, isAlreadyReached),
                           strokeWidth: borderThickness,
                           dashPattern: borderType == BorderType.normal
                               ? [1, 0]
@@ -146,33 +150,62 @@ class BaseStep extends StatelessWidget {
     );
   }
 
-  Color _handleColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached)  {
+  Color _handleColor(BuildContext context, bool isFinished, bool isActive,
+      bool isAlreadyReached) {
     if (isActive) {
       return activeStepBackgroundColor ?? Colors.transparent;
     } else {
-      if(isFinished) {
-        return finishedBackgroundColor ??
-            Theme.of(context).colorScheme.primary;
-      } else if(isAlreadyReached) {
-        return finishedBackgroundColor ??
-            Theme.of(context).colorScheme.primary;
+      if (isFinished) {
+        return finishedBackgroundColor ?? Theme.of(context).colorScheme.primary;
+      } else if (isAlreadyReached) {
+        return finishedBackgroundColor ?? Theme.of(context).colorScheme.primary;
       } else {
         return unreachedBackgroundColor ?? Colors.transparent;
       }
     }
   }
 
-  Color _handleBorderColor(BuildContext context, bool isFinished, bool isActive, bool isAlreadyReached) {
+  Color _handleBorderColor(BuildContext context, bool isFinished, bool isActive,
+      bool isAlreadyReached) {
     if (isActive) {
       return activeStepBorderColor ?? Theme.of(context).colorScheme.primary;
     } else {
-      if(isFinished) {
+      if (isFinished) {
         return finishedBorderColor ?? Colors.transparent;
-      } else if(isAlreadyReached) {
+      } else if (isAlreadyReached) {
         return finishedBorderColor ?? Colors.transparent;
       } else {
-        return unreachedBorderColor ??
-            Colors.grey.shade400;
+        return unreachedBorderColor ?? Colors.grey.shade400;
+      }
+    }
+  }
+
+  Color _handleTitleColor(BuildContext context, bool isFinished, bool isActive,
+      bool isAlreadyReached) {
+    if (isActive) {
+      return activeTextColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if (isFinished) {
+        return finishedTextColor ?? Colors.transparent;
+      } else if (isAlreadyReached) {
+        return finishedTextColor ?? Colors.transparent;
+      } else {
+        return unreachedTextColor ?? Colors.grey.shade400;
+      }
+    }
+  }
+
+  Color _handleIconColor(BuildContext context, bool isFinished, bool isActive,
+      bool isAlreadyReached) {
+    if (isActive) {
+      return activeIconColor ?? Theme.of(context).colorScheme.primary;
+    } else {
+      if (isFinished) {
+        return finishedIconColor ?? Colors.white;
+      } else if (isAlreadyReached) {
+        return finishedIconColor ?? Colors.white;
+      } else {
+        return unreachedIconColor ?? Colors.grey.shade400;
       }
     }
   }
@@ -210,12 +243,11 @@ class BaseStep extends StatelessWidget {
   Widget _buildStepTitle(BuildContext context) {
     return Positioned.directional(
       textDirection: textDirection,
-      top: step.topTitle ? -20 : (radius * 2.35),
-      // bottom: radius * 0.3,
-      // end: (radius * 1.3) - ((step.title?.length ?? 5) * 4),
-      // start: (radius * 1.3) - ((step.title?.length ?? 5) * 4),
+      top: step.topTitle ? -(radius * 2.35) : (radius * 2.35),
       child: SizedBox(
-        width: (radius * 2) + (padding ?? 0) + (lineLength / 1.0),
+        width: (radius * 2) +
+            (padding ?? 0) +
+            (direction == Axis.horizontal ? lineLength : 0),
         child: step.customTitle ??
             Text(
               step.title ?? '',
