@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
   int activeStep2 = 0;
   int reachedStep = 0;
   int upperBound = 5;
+  double progress = 0.2;
   Set<int> reachedSteps = <int>{0, 2, 4, 5};
   final dashImages = [
     'assets/1.png',
@@ -26,6 +27,14 @@ class _MyAppState extends State<MyApp> {
     'assets/4.png',
     'assets/5.png',
   ];
+
+  void increaseProgress() {
+    if (progress < 1) {
+      setState(() => progress += 0.2);
+    } else {
+      setState(() => progress = 0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +57,22 @@ class _MyAppState extends State<MyApp> {
               children: [
                 EasyStepper(
                   activeStep: activeStep,
-                  lineLength: 50,
+                  lineStyle: const LineStyle(
+                    lineLength: 50,
+                    lineType: LineType.normal,
+                    lineThickness: 3,
+                    lineSpace: 1,
+                    lineWidth: 10,
+                    unreachedLineType: LineType.dashed,
+                  ),
                   stepShape: StepShape.rRectangle,
                   stepBorderRadius: 15,
                   borderThickness: 2,
                   internalPadding: 10,
                   padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: 30, vertical: 20),
+                    horizontal: 30,
+                    vertical: 20,
+                  ),
                   stepRadius: 28,
                   finishedStepBorderColor: Colors.deepOrange,
                   finishedStepTextColor: Colors.deepOrange,
@@ -87,7 +105,6 @@ class _MyAppState extends State<MyApp> {
                         'Dash 2',
                         textAlign: TextAlign.center,
                       ),
-                      enabled: false,
                     ),
                     EasyStep(
                       customStep: ClipRRect(
@@ -148,11 +165,15 @@ class _MyAppState extends State<MyApp> {
                 const SizedBox(height: 20),
                 EasyStepper(
                   activeStep: activeStep,
-                  lineLength: 100,
-                  lineThickness: 3,
-                  lineSpace: 4,
-                  lineType: LineType.normal,
-                  defaultLineColor: Colors.purple.shade300,
+                  lineStyle: LineStyle(
+                    lineLength: 100,
+                    lineThickness: 6,
+                    lineSpace: 4,
+                    lineType: LineType.normal,
+                    defaultLineColor: Colors.purple.shade300,
+                    progress: progress,
+                    // progressColor: Colors.purple.shade700,
+                  ),
                   borderThickness: 10,
                   internalPadding: 15,
                   loadingAnimation: 'assets/loading_circle.json',
@@ -205,13 +226,17 @@ class _MyAppState extends State<MyApp> {
                         child: EasyStepper(
                           activeStep: activeStep2,
                           maxReachedStep: reachedStep,
-                          lineLength: 100,
-                          lineSpace: 4,
-                          lineType: LineType.normal,
+                          lineStyle: LineStyle(
+                            lineLength: 100,
+                            lineSpace: 4,
+                            lineType: LineType.normal,
+                            unreachedLineColor: Colors.grey.withOpacity(0.5),
+                            finishedLineColor: Colors.deepOrange,
+                            activeLineColor: Colors.grey.withOpacity(0.5),
+                          ),
                           activeStepBorderColor: Colors.purple,
                           activeStepIconColor: Colors.purple,
                           activeStepTextColor: Colors.purple,
-                          activeLineColor: Colors.grey.withOpacity(0.5),
                           activeStepBackgroundColor: Colors.white,
                           unreachedStepBackgroundColor:
                               Colors.grey.withOpacity(0.5),
@@ -219,12 +244,10 @@ class _MyAppState extends State<MyApp> {
                               Colors.grey.withOpacity(0.5),
                           unreachedStepIconColor: Colors.grey,
                           unreachedStepTextColor: Colors.grey.withOpacity(0.5),
-                          unreachedLineColor: Colors.grey.withOpacity(0.5),
                           finishedStepBackgroundColor: Colors.deepOrange,
                           finishedStepBorderColor: Colors.grey.withOpacity(0.5),
                           finishedStepIconColor: Colors.grey,
                           finishedStepTextColor: Colors.deepOrange,
-                          finishedLineColor: Colors.deepOrange,
                           borderThickness: 10,
                           internalPadding: 15,
                           showLoadingAnimation: false,
@@ -293,13 +316,17 @@ class _MyAppState extends State<MyApp> {
                       child: EasyStepper(
                         activeStep: activeStep2,
                         reachedSteps: reachedSteps,
-                        lineLength: 100,
-                        lineSpace: 4,
-                        lineType: LineType.dotted,
+                        lineStyle: LineStyle(
+                          lineLength: 100,
+                          lineSpace: 4,
+                          lineType: LineType.dotted,
+                          finishedLineColor: Colors.pink.withOpacity(0.5),
+                          unreachedLineColor: Colors.blueGrey.withOpacity(0.5),
+                          activeLineColor: Colors.blueGrey.withOpacity(0.5),
+                        ),
                         activeStepBorderColor: Colors.blue,
                         activeStepIconColor: Colors.blue,
                         activeStepTextColor: Colors.blue,
-                        activeLineColor: Colors.blueGrey.withOpacity(0.5),
                         activeStepBackgroundColor: Colors.white,
                         unreachedStepBackgroundColor:
                             Colors.blueGrey.withOpacity(0.5),
@@ -308,14 +335,12 @@ class _MyAppState extends State<MyApp> {
                         unreachedStepIconColor: Colors.blueGrey,
                         unreachedStepTextColor:
                             Colors.blueGrey.withOpacity(0.5),
-                        unreachedLineColor: Colors.blueGrey.withOpacity(0.5),
                         finishedStepBackgroundColor:
                             Colors.pink.withOpacity(0.5),
                         finishedStepBorderColor:
                             Colors.blueGrey.withOpacity(0.5),
                         finishedStepIconColor: Colors.blueGrey,
                         finishedStepTextColor: Colors.pink.withOpacity(0.5),
-                        finishedLineColor: Colors.pink.withOpacity(0.5),
                         borderThickness: 2,
                         internalPadding: 15,
                         showStepBorder: true,
@@ -384,18 +409,20 @@ class _MyAppState extends State<MyApp> {
                   clipBehavior: Clip.none,
                   child: EasyStepper(
                     activeStep: activeStep,
-                    lineLength: 70,
-                    lineSpace: 0,
-                    lineType: LineType.normal,
-                    defaultLineColor: Colors.white,
-                    finishedLineColor: Colors.orange,
+                    lineStyle: const LineStyle(
+                      lineLength: 70,
+                      lineSpace: 0,
+                      lineType: LineType.normal,
+                      defaultLineColor: Colors.white,
+                      finishedLineColor: Colors.orange,
+                      lineThickness: 1.5,
+                    ),
                     activeStepTextColor: Colors.black87,
                     finishedStepTextColor: Colors.black87,
                     internalPadding: 0,
                     showLoadingAnimation: false,
                     stepRadius: 8,
                     showStepBorder: false,
-                    lineThickness: 1.5,
                     steps: [
                       EasyStep(
                         customStep: CircleAvatar(
@@ -467,9 +494,11 @@ class _MyAppState extends State<MyApp> {
                 const SizedBox(height: 50),
                 EasyStepper(
                   activeStep: activeStep,
-                  lineLength: 80,
-                  lineThickness: 1,
-                  lineSpace: 5,
+                  lineStyle: const LineStyle(
+                    lineLength: 80,
+                    lineThickness: 1,
+                    lineSpace: 5,
+                  ),
                   stepRadius: 20,
                   unreachedStepIconColor: Colors.black87,
                   unreachedStepBorderColor: Colors.black54,
@@ -500,7 +529,10 @@ class _MyAppState extends State<MyApp> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       EasyStepper(
-                        lineType: LineType.normal,
+                        lineStyle: const LineStyle(
+                          lineType: LineType.normal,
+                          unreachedLineType: LineType.dotted,
+                        ),
                         activeStep: activeStep,
                         direction: Axis.vertical,
                         unreachedStepIconColor: Colors.white,
@@ -550,7 +582,9 @@ class _MyAppState extends State<MyApp> {
                         ],
                       ),
                       EasyStepper(
-                        lineType: LineType.normal,
+                        lineStyle: const LineStyle(
+                          lineType: LineType.normal,
+                        ),
                         activeStep: activeStep,
                         direction: Axis.vertical,
                         unreachedStepIconColor: Colors.white,
@@ -600,7 +634,9 @@ class _MyAppState extends State<MyApp> {
                         ],
                       ),
                       EasyStepper(
-                        lineType: LineType.normal,
+                        lineStyle: const LineStyle(
+                          lineType: LineType.normal,
+                        ),
                         activeStep: activeStep,
                         direction: Axis.vertical,
                         unreachedStepIconColor: Colors.white,
@@ -656,6 +692,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: increaseProgress),
       ),
     );
   }

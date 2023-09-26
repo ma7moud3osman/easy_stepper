@@ -1,3 +1,25 @@
+## 0.8.0
+
+### Tuesday,  26th Sept, 2023
+
+* feat: Support Different line type for reached & unreached steps. Thanks to [ARASHz4](https://github.com/ma7moud3osman/easy_stepper/issues/27) 
+* feat: Add Line `progress` & `progressColor` for `LineStyle`. Thanks to [lx8s8](https://github.com/ma7moud3osman/easy_stepper/issues/28) 
+* feat: `LineType` now support new `dashed` type, you can access it via `LineType.dashed`.
+* __Breaking Change:__ 
+    All properties related to the line style moved to `LineStyle` class.
+        [`lineType`
+        , `defaultLineColor`
+        , `unreachedLineColor`
+        , `activeLineColor`
+        , `finishedLineColor`
+        , `lineLength`
+        , `lineWidth`
+        , `lineThickness`
+        , `lineSpace`
+        , `unreachedLineType`].
+* Update example app.
+* Update CHANGELOG.
+
 ## 0.7.3
 
 ### Saturday,  22th Jul, 2023
