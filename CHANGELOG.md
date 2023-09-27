@@ -1,3 +1,8 @@
+## 0.8.1
+
+### Wednesday,  27th Sept, 2023
+* Update README.md
+
 ## 0.8.0
 
 ### Tuesday,  26th Sept, 2023
