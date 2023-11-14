@@ -9,8 +9,8 @@ import 'package:easy_stepper/src/easy_step.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-export 'package:easy_stepper/src/easy_step.dart';
 export 'package:easy_stepper/src/core/line_style.dart';
+export 'package:easy_stepper/src/easy_step.dart';
 
 class EasyStepper extends StatefulWidget {
   /// Each Step defines a step icon and title. Hence, total number of icons determines the total number of steps.
@@ -318,12 +318,17 @@ class _EasyStepperState extends State<EasyStepper> {
   List<Widget> _buildEasySteps() {
     return List.generate(widget.steps.length, (index) {
       return widget.direction == Axis.horizontal
-          ? Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _buildStep(index),
-                _buildLine(index, Axis.horizontal),
-              ],
+          ? Padding(
+              padding: widget.steps.any((element) => element.topTitle)
+                  ? const EdgeInsets.only(top: 10)
+                  : EdgeInsets.zero,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _buildStep(index),
+                  _buildLine(index, Axis.horizontal),
+                ],
+              ),
             )
           : Column(
               children: <Widget>[
@@ -339,6 +344,7 @@ class _EasyStepperState extends State<EasyStepper> {
     return BaseStep(
       step: step,
       radius: widget.stepRadius,
+      showScrollBar: widget.showScrollbar,
       showTitle: widget.showTitle,
       borderThickness: widget.borderThickness,
       isActive: index == widget.activeStep,
