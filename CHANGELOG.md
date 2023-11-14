@@ -1,3 +1,9 @@
+## 0.8.2
+
+### Tuesday,  14th Nov, 2023
+* Fix: Top title get cut when stepper is scrollable in web. Thanks to [BelalNayzak](https://github.com/ma7moud3osman/easy_stepper/issues/32).
+* Update CHANGELOG.
+
 ## 0.8.1
 
 ### Wednesday,  27th Sept, 2023

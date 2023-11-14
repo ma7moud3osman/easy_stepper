@@ -3,7 +3,7 @@ name: easy_stepper
 description: A fully customizable, beautiful and easy to use stepper widget. It
   help you to show or collect information from users using organized steps.
 
-version: 0.8.1
+version: 0.8.2
 
 homepage: https://github.com/ma7moud3osman
 repository: https://github.com/ma7moud3osman/easy_stepper.git
