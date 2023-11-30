@@ -1,3 +1,8 @@
+## 0.8.3
+
+### Thursday,  30th Nov, 2023
+* Fix: flutter version constraint error in pubspec.yaml. Thanks to [Xiaochao Fang](https://github.com/ma7moud3osman/easy_stepper/issues/33).
+
 ## 0.8.2
 
 ### Tuesday,  14th Nov, 2023
