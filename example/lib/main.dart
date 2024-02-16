@@ -419,6 +419,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     activeStepTextColor: Colors.black87,
                     finishedStepTextColor: Colors.black87,
+                    titlesAreLargerThanSteps: true,
                     internalPadding: 0,
                     showLoadingAnimation: false,
                     stepRadius: 8,

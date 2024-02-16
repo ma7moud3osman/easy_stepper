@@ -100,6 +100,11 @@ class EasyStepper extends StatefulWidget {
   /// The amount of padding around the stepper.
   final EdgeInsetsGeometry? padding;
 
+  ///Set this to true if the titles (of at least the first or last step) are wider
+  ///than the step itself. This will allow the stepper to correctly pad them so that
+  ///the titles don't get cut off
+  final bool titlesAreLargerThanSteps;
+
   /// The curve of the animation to show when a step is reached.
   final Curve stepAnimationCurve;
 
@@ -172,6 +177,7 @@ class EasyStepper extends StatefulWidget {
     this.fitWidth = true,
     this.showScrollbar = true,
     this.padding,
+    this.titlesAreLargerThanSteps = false,
     this.internalPadding = 8,
     this.stepAnimationCurve = Curves.linear,
     this.stepAnimationDuration = const Duration(seconds: 1),
@@ -212,6 +218,9 @@ class _EasyStepperState extends State<EasyStepper> {
     if(widget.direction == Axis.horizontal){
       if(widget.steps.any((element) => element.topTitle)){
         _padding = _padding.add(const EdgeInsetsDirectional.only(top: 45));
+      }
+      if(widget.titlesAreLargerThanSteps){
+        _padding = _padding.add(EdgeInsetsDirectional.symmetric(horizontal: lineStyle.lineLength / 2));
       }
       if(!widget.disableScroll && widget.showScrollbar){
         _padding = _padding.add(const EdgeInsetsDirectional.only(bottom: 15));
@@ -296,7 +305,6 @@ class _EasyStepperState extends State<EasyStepper> {
                       child: SingleChildScrollView(
                         scrollDirection: widget.direction,
                         physics: const ClampingScrollPhysics(),
-                        clipBehavior: Clip.none,
                         controller: _scrollController,
                         padding: _padding,
                         child: widget.direction == Axis.horizontal
@@ -313,7 +321,6 @@ class _EasyStepperState extends State<EasyStepper> {
                   : SingleChildScrollView(
                       scrollDirection: widget.direction,
                       physics: const ClampingScrollPhysics(),
-                      clipBehavior: Clip.none,
                       controller: _scrollController,
                       padding: _padding,
                       child: widget.direction == Axis.horizontal
