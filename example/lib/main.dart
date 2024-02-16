@@ -404,7 +404,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 35),
                   color: Colors.grey.shade200,
                   clipBehavior: Clip.none,
                   child: EasyStepper(
@@ -425,67 +425,135 @@ class _MyAppState extends State<MyApp> {
                     showStepBorder: false,
                     steps: [
                       EasyStep(
-                        customStep: CircleAvatar(
-                          radius: 8,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 7,
-                            backgroundColor:
-                                activeStep >= 0 ? Colors.orange : Colors.white,
+                          enabled: 0 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 0 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
-                        ),
-                        title: 'Waiting',
+                          topTitle: 0 % 2 == 1,
+                          title: "Awaiting authorization",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Awaiting authorization", textAlign: TextAlign.center),
+                          )
                       ),
                       EasyStep(
-                        customStep: CircleAvatar(
-                          radius: 8,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 7,
-                            backgroundColor:
-                                activeStep >= 1 ? Colors.orange : Colors.white,
+                          enabled: 1 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 1 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
-                        ),
-                        title: 'Order Received',
-                        topTitle: true,
+                          topTitle: 1 % 2 == 1,
+                          title: "Authorized",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Authorized", textAlign: TextAlign.center),
+                          )
                       ),
                       EasyStep(
-                        customStep: CircleAvatar(
-                          radius: 8,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 7,
-                            backgroundColor:
-                                activeStep >= 2 ? Colors.orange : Colors.white,
+                          enabled: 2 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 2 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
-                        ),
-                        title: 'Preparing',
+                          topTitle: 2 % 2 == 1,
+                          title: "Received",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Received", textAlign: TextAlign.center),
+                          )
                       ),
                       EasyStep(
-                        customStep: CircleAvatar(
-                          radius: 8,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 7,
-                            backgroundColor:
-                                activeStep >= 3 ? Colors.orange : Colors.white,
+                          enabled: 3 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 3 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
-                        ),
-                        title: 'On Way',
-                        topTitle: true,
+                          topTitle: 3 % 2 == 1,
+                          title: "Under processing",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Under processing", textAlign: TextAlign.center),
+                          )
                       ),
                       EasyStep(
-                        customStep: CircleAvatar(
-                          radius: 8,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 7,
-                            backgroundColor:
-                                activeStep >= 4 ? Colors.orange : Colors.white,
+                          enabled: 4 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 4 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
-                        ),
-                        title: 'Delivered',
+                          topTitle: 4 % 2 == 1,
+                          title: "Awaiting customer approval",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Awaiting customer approval", textAlign: TextAlign.center),
+                          )
                       ),
+                      EasyStep(
+                          enabled: 5 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 5 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          topTitle: 5 % 2 == 1,
+                          title: "Approved by customer personally",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Approved by customer personally", textAlign: TextAlign.center),
+                          )
+                      ),
+                      EasyStep(
+                          enabled: 6 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 6 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          topTitle: 6 % 2 == 1,
+                          title: "Confirmed",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Confirmed", textAlign: TextAlign.center),
+                          )
+                      ),
+                      EasyStep(
+                          enabled: 7 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 7 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          topTitle: 7 % 2 == 1,
+                          title: "In preparation",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("In preparation", textAlign: TextAlign.center),
+                          )
+                      ),
+                      EasyStep(
+                          enabled: 8 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 8 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          topTitle: 8 % 2 == 1,
+                          title: "Shipped",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Shipped", textAlign: TextAlign.center),
+                          )
+                      ),
+                      EasyStep(
+                          enabled: 9 <= activeStep + 1,
+                          customStep: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: 9 <= activeStep ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          topTitle: 9 % 2 == 1,
+                          title: "Delivered",
+                          customTitle: const SizedBox(
+                            width: double.infinity,
+                            child: Text("Delivered", textAlign: TextAlign.center),
+                          )
+                      )
                     ],
                     onStepReached: (index) =>
                         setState(() => activeStep = index),
