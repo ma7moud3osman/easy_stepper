@@ -1,3 +1,8 @@
+## 0.8.4
+
+### Sunday,  28th Nov, 2024
+* Fix: multiline step title display. Thanks to [SeriousMonk](https://github.com/ma7moud3osman/easy_stepper/pull/41).
+
 ## 0.8.3
 
 ### Thursday,  30th Nov, 2023

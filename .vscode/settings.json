@@ -9,7 +9,7 @@
         "editor.suggest.snippetsPreventQuickSuggestions": true,
         "editor.suggestSelection": "first",
         "editor.tabCompletion": "off",
-        "editor.wordBasedSuggestions": false,
+        "editor.wordBasedSuggestions": "off",
         "editor.wordWrapColumn": 80,
         "editor.wordWrap": "wordWrapColumn",
     },
