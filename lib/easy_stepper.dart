@@ -98,7 +98,12 @@ class EasyStepper extends StatefulWidget {
   final double internalPadding;
 
   /// The amount of padding around the stepper.
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
+
+  ///Set this to true if the titles (of at least the first or last step) are wider
+  ///than the step itself. This will allow the stepper to correctly pad them so that
+  ///the titles don't get cut off
+  final bool titlesAreLargerThanSteps;
 
   /// The curve of the animation to show when a step is reached.
   final Curve stepAnimationCurve;
@@ -171,12 +176,8 @@ class EasyStepper extends StatefulWidget {
     this.alignment = Alignment.center,
     this.fitWidth = true,
     this.showScrollbar = true,
-    this.padding = const EdgeInsetsDirectional.only(
-      start: 10,
-      end: 10,
-      top: 10,
-      bottom: 10,
-    ),
+    this.padding,
+    this.titlesAreLargerThanSteps = false,
     this.internalPadding = 8,
     this.stepAnimationCurve = Curves.linear,
     this.stepAnimationDuration = const Duration(seconds: 1),
@@ -205,12 +206,30 @@ class _EasyStepperState extends State<EasyStepper> {
   ScrollController? _scrollController;
   late int _selectedIndex;
   late LineStyle lineStyle;
+  late EdgeInsetsGeometry _padding;
 
   @override
   void initState() {
     lineStyle = widget.lineStyle ?? const LineStyle();
     _selectedIndex = widget.activeStep;
     _scrollController = ScrollController();
+
+    _padding = const EdgeInsetsDirectional.all(10);
+    if(widget.direction == Axis.horizontal){
+      if(widget.steps.any((element) => element.topTitle)){
+        _padding = _padding.add(const EdgeInsetsDirectional.only(top: 45));
+      }
+      if(widget.titlesAreLargerThanSteps){
+        _padding = _padding.add(EdgeInsetsDirectional.symmetric(horizontal: lineStyle.lineLength / 2));
+      }
+      if(!widget.disableScroll && widget.showScrollbar){
+        _padding = _padding.add(const EdgeInsetsDirectional.only(bottom: 15));
+      }
+    }
+    if(widget.padding != null){
+      _padding.add(widget.padding!);
+    }
+
     super.initState();
   }
 
@@ -287,7 +306,7 @@ class _EasyStepperState extends State<EasyStepper> {
                         scrollDirection: widget.direction,
                         physics: const ClampingScrollPhysics(),
                         controller: _scrollController,
-                        padding: widget.padding,
+                        padding: _padding,
                         child: widget.direction == Axis.horizontal
                             ? Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -303,7 +322,7 @@ class _EasyStepperState extends State<EasyStepper> {
                       scrollDirection: widget.direction,
                       physics: const ClampingScrollPhysics(),
                       controller: _scrollController,
-                      padding: widget.padding,
+                      padding: _padding,
                       child: widget.direction == Axis.horizontal
                           ? Row(
                               mainAxisSize: MainAxisSize.min,
@@ -322,18 +341,13 @@ class _EasyStepperState extends State<EasyStepper> {
   List<Widget> _buildEasySteps() {
     return List.generate(widget.steps.length, (index) {
       return widget.direction == Axis.horizontal
-          ? Padding(
-              padding: widget.steps.any((element) => element.topTitle)
-                  ? const EdgeInsets.only(top: 10)
-                  : EdgeInsets.zero,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _buildStep(index),
-                  _buildLine(index, Axis.horizontal),
-                ],
-              ),
-            )
+          ? Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildStep(index),
+              _buildLine(index, Axis.horizontal),
+            ],
+          )
           : Column(
               children: <Widget>[
                 _buildStep(index),
@@ -375,7 +389,7 @@ class _EasyStepperState extends State<EasyStepper> {
       unreachedIconColor: widget.unreachedStepIconColor,
       lottieAnimation: widget.loadingAnimation,
       padding: max(widget.internalPadding,
-          (widget.direction == Axis.vertical ? widget.padding.horizontal : 0)),
+          (widget.direction == Axis.vertical ? _padding.horizontal : 0)),
       stepShape: widget.stepShape,
       stepRadius: widget.stepBorderRadius,
       borderType: _handleBorderType(index),
