@@ -3,6 +3,8 @@ import 'package:easy_stepper/src/core/easy_border.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import 'base_step_delegate.dart';
+
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
@@ -93,63 +95,64 @@ class BaseStep extends StatelessWidget {
       child: InkWell(
         onTap: enabled ? onStepSelected : null,
         canRequestFocus: false,
-        child: Stack(
-          clipBehavior: Clip.none,
-          textDirection: textDirection,
-          alignment: Alignment.topCenter,
+        child: CustomMultiChildLayout(
+          delegate: BaseStepDelegate(stepRadius: radius, topTitle: step.topTitle, direction: direction),
           children: [
-            Material(
-              color: Colors.transparent,
-              shape:
-                  stepShape == StepShape.circle ? const CircleBorder() : null,
-              clipBehavior: Clip.antiAlias,
-              borderRadius: stepShape != StepShape.circle
-                  ? BorderRadius.circular(stepRadius ?? 0)
-                  : null,
-              child: InkWell(
-                onTap: enabled ? onStepSelected : null,
-                canRequestFocus: false,
-                radius: radius,
-                child: Container(
-                  width: radius * 2,
-                  height: radius * 2,
-                  decoration: BoxDecoration(
-                      shape: stepShape == StepShape.circle
-                          ? BoxShape.circle
-                          : BoxShape.rectangle,
-                      borderRadius: stepShape != StepShape.circle
-                          ? BorderRadius.circular(stepRadius ?? 0)
-                          : null,
-                      color: _handleColor(
-                          context, isFinished, isActive, isAlreadyReached)),
-                  alignment: Alignment.center,
-                  child: showStepBorder
-                      ? EasyBorder(
-                          borderShape: stepShape == StepShape.circle
-                              ? BorderShape.Circle
-                              : BorderShape.RRect,
-                          radius: stepShape != StepShape.circle
-                              ? Radius.circular(stepRadius ?? 0)
-                              : const Radius.circular(0),
-                          color: _handleBorderColor(
-                              context, isFinished, isActive, isAlreadyReached),
-                          strokeWidth: borderThickness,
-                          dashPattern: borderType == BorderType.normal
-                              ? [1, 0]
-                              : dashPattern,
-                          child: isActive && showLoadingAnimation
-                              ? _buildLoadingIcon()
-                              : _buildIcon(context),
-                        )
-                      : isActive && showLoadingAnimation
+            LayoutId(
+              id: BaseStepElem.step,
+              child: Material(
+                color: Colors.transparent,
+                shape:
+                stepShape == StepShape.circle ? const CircleBorder() : null,
+                clipBehavior: Clip.antiAlias,
+                borderRadius: stepShape != StepShape.circle
+                    ? BorderRadius.circular(stepRadius ?? 0)
+                    : null,
+                child: InkWell(
+                  onTap: enabled ? onStepSelected : null,
+                  canRequestFocus: false,
+                  radius: radius,
+                  child: Container(
+                    width: radius * 2,
+                    height: radius * 2,
+                    decoration: BoxDecoration(
+                        shape: stepShape == StepShape.circle
+                            ? BoxShape.circle
+                            : BoxShape.rectangle,
+                        borderRadius: stepShape != StepShape.circle
+                            ? BorderRadius.circular(stepRadius ?? 0)
+                            : null,
+                        color: _handleColor(
+                            context, isFinished, isActive, isAlreadyReached)),
+                    alignment: Alignment.center,
+                    child: showStepBorder
+                        ? EasyBorder(
+                      borderShape: stepShape == StepShape.circle
+                          ? BorderShape.Circle
+                          : BorderShape.RRect,
+                      radius: stepShape != StepShape.circle
+                          ? Radius.circular(stepRadius ?? 0)
+                          : const Radius.circular(0),
+                      color: _handleBorderColor(
+                          context, isFinished, isActive, isAlreadyReached),
+                      strokeWidth: borderThickness,
+                      dashPattern: borderType == BorderType.normal
+                          ? [1, 0]
+                          : dashPattern,
+                      child: isActive && showLoadingAnimation
                           ? _buildLoadingIcon()
                           : _buildIcon(context),
+                    )
+                        : isActive && showLoadingAnimation
+                        ? _buildLoadingIcon()
+                        : _buildIcon(context),
+                  ),
                 ),
-              ),
+              )
             ),
-            if (showTitle) _buildStepTitle(context),
+            if(showTitle) LayoutId(id: BaseStepElem.title, child: _buildStepTitle(context))
           ],
-        ),
+        )
       ),
     );
   }
@@ -215,28 +218,24 @@ class BaseStep extends StatelessWidget {
   }
 
   Widget _buildStepTitle(BuildContext context) {
-    return Positioned.directional(
-      textDirection: textDirection,
-      top: step.topTitle ? -(radius * 2.35) : (radius * 2.35),
-      child: SizedBox(
-        width: (radius * 2) +
-            (padding ?? 0) +
-            (direction == Axis.horizontal ? lineLength : 0),
-        child: step.customTitle ??
-            Text(
-              step.title ?? '',
-              maxLines: 3,
-              textAlign: TextAlign.center,
-              softWrap: false,
-              overflow: TextOverflow.visible,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: _handleTitleColor(
-                        context, isFinished, isActive, isAlreadyReached),
-                    height: 1,
-                    // fontSize: radius * 0.45,
-                  ),
+    return SizedBox(
+      width: (radius * 2) +
+          (padding ?? 0) +
+          (direction == Axis.horizontal ? lineLength : 0),
+      child: step.customTitle ??
+          Text(
+            step.title ?? '',
+            maxLines: 3,
+            textAlign: TextAlign.center,
+            softWrap: false,
+            overflow: TextOverflow.visible,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: _handleTitleColor(
+                  context, isFinished, isActive, isAlreadyReached),
+              height: 1,
+              // fontSize: radius * 0.45,
             ),
-      ),
+          ),
     );
   }
 
