@@ -1,6 +1,11 @@
+## 0.8.5
+
+### Sunday,  19th May, 2024
+* Fix: static analysis 
+
 ## 0.8.4
 
-### Sunday,  28th Nov, 2024
+### Sunday,  28th Apr, 2024
 * Fix: multiline step title display. Thanks to [SeriousMonk](https://github.com/ma7moud3osman/easy_stepper/pull/41).
 
 ## 0.8.3

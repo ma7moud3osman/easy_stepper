@@ -215,18 +215,19 @@ class _EasyStepperState extends State<EasyStepper> {
     _scrollController = ScrollController();
 
     _padding = const EdgeInsetsDirectional.all(10);
-    if(widget.direction == Axis.horizontal){
-      if(widget.steps.any((element) => element.topTitle)){
+    if (widget.direction == Axis.horizontal) {
+      if (widget.steps.any((element) => element.topTitle)) {
         _padding = _padding.add(const EdgeInsetsDirectional.only(top: 45));
       }
-      if(widget.titlesAreLargerThanSteps){
-        _padding = _padding.add(EdgeInsetsDirectional.symmetric(horizontal: lineStyle.lineLength / 2));
+      if (widget.titlesAreLargerThanSteps) {
+        _padding = _padding.add(EdgeInsetsDirectional.symmetric(
+            horizontal: lineStyle.lineLength / 2));
       }
-      if(!widget.disableScroll && widget.showScrollbar){
+      if (!widget.disableScroll && widget.showScrollbar) {
         _padding = _padding.add(const EdgeInsetsDirectional.only(bottom: 15));
       }
     }
-    if(widget.padding != null){
+    if (widget.padding != null) {
       _padding.add(widget.padding!);
     }
 
@@ -342,12 +343,12 @@ class _EasyStepperState extends State<EasyStepper> {
     return List.generate(widget.steps.length, (index) {
       return widget.direction == Axis.horizontal
           ? Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildStep(index),
-              _buildLine(index, Axis.horizontal),
-            ],
-          )
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildStep(index),
+                _buildLine(index, Axis.horizontal),
+              ],
+            )
           : Column(
               children: <Widget>[
                 _buildStep(index),
