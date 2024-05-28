@@ -154,7 +154,7 @@ class _MyAppState extends State<MyApp> {
                   child: Column(
                     children: [
                       Image.asset(
-                        dashImages[activeStep],
+                        dashImages[activeStep % dashImages.length],
                         height: 150,
                       ),
                       const SizedBox(height: 5),
@@ -608,42 +608,49 @@ class _MyAppState extends State<MyApp> {
                         unreachedStepBorderColor: Colors.black54,
                         finishedStepBackgroundColor: Colors.deepPurple,
                         unreachedStepBackgroundColor: Colors.deepOrange,
-                        showTitle: false,
+                        showTitle: true,
                         onStepReached: (index) =>
                             setState(() => activeStep = index),
                         steps: const [
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(CupertinoIcons.cart),
                             title: 'Cart',
                             activeIcon: Icon(CupertinoIcons.cart),
                             lineText: 'Cart Line',
                           ),
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(Icons.file_present),
                             activeIcon: Icon(Icons.file_present),
                             title: 'Address',
                           ),
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(Icons.filter_center_focus_sharp),
                             activeIcon: Icon(Icons.filter_center_focus_sharp),
                             title: 'Checkout',
                           ),
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(Icons.money),
                             activeIcon: Icon(Icons.money),
                             title: 'Payment',
                           ),
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(Icons.local_shipping_outlined),
                             activeIcon: Icon(Icons.local_shipping_outlined),
                             title: 'Shipping',
                           ),
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(Icons.file_copy_outlined),
                             activeIcon: Icon(Icons.file_copy_outlined),
                             title: 'Order Details',
                           ),
                           EasyStep(
+                            topTitle: true,
                             icon: Icon(Icons.check_circle_outline),
                             activeIcon: Icon(Icons.check_circle_outline),
                             title: 'Finish',
@@ -660,7 +667,7 @@ class _MyAppState extends State<MyApp> {
                         unreachedStepBorderColor: Colors.black54,
                         finishedStepBackgroundColor: Colors.deepPurple,
                         unreachedStepBackgroundColor: Colors.deepOrange,
-                        showTitle: false,
+                        showTitle: true,
                         onStepReached: (index) =>
                             setState(() => activeStep = index),
                         steps: const [
