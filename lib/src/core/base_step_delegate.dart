@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-enum BaseStepElem{
-  step,
-  title
-}
+enum BaseStepElem { step, title }
 
-class BaseStepDelegate extends MultiChildLayoutDelegate{
+class BaseStepDelegate extends MultiChildLayoutDelegate {
   final double stepRadius;
   final Axis direction;
   final bool topTitle;
@@ -22,29 +19,28 @@ class BaseStepDelegate extends MultiChildLayoutDelegate{
 
     layoutChild(
       BaseStepElem.step,
-      BoxConstraints.loose(size), // This just says that the child cannot be bigger than the whole layout.
+      BoxConstraints.loose(
+          size), // This just says that the child cannot be bigger than the whole layout.
     );
 
     positionChild(
         BaseStepElem.step,
-        Offset((size.width - 2 * stepRadius) / 2, direction == Axis.horizontal ? 0 : (size.height - 2 * stepRadius) / 2)
-    );
+        Offset(
+            (size.width - 2 * stepRadius) / 2,
+            direction == Axis.horizontal
+                ? 0
+                : (size.height - 2 * stepRadius) / 2));
 
-    if(hasChild(BaseStepElem.title)){
+    if (hasChild(BaseStepElem.title)) {
       final Size titleSize = layoutChild(
         BaseStepElem.title,
         const BoxConstraints(),
       );
 
-      Offset titleOffset = Offset(
-        - titleSize.width / 2 + (size.width / 2),
-        topTitle ? -(stepRadius + titleSize.height) : (stepRadius * 2.35)
-      );
+      Offset titleOffset = Offset(-titleSize.width / 2 + (size.width / 2),
+          topTitle ? -(stepRadius + titleSize.height) : (stepRadius * 2.35));
 
-      positionChild(
-        BaseStepElem.title,
-        titleOffset
-      );
+      positionChild(BaseStepElem.title, titleOffset);
     }
   }
 

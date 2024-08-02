@@ -1,3 +1,8 @@
+## 0.8.5+1
+
+### Sunday,  2nd Aug, 2024
+* Fix: static analysis 
+
 ## 0.8.5
 
 ### Sunday,  19th May, 2024
