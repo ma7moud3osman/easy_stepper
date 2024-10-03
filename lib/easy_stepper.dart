@@ -40,6 +40,9 @@ class EasyStepper extends StatefulWidget {
   /// The type of the step border  when it is not reached [normal, dotted].
   final BorderType? unreachedStepBorderType;
 
+  /// The shadow of the step when it is not reached.
+  final List<BoxShadow>? unreachedStepBoxShadow;
+
   /// The color of a step background when it is reached.
   final Color? activeStepBackgroundColor;
 
@@ -55,6 +58,9 @@ class EasyStepper extends StatefulWidget {
   /// The type of the step border  when it is reached [normal, dotted].
   final BorderType? activeStepBorderType;
 
+  /// The shadow of the step when it is reached.
+  final List<BoxShadow>? activeStepBoxShadow;
+
   /// The color of the step background when it is finished.
   final Color? finishedStepBackgroundColor;
 
@@ -69,6 +75,9 @@ class EasyStepper extends StatefulWidget {
 
   /// The type of the step border  when it is finished [normal, dotted].
   final BorderType? finishedStepBorderType;
+
+  /// The shadow of the step when it is finished.
+  final List<BoxShadow>? finishedStepBoxShadow;
 
   /// The radius of a step.
   final double stepRadius;
@@ -161,14 +170,17 @@ class EasyStepper extends StatefulWidget {
     this.unreachedStepTextColor,
     this.unreachedStepIconColor,
     this.unreachedStepBorderColor,
+    this.unreachedStepBoxShadow,
     this.activeStepTextColor,
     this.activeStepIconColor,
     this.activeStepBackgroundColor,
     this.activeStepBorderColor,
+    this.activeStepBoxShadow,
     this.finishedStepTextColor,
     this.finishedStepBackgroundColor,
     this.finishedStepBorderColor,
     this.finishedStepIconColor,
+    this.finishedStepBoxShadow,
     this.stepRadius = 30,
     this.steppingEnabled = true,
     this.disableScroll = false,
@@ -380,14 +392,17 @@ class _EasyStepperState extends State<EasyStepper> {
       activeStepBorderColor: widget.activeStepBorderColor,
       activeTextColor: widget.activeStepTextColor,
       activeIconColor: widget.activeStepIconColor,
+      activeStepBoxShadow: widget.activeStepBoxShadow,
       finishedBackgroundColor: widget.finishedStepBackgroundColor,
       finishedBorderColor: widget.finishedStepBorderColor,
       finishedTextColor: widget.finishedStepTextColor,
       finishedIconColor: widget.finishedStepIconColor,
+      finishedStepBoxShadow: widget.finishedStepBoxShadow,
       unreachedBackgroundColor: widget.unreachedStepBackgroundColor,
       unreachedBorderColor: widget.unreachedStepBorderColor,
       unreachedTextColor: widget.unreachedStepTextColor,
       unreachedIconColor: widget.unreachedStepIconColor,
+      unreachedStepBoxShadow: widget.unreachedStepBoxShadow,
       lottieAnimation: widget.loadingAnimation,
       padding: max(widget.internalPadding,
           (widget.direction == Axis.vertical ? _padding.horizontal : 0)),
