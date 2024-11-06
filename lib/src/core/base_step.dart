@@ -26,6 +26,9 @@ class BaseStep extends StatelessWidget {
     required this.activeStepBackgroundColor,
     required this.finishedBackgroundColor,
     required this.unreachedBackgroundColor,
+    required this.unreachedStepBoxShadow,
+    required this.activeStepBoxShadow,
+    required this.finishedStepBoxShadow,
     required this.activeStepBorderColor,
     required this.finishedBorderColor,
     required this.unreachedBorderColor,
@@ -61,6 +64,9 @@ class BaseStep extends StatelessWidget {
   final Color? activeStepBackgroundColor;
   final Color? unreachedBackgroundColor;
   final Color? finishedBackgroundColor;
+  final List<BoxShadow>? activeStepBoxShadow;
+  final List<BoxShadow>? unreachedStepBoxShadow;
+  final List<BoxShadow>? finishedStepBoxShadow;
   final Color? activeStepBorderColor;
   final Color? unreachedBorderColor;
   final Color? finishedBorderColor;
@@ -103,53 +109,66 @@ class BaseStep extends StatelessWidget {
             children: [
               LayoutId(
                   id: BaseStepElem.step,
-                  child: Material(
-                    color: Colors.transparent,
-                    shape: stepShape == StepShape.circle
-                        ? const CircleBorder()
-                        : null,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: stepShape == StepShape.circle
+                          ? BoxShape.circle
+                          : BoxShape.rectangle,
+                      boxShadow: _handleBoxShadow(
+                          context, isFinished, isActive, isAlreadyReached),
+                      borderRadius: stepShape != StepShape.circle
+                          ? BorderRadius.circular(stepRadius ?? 0)
+                          : null,
+                    ),
                     clipBehavior: Clip.antiAlias,
-                    borderRadius: stepShape != StepShape.circle
-                        ? BorderRadius.circular(stepRadius ?? 0)
-                        : null,
-                    child: InkWell(
-                      onTap: enabled ? onStepSelected : null,
-                      canRequestFocus: false,
-                      radius: radius,
-                      child: Container(
-                        width: radius * 2,
-                        height: radius * 2,
-                        decoration: BoxDecoration(
-                            shape: stepShape == StepShape.circle
-                                ? BoxShape.circle
-                                : BoxShape.rectangle,
-                            borderRadius: stepShape != StepShape.circle
-                                ? BorderRadius.circular(stepRadius ?? 0)
-                                : null,
-                            color: _handleColor(context, isFinished, isActive,
-                                isAlreadyReached)),
-                        alignment: Alignment.center,
-                        child: showStepBorder
-                            ? EasyBorder(
-                                borderShape: stepShape == StepShape.circle
-                                    ? BorderShape.Circle
-                                    : BorderShape.RRect,
-                                radius: stepShape != StepShape.circle
-                                    ? Radius.circular(stepRadius ?? 0)
-                                    : const Radius.circular(0),
-                                color: _handleBorderColor(context, isFinished,
-                                    isActive, isAlreadyReached),
-                                strokeWidth: borderThickness,
-                                dashPattern: borderType == BorderType.normal
-                                    ? [1, 0]
-                                    : dashPattern,
-                                child: isActive && showLoadingAnimation
-                                    ? _buildLoadingIcon()
-                                    : _buildIcon(context),
-                              )
-                            : isActive && showLoadingAnimation
-                                ? _buildLoadingIcon()
-                                : _buildIcon(context),
+                    child: Material(
+                      color: Colors.transparent,
+                      shape: stepShape == StepShape.circle
+                          ? const CircleBorder()
+                          : null,
+                      clipBehavior: Clip.antiAlias,
+                      borderRadius: stepShape != StepShape.circle
+                          ? BorderRadius.circular(stepRadius ?? 0)
+                          : null,
+                      child: InkWell(
+                        onTap: enabled ? onStepSelected : null,
+                        canRequestFocus: false,
+                        radius: radius,
+                        child: Container(
+                          width: radius * 2,
+                          height: radius * 2,
+                          decoration: BoxDecoration(
+                              shape: stepShape == StepShape.circle
+                                  ? BoxShape.circle
+                                  : BoxShape.rectangle,
+                              borderRadius: stepShape != StepShape.circle
+                                  ? BorderRadius.circular(stepRadius ?? 0)
+                                  : null,
+                              color: _handleColor(context, isFinished, isActive,
+                                  isAlreadyReached)),
+                          alignment: Alignment.center,
+                          child: showStepBorder
+                              ? EasyBorder(
+                                  borderShape: stepShape == StepShape.circle
+                                      ? BorderShape.Circle
+                                      : BorderShape.RRect,
+                                  radius: stepShape != StepShape.circle
+                                      ? Radius.circular(stepRadius ?? 0)
+                                      : const Radius.circular(0),
+                                  color: _handleBorderColor(context, isFinished,
+                                      isActive, isAlreadyReached),
+                                  strokeWidth: borderThickness,
+                                  dashPattern: borderType == BorderType.normal
+                                      ? [1, 0]
+                                      : dashPattern,
+                                  child: isActive && showLoadingAnimation
+                                      ? _buildLoadingIcon()
+                                      : _buildIcon(context),
+                                )
+                              : isActive && showLoadingAnimation
+                                  ? _buildLoadingIcon()
+                                  : _buildIcon(context),
+                        ),
                       ),
                     ),
                   )),
@@ -187,6 +206,21 @@ class BaseStep extends StatelessWidget {
         return finishedBorderColor ?? Colors.transparent;
       } else {
         return unreachedBorderColor ?? Colors.grey.shade400;
+      }
+    }
+  }
+
+  List<BoxShadow>? _handleBoxShadow(BuildContext context, bool isFinished,
+      bool isActive, bool isAlreadyReached) {
+    if (isActive) {
+      return activeStepBoxShadow;
+    } else {
+      if (isFinished) {
+        return finishedStepBoxShadow;
+      } else if (isAlreadyReached) {
+        return finishedStepBoxShadow;
+      } else {
+        return unreachedStepBoxShadow;
       }
     }
   }
