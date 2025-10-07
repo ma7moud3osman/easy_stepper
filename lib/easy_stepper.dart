@@ -369,7 +369,7 @@ class _EasyStepperState extends State<EasyStepper> {
                       _buildStep(index),
                       if (widget.steps[index].stepDescription != null) ...[
                         const SizedBox(width: 8),
-                        Expanded(child: widget.steps[index].stepDescription!),
+                        widget.steps[index].stepDescription!,
                       ]
                     ],
                   ),
