@@ -240,7 +240,7 @@ class _EasyStepperState extends State<EasyStepper> {
       }
     }
     if (widget.padding != null) {
-      _padding.add(widget.padding!);
+      _padding = widget.padding!;
     }
 
     super.initState();
