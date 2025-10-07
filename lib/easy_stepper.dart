@@ -156,6 +156,7 @@ class EasyStepper extends StatefulWidget {
 
   //All Styles to customize line between steps
   final LineStyle? lineStyle;
+  final Widget? stepDescription;
 
   const EasyStepper({
     Key? key,
@@ -206,6 +207,7 @@ class EasyStepper extends StatefulWidget {
     this.showLoadingAnimation = true,
     this.textDirection = TextDirection.ltr,
     this.lineStyle,
+    required this.stepDescription,
   })  : assert(maxReachedStep == null || reachedSteps == null,
             'only "maxReachedStep" or "reachedSteps" allowed'),
         super(key: key);
@@ -363,7 +365,15 @@ class _EasyStepperState extends State<EasyStepper> {
             )
           : Column(
               children: <Widget>[
-                _buildStep(index),
+                Row(
+                  children: [
+                    _buildStep(index),
+                    if (widget.stepDescription != null) ...[
+                      const SizedBox(width: 10),
+                      Expanded(child: widget.stepDescription!),
+                    ]
+                  ],
+                ),
                 _buildLine(index, Axis.vertical),
               ],
             );
