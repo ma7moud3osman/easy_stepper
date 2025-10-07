@@ -362,7 +362,7 @@ class _EasyStepperState extends State<EasyStepper> {
               ],
             )
           : Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
                   children: <Widget>[
