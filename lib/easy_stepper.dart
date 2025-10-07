@@ -362,18 +362,27 @@ class _EasyStepperState extends State<EasyStepper> {
               ],
             )
           : Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    _buildStep(index),
-                    _buildLine(index, Axis.vertical),
+                    Row(
+                      children: [
+                        _buildStep(index),
+                        if (widget.steps[index].stepDescription != null) ...[
+                          const SizedBox(width: 8),
+                          Expanded(child: widget.steps[index].stepDescription!),
+                        ]
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: widget.stepRadius),
+                        _buildLine(index, Axis.vertical),
+                      ],
+                    ),
                   ],
                 ),
-                if (widget.steps[index].stepDescription != null) ...[
-                  const SizedBox(width: 8),
-                  Expanded(child: widget.steps[index].stepDescription!),
-                ]
               ],
             );
     });
