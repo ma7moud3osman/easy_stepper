@@ -378,7 +378,7 @@ class _EasyStepperState extends State<EasyStepper> {
                     Row(
                       children: [
                         SizedBox(width: widget.stepRadius),
-                        _buildLine(index, Axis.vertical),
+                        Expanded(child: _buildLine(index, Axis.vertical)),
                       ],
                     ),
                   ],
