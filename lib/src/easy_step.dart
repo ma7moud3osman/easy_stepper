@@ -34,9 +34,11 @@ class EasyStep {
 
   /// enable/disable stepping for this step, Default `true`.
   final bool enabled;
+  final Widget? stepDescription;
 
   /// Create a new Step with custom icon and optional title
   const EasyStep({
+    this.stepDescription,
     this.icon,
     this.finishIcon,
     this.activeIcon,
