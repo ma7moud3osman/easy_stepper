@@ -361,25 +361,21 @@ class _EasyStepperState extends State<EasyStepper> {
                 _buildLine(index, Axis.horizontal),
               ],
             )
-          : Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        _buildStep(index),
-                        if (widget.steps[index].stepDescription != null) ...[
-                          const SizedBox(width: 8),
-                          Expanded(child: widget.steps[index].stepDescription!),
-                        ]
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: widget.stepRadius),
-                      child: _buildLine(index, Axis.vertical),
-                    ),
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: [
+                    _buildStep(index),
+                    if (widget.steps[index].stepDescription != null) ...[
+                      const SizedBox(width: 8),
+                      Expanded(child: widget.steps[index].stepDescription!),
+                    ]
                   ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: widget.stepRadius),
+                  child: _buildLine(index, Axis.vertical),
                 ),
               ],
             );
