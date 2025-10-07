@@ -375,11 +375,9 @@ class _EasyStepperState extends State<EasyStepper> {
                         ]
                       ],
                     ),
-                    Row(
-                      children: [
-                        SizedBox(width: widget.stepRadius),
-                        Expanded(child: _buildLine(index, Axis.vertical)),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.only(left: widget.stepRadius),
+                      child: _buildLine(index, Axis.vertical),
                     ),
                   ],
                 ),
