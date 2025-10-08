@@ -99,7 +99,7 @@ Example:
               ),
             ),
             title: 'Order Received',
-            topTitle: true,
+            placeTitleAtStart: true,
           ),
           EasyStep(
             customStep: CircleAvatar(
@@ -124,7 +124,7 @@ Example:
               ),
             ),
             title: 'On Way',
-            topTitle: true,
+            placeTitleAtStart: true,
           ),
           EasyStep(
             customStep: CircleAvatar(

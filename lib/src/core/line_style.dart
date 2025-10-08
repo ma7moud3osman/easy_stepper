@@ -40,6 +40,9 @@ class LineStyle {
   /// Progress value of the active line. Hence, values range from 0 to 1.
   final double? progress;
 
+  /// The border radius of the line that separates the steps.
+  final BorderRadiusGeometry? borderRadius;
+
   const LineStyle({
     Key? key,
     this.lineType = LineType.dotted,
@@ -54,12 +57,9 @@ class LineStyle {
     this.unreachedLineType,
     this.progressColor,
     this.progress,
-  })  : assert(
+    this.borderRadius,
+  }) : assert(
           progressColor == null || progress != null,
           'progress should be defined to use progressColor',
-        ),
-        assert(
-          progress == null || (progress >= 0 && progress <= 1),
-          'progress value should be between 0 and 1',
         );
 }

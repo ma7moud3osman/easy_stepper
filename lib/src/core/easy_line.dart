@@ -22,6 +22,9 @@ class EasyLine extends StatelessWidget {
   /// Line Axis.
   final Axis axis;
 
+  /// Line Border radius.
+  final BorderRadiusGeometry? borderRadius;
+
   const EasyLine({
     key,
     this.length = 50.0,
@@ -31,16 +34,12 @@ class EasyLine extends StatelessWidget {
     this.width = 2.0,
     this.lineType = LineType.dotted,
     this.axis = Axis.horizontal,
+    required this.borderRadius,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // If this is not applied, top half of the dot gets offscreen, hence, hidden.
-      margin: EdgeInsets.only(
-          top: lineType == LineType.dotted || lineType == LineType.dashed
-              ? thickness
-              : 0),
       width: axis == Axis.horizontal
           ? length
           : lineType == LineType.dotted
@@ -54,7 +53,7 @@ class EasyLine extends StatelessWidget {
       decoration: lineType == LineType.normal
           ? BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: borderRadius,
             )
           : null,
       child: lineType == LineType.dotted

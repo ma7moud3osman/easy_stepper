@@ -32,6 +32,9 @@ class EasyStep {
   /// Show the title above the step icon. Default `false`.
   final bool topTitle;
 
+  /// Show the title above the step in horizontal layout or below the step in vertical layout. Default `false`.
+  final bool placeTitleAtStart;
+
   /// enable/disable stepping for this step, Default `true`.
   final bool enabled;
 
@@ -45,7 +48,10 @@ class EasyStep {
     this.customStep,
     this.customTitle,
     this.customLineWidget,
-    this.topTitle = false,
     this.enabled = true,
+    @Deprecated(
+        '`topTitle` will be removed in next version use `placeTitleAtStart` instead')
+    this.topTitle = false,
+    this.placeTitleAtStart = false,
   }) : assert(icon != null || customStep != null);
 }

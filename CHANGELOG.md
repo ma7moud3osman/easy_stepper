@@ -1,3 +1,25 @@
+## 0.9.0
+
+### Wednesday,  9th Oct, 2025
+
+* Feat: Added `maxTitleLines` property to limit the number of lines for step titles.
+* Feat: Introduced `borderRadius` support in `LineStyle` and `EasyLine` for smoother line edges.
+* Fix: Improved platform support for mobile and web.
+* Update: Improved padding calculations to handle larger titles and prevent text clipping. Thanks to [Mostafa Abdelazim](https://github.com/ma7moud3osman/easy_stepper/pull/59).
+* Update: Enhanced step layout alignment and spacing for better visual consistency. Thanks to [Basem Osama](https://github.com/ma7moud3osman/easy_stepper/pull/57)
+* Update: Changed the default value of `showScrollbar` to `false` for a cleaner initial UI.
+* Update: Title and icon colors now adapt automatically to the theme’s `ColorScheme` for improved appearance.
+* Refactor: Updated `_buildLine` and `_buildProgressLine` to use the new `borderRadius` feature.
+* Updated `BaseStepDelegate` to use more direction-aware naming for title positioning.
+* Introduced a new property: **`placeTitleAtStart`** — a clearer, axis-independent replacement for `topTitle`.
+  * `placeTitleAtStart = true` → places the title **above** the step in horizontal mode, or on the **start side** (left in LTR / right in RTL) in vertical mode.
+  * `placeTitleAtStart = false` → places the title **below** (horizontal) or on the **end side** (vertical).
+
+### ⚠️ Deprecations
+* **`topTitle`** has been **deprecated** and will be **removed in the next release**.  
+  Please migrate to the new `placeTitleAtStart` property for better readability and directional consistency.
+
+
 ## 0.8.5+1
 
 ### Sunday,  2nd Aug, 2024
