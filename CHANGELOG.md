@@ -1,5 +1,14 @@
 ## 0.9.0
 
+### Thursday,  10th Oct, 2025
+
+* Updated project dependencies to their latest compatible versions.
+* Refactored key parameters in EasyBorder and EasyLine for improved clarity and maintainability.
+* Simplified internal logic to enhance readability and consistency across components.
+
+
+## 0.9.0
+
 ### Wednesday,  9th Oct, 2025
 
 * Feat: Added `maxTitleLines` property to limit the number of lines for step titles.

@@ -3,7 +3,7 @@ name: easy_stepper
 description: A fully customizable, beautiful and easy to use stepper widget. It
   help you to show or collect information from users using organized steps.
 
-version: 0.9.0
+version: 0.9.1
 
 homepage: https://github.com/ma7moud3osman
 repository: https://github.com/ma7moud3osman/easy_stepper.git
@@ -19,7 +19,7 @@ dependencies:
   lottie: ^3.3.2
 
 dev_dependencies:
-  flutter_lints: ^3.0.2
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 

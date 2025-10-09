@@ -287,7 +287,7 @@ class _EasyStepperState extends State<EasyStepper> {
   }
 
   /// Controls the step scrolling.
-  void _afterLayout(_) {
+  void _afterLayout(Duration duration) {
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
         i *

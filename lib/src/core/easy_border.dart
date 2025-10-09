@@ -17,7 +17,7 @@ class EasyBorder extends StatelessWidget {
   final PathBuilder? customPath;
 
   EasyBorder({
-    key,
+    Key? key,
     required this.child,
     this.color = Colors.black,
     this.strokeWidth = 1,

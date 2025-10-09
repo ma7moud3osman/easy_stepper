@@ -26,7 +26,7 @@ class EasyLine extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
 
   const EasyLine({
-    key,
+    Key? key,
     this.length = 50.0,
     this.color = Colors.grey,
     this.thickness = 3,
