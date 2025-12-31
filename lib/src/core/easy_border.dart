@@ -5,17 +5,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class EasyBorder extends StatelessWidget {
-  final Widget child;
-  final EdgeInsets padding;
-  final EdgeInsets borderPadding;
-  final double strokeWidth;
-  final Color color;
-  final List<double> dashPattern;
-  final BorderShape borderShape;
-  final Radius radius;
-  final StrokeCap strokeCap;
-  final PathBuilder? customPath;
-
   EasyBorder({
     Key? key,
     required this.child,
@@ -31,6 +20,16 @@ class EasyBorder extends StatelessWidget {
   }) : super(key: key) {
     assert(_isValidDashPattern(dashPattern), 'Invalid dash pattern');
   }
+  final Widget child;
+  final EdgeInsets padding;
+  final EdgeInsets borderPadding;
+  final double strokeWidth;
+  final Color color;
+  final List<double> dashPattern;
+  final BorderShape borderShape;
+  final Radius radius;
+  final StrokeCap strokeCap;
+  final PathBuilder? customPath;
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +61,16 @@ class EasyBorder extends StatelessWidget {
   /// * Cannot be null or empty
   /// * If [dashPattern] has only 1 element, it cannot be 0
   bool _isValidDashPattern(List<double>? dashPattern) {
-    Set<double>? dashSet = dashPattern?.toSet();
-    if (dashSet == null) return false;
-    if (dashSet.length == 1 && dashSet.elementAt(0) == 0.0) return false;
-    if (dashSet.isEmpty) return false;
+    final Set<double>? dashSet = dashPattern?.toSet();
+    if (dashSet == null) {
+      return false;
+    }
+    if (dashSet.length == 1 && dashSet.elementAt(0) == 0.0) {
+      return false;
+    }
+    if (dashSet.isEmpty) {
+      return false;
+    }
     return true;
   }
 }
@@ -76,15 +81,6 @@ enum BorderShape { Circle, RRect, Rect, Oval }
 typedef PathBuilder = Path Function(Size);
 
 class _DashPainter extends CustomPainter {
-  final double strokeWidth;
-  final List<double> dashPattern;
-  final Color color;
-  final BorderShape borderShape;
-  final Radius radius;
-  final StrokeCap strokeCap;
-  final PathBuilder? customPath;
-  final EdgeInsets padding;
-
   _DashPainter({
     this.strokeWidth = 2,
     this.dashPattern = const <double>[3, 1],
@@ -97,6 +93,14 @@ class _DashPainter extends CustomPainter {
   }) {
     assert(dashPattern.isNotEmpty, 'Dash Pattern cannot be empty');
   }
+  final double strokeWidth;
+  final List<double> dashPattern;
+  final Color color;
+  final BorderShape borderShape;
+  final Radius radius;
+  final StrokeCap strokeCap;
+  final PathBuilder? customPath;
+  final EdgeInsets padding;
 
   @override
   void paint(Canvas canvas, Size originalSize) {
@@ -111,7 +115,7 @@ class _DashPainter extends CustomPainter {
       );
     }
 
-    Paint paint = Paint()
+    final Paint paint = Paint()
       ..strokeWidth = strokeWidth
       ..color = color
       ..strokeCap = strokeCap
@@ -153,9 +157,9 @@ class _DashPainter extends CustomPainter {
 
   /// Returns a circular path of [size]
   Path _getCirclePath(Size size) {
-    double w = size.width;
-    double h = size.height;
-    double s = size.shortestSide;
+    final double w = size.width;
+    final double h = size.height;
+    final double s = size.shortestSide;
 
     return Path()
       ..addRRect(

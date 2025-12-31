@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:easy_stepper/src/core/easy_border.dart';
-import 'package:easy_stepper/src/utils/platform_stub.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -104,8 +103,13 @@ class BaseStep extends StatelessWidget {
     return SizedBox(
       width: direction == Axis.vertical ? null : (radius * 2) + (padding ?? 0),
       height: showScrollBar
-          ? 20 + (showTitle ? radius * 2 + textHight : radius * 2)
-          : (showTitle ? radius * 2 + textHight : radius * 2),
+          ? 20 +
+              (showTitle && direction == Axis.horizontal
+                  ? radius * 2 + textHight
+                  : radius * 2)
+          : (showTitle && direction == Axis.horizontal
+              ? radius * 2 + textHight
+              : radius * 2),
       child: CustomMultiChildLayout(
         delegate: BaseStepDelegate(
           stepRadius: radius,
@@ -116,65 +120,7 @@ class BaseStep extends StatelessWidget {
         children: [
           LayoutId(
             id: BaseStepElem.step,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: stepShape == StepShape.circle
-                    ? BoxShape.circle
-                    : BoxShape.rectangle,
-                boxShadow: _handleBoxShadow(
-                    context, isFinished, isActive, isAlreadyReached),
-                borderRadius: stepShape != StepShape.circle
-                    ? BorderRadius.circular(stepRadius ?? 0)
-                    : null,
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                onTap: enabled ? onStepSelected : null,
-                canRequestFocus: false,
-                radius: radius * 4,
-                borderRadius: BorderRadius.circular(stepRadius ?? 0),
-                child: Container(
-                  width: radius * 2,
-                  height: radius * 2,
-                  decoration: BoxDecoration(
-                    shape: stepShape == StepShape.circle
-                        ? BoxShape.circle
-                        : BoxShape.rectangle,
-                    borderRadius: stepShape != StepShape.circle
-                        ? BorderRadius.circular(stepRadius ?? 0)
-                        : null,
-                    color: _handleColor(
-                      context,
-                      isFinished,
-                      isActive,
-                      isAlreadyReached,
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                  child: showStepBorder
-                      ? EasyBorder(
-                          borderShape: stepShape == StepShape.circle
-                              ? BorderShape.Circle
-                              : BorderShape.RRect,
-                          radius: stepShape != StepShape.circle
-                              ? Radius.circular(stepRadius ?? 0)
-                              : const Radius.circular(0),
-                          color: _handleBorderColor(
-                              context, isFinished, isActive, isAlreadyReached),
-                          strokeWidth: borderThickness,
-                          dashPattern: borderType == BorderType.normal
-                              ? [1, 0]
-                              : dashPattern,
-                          child: isActive && showLoadingAnimation
-                              ? _buildLoadingIcon()
-                              : _buildIcon(context),
-                        )
-                      : isActive && showLoadingAnimation
-                          ? _buildLoadingIcon()
-                          : _buildIcon(context),
-                ),
-              ),
-            ),
+            child: _buildStepIcon(context),
           ),
           if (showTitle)
             LayoutId(
@@ -182,6 +128,69 @@ class BaseStep extends StatelessWidget {
               child: _buildStepTitle(context),
             )
         ],
+      ),
+    );
+  }
+
+  Widget _buildStepIcon(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: stepShape == StepShape.circle
+            ? BoxShape.circle
+            : BoxShape.rectangle,
+        boxShadow:
+            _handleBoxShadow(context, isFinished, isActive, isAlreadyReached),
+        borderRadius: stepShape != StepShape.circle
+            ? BorderRadius.circular(stepRadius ?? 0)
+            : null,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: enabled ? onStepSelected : null,
+        canRequestFocus: false,
+        radius: radius,
+        borderRadius: stepShape == StepShape.circle
+            ? BorderRadius.circular(radius)
+            : BorderRadius.circular(stepRadius ?? 0),
+        child: Container(
+          width: radius * 2,
+          height: radius * 2,
+          decoration: BoxDecoration(
+            shape: stepShape == StepShape.circle
+                ? BoxShape.circle
+                : BoxShape.rectangle,
+            borderRadius: stepShape != StepShape.circle
+                ? BorderRadius.circular(stepRadius ?? 0)
+                : null,
+            color: _handleColor(
+              context,
+              isFinished,
+              isActive,
+              isAlreadyReached,
+            ),
+          ),
+          alignment: Alignment.center,
+          child: showStepBorder
+              ? EasyBorder(
+                  borderShape: stepShape == StepShape.circle
+                      ? BorderShape.Circle
+                      : BorderShape.RRect,
+                  radius: stepShape != StepShape.circle
+                      ? Radius.circular(stepRadius ?? 0)
+                      : const Radius.circular(0),
+                  color: _handleBorderColor(
+                      context, isFinished, isActive, isAlreadyReached),
+                  strokeWidth: borderThickness,
+                  dashPattern:
+                      borderType == BorderType.normal ? [1, 0] : dashPattern,
+                  child: isActive && showLoadingAnimation
+                      ? _buildLoadingIcon()
+                      : _buildIcon(context),
+                )
+              : isActive && showLoadingAnimation
+                  ? _buildLoadingIcon()
+                  : _buildIcon(context),
+        ),
       ),
     );
   }
@@ -273,27 +282,31 @@ class BaseStep extends StatelessWidget {
 
   Widget _buildStepTitle(BuildContext context) {
     return SizedBox(
-      width: direction == Axis.vertical
+      width: (direction == Axis.vertical ||
+              (lineLength == double.infinity && direction == Axis.horizontal))
           ? null
-          : (radius * 2) + (padding ?? 0) + (lineLength),
+          : (radius * 2) + (padding ?? 0) + lineLength,
       child: Align(
         alignment: AlignmentDirectional.center,
-        child: step.customTitle ??
-            Text(
-              step.title ?? '',
-              maxLines: max(1, maxTitleLines),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: titleTextStyle ??
-                  Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: _handleTitleColor(
-                          context,
-                          isFinished,
-                          isActive,
-                          isAlreadyReached,
+        child: GestureDetector(
+          onTap: onStepSelected,
+          behavior: HitTestBehavior.opaque,
+          child: step.customTitle ??
+              Text(
+                step.title ?? '',
+                maxLines: max(1, maxTitleLines),
+                textAlign: TextAlign.center,
+                style: titleTextStyle ??
+                    Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: _handleTitleColor(
+                            context,
+                            isFinished,
+                            isActive,
+                            isAlreadyReached,
+                          ),
                         ),
-                      ),
-            ),
+              ),
+        ),
       ),
     );
   }
@@ -325,9 +338,9 @@ class BaseStep extends StatelessWidget {
             (((activeStepBackgroundColor != null &&
                         activeStepBackgroundColor!.computeLuminance() < 0.35) &&
                     activeStepBackgroundColor != Colors.transparent)
-                ? "packages/easy_stepper/assets/loading_white.json"
-                : "packages/easy_stepper/assets/loading_black.json"),
-        animate: !isWeb,
+                ? 'packages/easy_stepper/assets/loading_white.json'
+                : 'packages/easy_stepper/assets/loading_black.json'),
+        animate: true,
         width: radius * 1.6,
         height: radius * 1.6,
         fit: BoxFit.contain,

@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 
 class EasyLine extends StatelessWidget {
+  const EasyLine({
+    Key? key,
+    this.length = 50.0,
+    this.color = Colors.grey,
+    this.thickness = 3,
+    this.spacing = 3.0,
+    this.width = 2.0,
+    this.lineType = LineType.dotted,
+    this.axis = Axis.horizontal,
+    required this.borderRadius,
+  }) : super(key: key);
+
   /// Width of the dotted line.
   final double length;
 
@@ -25,30 +37,18 @@ class EasyLine extends StatelessWidget {
   /// Line Border radius.
   final BorderRadiusGeometry? borderRadius;
 
-  const EasyLine({
-    Key? key,
-    this.length = 50.0,
-    this.color = Colors.grey,
-    this.thickness = 3,
-    this.spacing = 3.0,
-    this.width = 2.0,
-    this.lineType = LineType.dotted,
-    this.axis = Axis.horizontal,
-    required this.borderRadius,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: axis == Axis.horizontal
           ? length
           : lineType == LineType.dotted
-              ? 0
+              ? thickness * 2
               : thickness,
       height: axis == Axis.vertical
           ? length
           : lineType == LineType.dotted
-              ? 0
+              ? thickness * 2
               : thickness,
       decoration: lineType == LineType.normal
           ? BoxDecoration(
@@ -67,22 +67,50 @@ class EasyLine extends StatelessWidget {
               ),
             )
           : lineType == LineType.dashed
-              ? Row(
-                  children: List.generate(
-                    length ~/ ((width + spacing) / 2),
-                    (index) => Expanded(
-                      child: index % 2 == 0
-                          ? Container(
-                              color: color,
-                              height: thickness,
-                              width: width,
-                            )
-                          : SizedBox(
-                              width: spacing,
-                              height: thickness,
-                            ),
-                    ),
-                  ),
+              ? LayoutBuilder(
+                  builder: (context, constraints) {
+                    final double effectiveLength = length == double.infinity
+                        ? (axis == Axis.horizontal
+                            ? constraints.maxWidth
+                            : constraints.maxHeight)
+                        : length;
+
+                    if (axis == Axis.vertical) {
+                      return Column(
+                          children: List.generate(
+                        effectiveLength ~/ ((width + spacing) / 2),
+                        (index) => Expanded(
+                          child: index % 2 == 0
+                              ? Container(
+                                  color: color,
+                                  height: width,
+                                  width: thickness,
+                                )
+                              : SizedBox(
+                                  width: thickness,
+                                  height: spacing,
+                                ),
+                        ),
+                      ));
+                    }
+                    return Row(
+                      children: List.generate(
+                        effectiveLength ~/ ((width + spacing) / 2),
+                        (index) => Expanded(
+                          child: index % 2 == 0
+                              ? Container(
+                                  color: color,
+                                  height: thickness,
+                                  width: width,
+                                )
+                              : SizedBox(
+                                  width: spacing,
+                                  height: thickness,
+                                ),
+                        ),
+                      ),
+                    );
+                  },
                 )
               : null,
     );
@@ -90,12 +118,6 @@ class EasyLine extends StatelessWidget {
 }
 
 class _DottedLinePainter extends CustomPainter {
-  final double length;
-  final double dotRadius;
-  final double spacing;
-  final Paint brush;
-  final Axis axis;
-
   _DottedLinePainter({
     this.length = 100,
     required this.brush,
@@ -103,18 +125,26 @@ class _DottedLinePainter extends CustomPainter {
     this.spacing = 3.0,
     this.axis = Axis.horizontal,
   }) : assert(dotRadius > 0, 'dotRadius must be greater than 0');
+  final double length;
+  final double dotRadius;
+  final double spacing;
+  final Paint brush;
+  final Axis axis;
 
   @override
   void paint(Canvas canvas, Size size) {
     double start = 0.0;
 
+    final double effectiveLength =
+        axis == Axis.horizontal ? size.width : size.height;
+
     // Length of the line is calculated by dividing the supplied length [to] by dotRadius * space.
 
     late final int calculatedLength;
     if (spacing == 0) {
-      calculatedLength = length ~/ dotRadius;
+      calculatedLength = effectiveLength ~/ dotRadius;
     } else {
-      calculatedLength = length ~/ (dotRadius * spacing);
+      calculatedLength = effectiveLength ~/ (dotRadius * spacing);
     }
 
     for (int i = 1; i < calculatedLength; i++) {
@@ -127,8 +157,8 @@ class _DottedLinePainter extends CustomPainter {
 
       canvas.drawCircle(
         Offset(
-          axis == Axis.horizontal ? start : 0.0,
-          axis == Axis.horizontal ? 0.0 : start,
+          axis == Axis.horizontal ? start : dotRadius,
+          axis == Axis.horizontal ? dotRadius : start,
         ),
         dotRadius,
         brush,

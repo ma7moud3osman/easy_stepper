@@ -1,7 +1,27 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 
+/// Defines the style of the lines separating steps.
 class LineStyle {
+  const LineStyle({
+    this.lineType = LineType.dotted,
+    this.defaultLineColor,
+    this.unreachedLineColor,
+    this.activeLineColor,
+    this.finishedLineColor,
+    this.lineLength = 40,
+    this.lineWidth = 4,
+    this.lineThickness = 1,
+    this.lineSpace = 5,
+    this.unreachedLineType,
+    this.progressColor,
+    this.progress,
+    this.borderRadius,
+  }) : assert(
+          progressColor == null || progress != null,
+          'progress should be defined to use progressColor',
+        );
+
   /// The color of the line that separates the steps.
   /// If null, [Theme.of(context).colorScheme.primary] will be used.
   final Color? defaultLineColor;
@@ -16,6 +36,7 @@ class LineStyle {
   final Color? finishedLineColor;
 
   /// The length of the line that separates the steps.
+  /// Set to [double.infinity] to make the line fill all available space.
   final double lineLength;
 
   /// The thickness of the line that separates the steps.
@@ -42,24 +63,4 @@ class LineStyle {
 
   /// The border radius of the line that separates the steps.
   final BorderRadiusGeometry? borderRadius;
-
-  const LineStyle({
-    Key? key,
-    this.lineType = LineType.dotted,
-    this.defaultLineColor,
-    this.unreachedLineColor,
-    this.activeLineColor,
-    this.finishedLineColor,
-    this.lineLength = 40,
-    this.lineWidth = 4,
-    this.lineThickness = 1,
-    this.lineSpace = 5,
-    this.unreachedLineType,
-    this.progressColor,
-    this.progress,
-    this.borderRadius,
-  }) : assert(
-          progressColor == null || progress != null,
-          'progress should be defined to use progressColor',
-        );
 }

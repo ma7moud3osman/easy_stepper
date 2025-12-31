@@ -4,7 +4,25 @@ export 'package:easy_stepper/src/core/base_step.dart';
 export 'package:easy_stepper/src/core/easy_line.dart';
 export 'package:easy_stepper/src/easy_step.dart';
 
+/// Defines the properties of each step in the stepper.
 class EasyStep {
+  /// Create a new Step with custom icon and optional title
+  const EasyStep({
+    this.icon,
+    this.finishIcon,
+    this.activeIcon,
+    this.title,
+    this.lineText,
+    this.customStep,
+    this.customTitle,
+    this.customLineWidget,
+    this.enabled = true,
+    @Deprecated(
+        '`topTitle` will be removed in next version use `placeTitleAtStart` instead')
+    this.topTitle = false,
+    this.placeTitleAtStart = false,
+  }) : assert(icon != null || customStep != null);
+
   /// The icon displayed in the step, you can change size & color for different status from main stepper.
   final Icon? icon;
 
@@ -35,23 +53,6 @@ class EasyStep {
   /// Show the title above the step in horizontal layout or below the step in vertical layout. Default `false`.
   final bool placeTitleAtStart;
 
-  /// enable/disable stepping for this step, Default `true`.
+  /// Enable/disable stepping for this step, Default `true`.
   final bool enabled;
-
-  /// Create a new Step with custom icon and optional title
-  const EasyStep({
-    this.icon,
-    this.finishIcon,
-    this.activeIcon,
-    this.title,
-    this.lineText,
-    this.customStep,
-    this.customTitle,
-    this.customLineWidget,
-    this.enabled = true,
-    @Deprecated(
-        '`topTitle` will be removed in next version use `placeTitleAtStart` instead')
-    this.topTitle = false,
-    this.placeTitleAtStart = false,
-  }) : assert(icon != null || customStep != null);
 }

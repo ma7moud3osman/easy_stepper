@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:easy_stepper/src/core/custom_scroll_behavior.dart';
 import 'package:easy_stepper/src/core/line_style.dart';
+import 'package:easy_stepper/src/core/step_builder.dart';
 import 'package:easy_stepper/src/easy_step.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,66 @@ import 'src/utils/platform_stub.dart'
 export 'package:easy_stepper/src/core/line_style.dart';
 export 'package:easy_stepper/src/easy_step.dart';
 
+/// A customizable stepper widget for Flutter.
+///
+/// It supports horizontal and vertical orientations, custom step shapes,
+/// custom colors, and various line styles.
 class EasyStepper extends StatefulWidget {
+  const EasyStepper({
+    Key? key,
+    required this.activeStep,
+    required this.steps,
+    this.reachedSteps,
+    this.maxReachedStep,
+    this.enableStepTapping = true,
+    this.direction = Axis.horizontal,
+    this.onStepReached,
+    this.unreachedStepBackgroundColor,
+    this.unreachedStepTextColor,
+    this.unreachedStepIconColor,
+    this.unreachedStepBorderColor,
+    this.unreachedStepBoxShadow,
+    this.activeStepTextColor,
+    this.activeStepIconColor,
+    this.activeStepBackgroundColor,
+    this.activeStepBorderColor,
+    this.activeStepBoxShadow,
+    this.finishedStepTextColor,
+    this.finishedStepBackgroundColor,
+    this.finishedStepBorderColor,
+    this.finishedStepIconColor,
+    this.finishedStepBoxShadow,
+    this.stepRadius = 30,
+    this.steppingEnabled = true,
+    this.disableScroll = false,
+    this.showTitle = true,
+    this.alignment = Alignment.center,
+    this.fitWidth = true,
+    this.showScrollbar = false,
+    this.padding,
+    this.titlesAreLargerThanSteps = false,
+    this.internalPadding = 8,
+    this.stepAnimationCurve = Curves.linear,
+    this.stepAnimationDuration = const Duration(seconds: 1),
+    this.borderThickness = 0.8,
+    this.loadingAnimation,
+    this.stepShape = StepShape.circle,
+    this.stepBorderRadius,
+    this.defaultStepBorderType = BorderType.dotted,
+    this.unreachedStepBorderType,
+    this.activeStepBorderType,
+    this.finishedStepBorderType,
+    this.dashPattern = const [3, 1],
+    this.showStepBorder = true,
+    this.showLoadingAnimation = true,
+    this.textDirection,
+    this.lineStyle,
+    this.maxTitleLines = 2,
+    this.titleTextStyle,
+  })  : assert(maxReachedStep == null || reachedSteps == null,
+            'only "maxReachedStep" or "reachedSteps" allowed'),
+        super(key: key);
+
   /// Each Step defines a step icon and title. Hence, total number of icons determines the total number of steps.
   final List<EasyStep> steps;
 
@@ -164,61 +224,6 @@ class EasyStepper extends StatefulWidget {
   /// The text style of step title
   final TextStyle? titleTextStyle;
 
-  const EasyStepper({
-    Key? key,
-    required this.activeStep,
-    required this.steps,
-    this.reachedSteps,
-    this.maxReachedStep,
-    this.enableStepTapping = true,
-    this.direction = Axis.horizontal,
-    this.onStepReached,
-    this.unreachedStepBackgroundColor,
-    this.unreachedStepTextColor,
-    this.unreachedStepIconColor,
-    this.unreachedStepBorderColor,
-    this.unreachedStepBoxShadow,
-    this.activeStepTextColor,
-    this.activeStepIconColor,
-    this.activeStepBackgroundColor,
-    this.activeStepBorderColor,
-    this.activeStepBoxShadow,
-    this.finishedStepTextColor,
-    this.finishedStepBackgroundColor,
-    this.finishedStepBorderColor,
-    this.finishedStepIconColor,
-    this.finishedStepBoxShadow,
-    this.stepRadius = 30,
-    this.steppingEnabled = true,
-    this.disableScroll = false,
-    this.showTitle = true,
-    this.alignment = Alignment.center,
-    this.fitWidth = true,
-    this.showScrollbar = false,
-    this.padding,
-    this.titlesAreLargerThanSteps = false,
-    this.internalPadding = 8,
-    this.stepAnimationCurve = Curves.linear,
-    this.stepAnimationDuration = const Duration(seconds: 1),
-    this.borderThickness = 0.8,
-    this.loadingAnimation,
-    this.stepShape = StepShape.circle,
-    this.stepBorderRadius,
-    this.defaultStepBorderType = BorderType.dotted,
-    this.unreachedStepBorderType,
-    this.activeStepBorderType,
-    this.finishedStepBorderType,
-    this.dashPattern = const [3, 1],
-    this.showStepBorder = true,
-    this.showLoadingAnimation = true,
-    this.textDirection,
-    this.lineStyle,
-    this.maxTitleLines = 1,
-    this.titleTextStyle,
-  })  : assert(maxReachedStep == null || reachedSteps == null,
-            'only "maxReachedStep" or "reachedSteps" allowed'),
-        super(key: key);
-
   @override
   State<EasyStepper> createState() => _EasyStepperState();
 }
@@ -288,6 +293,10 @@ class _EasyStepperState extends State<EasyStepper> {
 
   /// Controls the step scrolling.
   void _afterLayout(Duration duration) {
+    if (lineStyle.lineLength == double.infinity ||
+        !_scrollController!.hasClients) {
+      return;
+    }
     for (int i = 0; i < widget.steps.length; i++) {
       _scrollController!.animateTo(
         i *
@@ -298,7 +307,9 @@ class _EasyStepperState extends State<EasyStepper> {
         curve: widget.stepAnimationCurve,
       );
 
-      if (_selectedIndex == i) break;
+      if (_selectedIndex == i) {
+        break;
+      }
     }
   }
 
@@ -306,7 +317,7 @@ class _EasyStepperState extends State<EasyStepper> {
   Widget build(BuildContext context) {
     lineStyle = widget.lineStyle ?? const LineStyle();
     // Controls scrolling behavior.
-    if (!widget.disableScroll) {
+    if (!widget.disableScroll && lineStyle.lineLength != double.infinity) {
       WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     }
 
@@ -314,28 +325,47 @@ class _EasyStepperState extends State<EasyStepper> {
       behavior: CustomScrollBehavior(),
       child: Align(
         alignment: widget.alignment,
-        heightFactor: 1,
+        heightFactor: lineStyle.lineLength == double.infinity ? null : 1,
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
             overscroll.disallowIndicator();
             return false;
           },
-          child: widget.disableScroll
+          child: widget.disableScroll || lineStyle.lineLength == double.infinity
               ? widget.direction == Axis.horizontal
-                  ? FittedBox(
-                      fit: widget.fitWidth ? BoxFit.fitWidth : BoxFit.none,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                  ? lineStyle.lineLength == double.infinity
+                      ? LayoutBuilder(
+                          builder: (context, constraints) {
+                            return Padding(
+                              padding: _padding,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: _buildEasySteps(constraints.maxWidth),
+                              ),
+                            );
+                          },
+                        )
+                      : FittedBox(
+                          fit: widget.fitWidth ? BoxFit.fitWidth : BoxFit.none,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: _buildEasySteps(),
+                          ),
+                        )
+                  : Padding(
+                      padding: _padding,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: _buildEasySteps(),
                       ),
                     )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: _buildEasySteps(),
-                    )
-              : ((!widget.disableScroll && widget.showScrollbar) ||
-                      (!isMobile && !widget.disableScroll))
+              : ((!widget.disableScroll &&
+                          lineStyle.lineLength != double.infinity &&
+                          widget.showScrollbar) ||
+                      (!isMobile &&
+                          !widget.disableScroll &&
+                          lineStyle.lineLength != double.infinity))
                   ? RawScrollbar(
                       controller: _scrollController,
                       padding: const EdgeInsets.only(top: 8),
@@ -380,78 +410,73 @@ class _EasyStepperState extends State<EasyStepper> {
     );
   }
 
-  List<Widget> _buildEasySteps() {
-    return List.generate(
-      widget.steps.length,
-      (index) {
-        return widget.direction == Axis.horizontal
-            ? Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _buildStep(index),
-                  _buildLine(index, Axis.horizontal),
-                ],
-              )
-            : Column(
-                children: <Widget>[
-                  _buildStep(index),
-                  _buildLine(index, Axis.vertical),
-                ],
-              );
-      },
-    );
-  }
+  List<Widget> _buildEasySteps([double? maxWidth]) {
+    if (lineStyle.lineLength == double.infinity) {
+      double? flexibleLineLength;
+      if (maxWidth != null && widget.direction == Axis.horizontal) {
+        // Calculate dynamic line length for StepBuilder to constrain text
+        final totalStepsWidth = widget.steps.length * (widget.stepRadius * 2);
+        final totalInternalPadding =
+            (widget.steps.length - 1) * widget.internalPadding;
+        final availableWidth = maxWidth -
+            totalStepsWidth -
+            totalInternalPadding -
+            _padding.horizontal;
+        flexibleLineLength = max(0, availableWidth / (widget.steps.length - 1));
+      }
 
-  BaseStep _buildStep(int index) {
-    final step = widget.steps[index];
-    return BaseStep(
-      step: step,
-      radius: widget.stepRadius,
-      showScrollBar: widget.showScrollbar,
-      showTitle: widget.showTitle,
-      borderThickness: widget.borderThickness,
-      isActive: index == widget.activeStep,
-      isFinished: widget.reachedSteps != null
-          ? index < widget.activeStep && widget.reachedSteps!.contains(index)
-          : index < widget.activeStep,
-      isUnreached: index > widget.activeStep,
-      isAlreadyReached: widget.reachedSteps != null
-          ? widget.reachedSteps!.contains(index)
-          : widget.maxReachedStep != null
-              ? index <= widget.maxReachedStep!
-              : false,
-      activeStepBackgroundColor: widget.activeStepBackgroundColor,
-      activeStepBorderColor: widget.activeStepBorderColor,
-      activeTextColor: widget.activeStepTextColor,
-      activeIconColor: widget.activeStepIconColor,
-      activeStepBoxShadow: widget.activeStepBoxShadow,
-      finishedBackgroundColor: widget.finishedStepBackgroundColor,
-      finishedBorderColor: widget.finishedStepBorderColor,
-      finishedTextColor: widget.finishedStepTextColor,
-      finishedIconColor: widget.finishedStepIconColor,
-      finishedStepBoxShadow: widget.finishedStepBoxShadow,
-      unreachedBackgroundColor: widget.unreachedStepBackgroundColor,
-      unreachedBorderColor: widget.unreachedStepBorderColor,
-      unreachedTextColor: widget.unreachedStepTextColor,
-      unreachedIconColor: widget.unreachedStepIconColor,
-      unreachedStepBoxShadow: widget.unreachedStepBoxShadow,
-      lottieAnimation: widget.loadingAnimation,
-      padding: max(widget.internalPadding,
-          (widget.direction == Axis.vertical ? _padding.horizontal : 0)),
-      stepShape: widget.stepShape,
-      stepRadius: widget.stepBorderRadius,
-      borderType: _handleBorderType(index),
-      dashPattern: widget.dashPattern,
-      showStepBorder: widget.showStepBorder,
-      showLoadingAnimation: widget.showLoadingAnimation,
-      textDirection: widget.textDirection,
-      lineLength: lineStyle.lineLength,
-      enabled: widget.steps[index].enabled,
-      direction: widget.direction,
-      maxTitleLines: widget.maxTitleLines,
-      titleTextStyle: widget.titleTextStyle,
-      onStepSelected: widget.enableStepTapping
-          ? () {
+      return widget.steps.asMap().entries.expand((entry) {
+        final int index = entry.key;
+        final list = <Widget>[
+          StepBuilder(
+            index: index,
+            step: widget.steps[index],
+            activeStep: widget.activeStep,
+            reachedSteps: widget.reachedSteps,
+            maxReachedStep: widget.maxReachedStep,
+            activeStepBackgroundColor: widget.activeStepBackgroundColor,
+            activeStepBorderColor: widget.activeStepBorderColor,
+            activeStepTextColor: widget.activeStepTextColor,
+            activeStepIconColor: widget.activeStepIconColor,
+            activeStepBoxShadow: widget.activeStepBoxShadow,
+            finishedStepBackgroundColor: widget.finishedStepBackgroundColor,
+            finishedStepBorderColor: widget.finishedStepBorderColor,
+            finishedStepTextColor: widget.finishedStepTextColor,
+            finishedStepIconColor: widget.finishedStepIconColor,
+            finishedStepBoxShadow: widget.finishedStepBoxShadow,
+            unreachedStepBackgroundColor: widget.unreachedStepBackgroundColor,
+            unreachedStepBorderColor: widget.unreachedStepBorderColor,
+            unreachedStepTextColor: widget.unreachedStepTextColor,
+            unreachedStepIconColor: widget.unreachedStepIconColor,
+            unreachedStepBoxShadow: widget.unreachedStepBoxShadow,
+            stepRadius: widget.stepRadius,
+            showScrollbar: widget.showScrollbar,
+            showTitle: widget.showTitle,
+            borderThickness: widget.borderThickness,
+            loadingAnimation: widget.loadingAnimation,
+            padding: widget.direction == Axis.horizontal
+                ? 0
+                : max(widget.internalPadding, _padding.horizontal),
+            stepShape: widget.stepShape,
+            stepBorderRadius: widget.stepBorderRadius,
+            defaultStepBorderType: widget.defaultStepBorderType,
+            activeStepBorderType: widget.activeStepBorderType,
+            unreachedStepBorderType: widget.unreachedStepBorderType,
+            finishedStepBorderType: widget.finishedStepBorderType,
+            dashPattern: widget.dashPattern,
+            showStepBorder: widget.showStepBorder,
+            showLoadingAnimation: widget.showLoadingAnimation,
+            textDirection: widget.textDirection,
+            lineLength: flexibleLineLength ?? lineStyle.lineLength,
+            enabled: widget.steps[index].enabled,
+            direction: widget.direction,
+            maxTitleLines: widget.maxTitleLines,
+            titleTextStyle: widget.titleTextStyle,
+            enableStepTapping: widget.enableStepTapping,
+            steppingEnabled: widget.steppingEnabled,
+            selectedIndex: _selectedIndex,
+            onStepReached: widget.onStepReached,
+            onStepSelected: () {
               if (widget.steppingEnabled && widget.steps[index].enabled ||
                   index < _selectedIndex) {
                 setState(() {
@@ -459,24 +484,175 @@ class _EasyStepperState extends State<EasyStepper> {
                   widget.onStepReached?.call(_selectedIndex);
                 });
               }
-            }
-          : null,
-    );
-  }
+            },
+          ),
+        ];
 
-  BorderType _handleBorderType(int index) {
-    if (index == widget.activeStep) {
-      //Active Step
-      return widget.activeStepBorderType ?? widget.defaultStepBorderType;
-    } else if (index > widget.activeStep) {
-      //Unreached Step
-      return widget.unreachedStepBorderType ?? widget.defaultStepBorderType;
-    } else if (index < widget.activeStep) {
-      //Finished Step
-      return widget.finishedStepBorderType ?? widget.defaultStepBorderType;
-    } else {
-      return widget.defaultStepBorderType;
+        if (index < widget.steps.length - 1) {
+          if (widget.direction == Axis.horizontal) {
+            list.add(SizedBox(width: widget.internalPadding / 2));
+            list.add(
+              Expanded(
+                child: _buildLine(index, widget.direction),
+              ),
+            );
+            list.add(SizedBox(width: widget.internalPadding / 2));
+          } else {
+            list.add(
+              Expanded(
+                child: _buildLine(index, widget.direction),
+              ),
+            );
+          }
+        }
+
+        return list;
+      }).toList();
     }
+
+    return List.generate(
+      widget.steps.length,
+      (index) {
+        return widget.direction == Axis.horizontal
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  StepBuilder(
+                    index: index,
+                    step: widget.steps[index],
+                    activeStep: widget.activeStep,
+                    reachedSteps: widget.reachedSteps,
+                    maxReachedStep: widget.maxReachedStep,
+                    activeStepBackgroundColor: widget.activeStepBackgroundColor,
+                    activeStepBorderColor: widget.activeStepBorderColor,
+                    activeStepTextColor: widget.activeStepTextColor,
+                    activeStepIconColor: widget.activeStepIconColor,
+                    activeStepBoxShadow: widget.activeStepBoxShadow,
+                    finishedStepBackgroundColor:
+                        widget.finishedStepBackgroundColor,
+                    finishedStepBorderColor: widget.finishedStepBorderColor,
+                    finishedStepTextColor: widget.finishedStepTextColor,
+                    finishedStepIconColor: widget.finishedStepIconColor,
+                    finishedStepBoxShadow: widget.finishedStepBoxShadow,
+                    unreachedStepBackgroundColor:
+                        widget.unreachedStepBackgroundColor,
+                    unreachedStepBorderColor: widget.unreachedStepBorderColor,
+                    unreachedStepTextColor: widget.unreachedStepTextColor,
+                    unreachedStepIconColor: widget.unreachedStepIconColor,
+                    unreachedStepBoxShadow: widget.unreachedStepBoxShadow,
+                    stepRadius: widget.stepRadius,
+                    showScrollbar: widget.showScrollbar,
+                    showTitle: widget.showTitle,
+                    borderThickness: widget.borderThickness,
+                    loadingAnimation: widget.loadingAnimation,
+                    padding: max(
+                        widget.internalPadding,
+                        (widget.direction == Axis.vertical
+                            ? _padding.horizontal
+                            : 0)),
+                    stepShape: widget.stepShape,
+                    stepBorderRadius: widget.stepBorderRadius,
+                    defaultStepBorderType: widget.defaultStepBorderType,
+                    activeStepBorderType: widget.activeStepBorderType,
+                    unreachedStepBorderType: widget.unreachedStepBorderType,
+                    finishedStepBorderType: widget.finishedStepBorderType,
+                    dashPattern: widget.dashPattern,
+                    showStepBorder: widget.showStepBorder,
+                    showLoadingAnimation: widget.showLoadingAnimation,
+                    textDirection: widget.textDirection,
+                    lineLength: lineStyle.lineLength,
+                    enabled: widget.steps[index].enabled,
+                    direction: widget.direction,
+                    maxTitleLines: widget.maxTitleLines,
+                    titleTextStyle: widget.titleTextStyle,
+                    enableStepTapping: widget.enableStepTapping,
+                    steppingEnabled: widget.steppingEnabled,
+                    selectedIndex: _selectedIndex,
+                    onStepReached: widget.onStepReached,
+                    onStepSelected: () {
+                      if (widget.steppingEnabled &&
+                              widget.steps[index].enabled ||
+                          index < _selectedIndex) {
+                        setState(() {
+                          _selectedIndex = index;
+                          widget.onStepReached?.call(_selectedIndex);
+                        });
+                      }
+                    },
+                  ),
+                  _buildLine(index, Axis.horizontal),
+                ],
+              )
+            : Column(
+                children: <Widget>[
+                  StepBuilder(
+                    index: index,
+                    step: widget.steps[index],
+                    activeStep: widget.activeStep,
+                    reachedSteps: widget.reachedSteps,
+                    maxReachedStep: widget.maxReachedStep,
+                    activeStepBackgroundColor: widget.activeStepBackgroundColor,
+                    activeStepBorderColor: widget.activeStepBorderColor,
+                    activeStepTextColor: widget.activeStepTextColor,
+                    activeStepIconColor: widget.activeStepIconColor,
+                    activeStepBoxShadow: widget.activeStepBoxShadow,
+                    finishedStepBackgroundColor:
+                        widget.finishedStepBackgroundColor,
+                    finishedStepBorderColor: widget.finishedStepBorderColor,
+                    finishedStepTextColor: widget.finishedStepTextColor,
+                    finishedStepIconColor: widget.finishedStepIconColor,
+                    finishedStepBoxShadow: widget.finishedStepBoxShadow,
+                    unreachedStepBackgroundColor:
+                        widget.unreachedStepBackgroundColor,
+                    unreachedStepBorderColor: widget.unreachedStepBorderColor,
+                    unreachedStepTextColor: widget.unreachedStepTextColor,
+                    unreachedStepIconColor: widget.unreachedStepIconColor,
+                    unreachedStepBoxShadow: widget.unreachedStepBoxShadow,
+                    stepRadius: widget.stepRadius,
+                    showScrollbar: widget.showScrollbar,
+                    showTitle: widget.showTitle,
+                    borderThickness: widget.borderThickness,
+                    loadingAnimation: widget.loadingAnimation,
+                    padding: max(
+                        widget.internalPadding,
+                        (widget.direction == Axis.vertical
+                            ? _padding.horizontal
+                            : 0)),
+                    stepShape: widget.stepShape,
+                    stepBorderRadius: widget.stepBorderRadius,
+                    defaultStepBorderType: widget.defaultStepBorderType,
+                    activeStepBorderType: widget.activeStepBorderType,
+                    unreachedStepBorderType: widget.unreachedStepBorderType,
+                    finishedStepBorderType: widget.finishedStepBorderType,
+                    dashPattern: widget.dashPattern,
+                    showStepBorder: widget.showStepBorder,
+                    showLoadingAnimation: widget.showLoadingAnimation,
+                    textDirection: widget.textDirection,
+                    lineLength: lineStyle.lineLength,
+                    enabled: widget.steps[index].enabled,
+                    direction: widget.direction,
+                    maxTitleLines: widget.maxTitleLines,
+                    titleTextStyle: widget.titleTextStyle,
+                    enableStepTapping: widget.enableStepTapping,
+                    steppingEnabled: widget.steppingEnabled,
+                    selectedIndex: _selectedIndex,
+                    onStepReached: widget.onStepReached,
+                    onStepSelected: () {
+                      if (widget.steppingEnabled &&
+                              widget.steps[index].enabled ||
+                          index < _selectedIndex) {
+                        setState(() {
+                          _selectedIndex = index;
+                          widget.onStepReached?.call(_selectedIndex);
+                        });
+                      }
+                    },
+                  ),
+                  _buildLine(index, Axis.vertical),
+                ],
+              );
+      },
+    );
   }
 
   Color _getLineColor(int index) {
@@ -499,35 +675,109 @@ class _EasyStepperState extends State<EasyStepper> {
 
   Widget _buildLine(int index, Axis axis) {
     final step = widget.steps[index];
+    final isVertical = axis == Axis.vertical;
+
     return index < widget.steps.length - 1
-        ? Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: axis == Axis.horizontal
-                      ? (widget.stepRadius - (lineStyle.lineThickness / 2))
-                      : 0,
-                  bottom: axis == Axis.vertical && widget.showTitle ? 10 : 0,
-                ),
-                child: lineStyle.progress != null && index == widget.activeStep
-                    ? _buildProgressLine(index, axis)
-                    : _buildBaseLine(index, axis),
-              ),
-              if (step.lineText != null) ...[
-                const SizedBox(height: 4),
-                SizedBox(
-                  width: lineStyle.lineLength,
-                  child: step.customLineWidget ??
-                      Text(
-                        step.lineText!,
-                        maxLines: 3,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.labelSmall,
+        ? isVertical
+            ? Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (lineStyle.lineLength == double.infinity)
+                    PositionedDirectional(
+                      top: 0,
+                      bottom: 0,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: axis == Axis.horizontal
+                              ? (widget.stepRadius -
+                                  (lineStyle.lineThickness / 2))
+                              : 0,
+                          bottom: 0,
+                        ),
+                        child: lineStyle.progress != null &&
+                                index == widget.activeStep
+                            ? _buildProgressLine(index, axis)
+                            : _buildBaseLine(index, axis),
                       ),
-                ),
-              ],
-            ],
-          )
+                    )
+                  else
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: axis == Axis.horizontal
+                            ? (widget.stepRadius -
+                                (lineStyle.lineThickness / 2))
+                            : 0,
+                        bottom: 0,
+                      ),
+                      child: lineStyle.progress != null &&
+                              index == widget.activeStep
+                          ? _buildProgressLine(index, axis)
+                          : _buildBaseLine(index, axis),
+                    ),
+                  if (step.lineText != null)
+                    Container(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: step.customLineWidget ??
+                          Text(
+                            step.lineText!,
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
+                    ),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (lineStyle.lineLength == double.infinity)
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: axis == Axis.horizontal
+                            ? (widget.stepRadius -
+                                (lineStyle.lineThickness / 2))
+                            : 0,
+                        bottom: 0,
+                      ),
+                      child: lineStyle.progress != null &&
+                              index == widget.activeStep
+                          ? _buildProgressLine(index, axis)
+                          : _buildBaseLine(index, axis),
+                    )
+                  else
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: axis == Axis.horizontal
+                            ? (widget.stepRadius -
+                                (lineStyle.lineThickness / 2))
+                            : 0,
+                        bottom: 0,
+                      ),
+                      child: lineStyle.progress != null &&
+                              index == widget.activeStep
+                          ? _buildProgressLine(index, axis)
+                          : _buildBaseLine(index, axis),
+                    ),
+                  if (step.lineText != null) ...[
+                    const SizedBox(height: 4),
+                    SizedBox(
+                      width: lineStyle.lineLength == double.infinity
+                          ? null
+                          : lineStyle.lineLength,
+                      child: step.customLineWidget ??
+                          Text(
+                            step.lineText!,
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
+                    ),
+                  ],
+                ],
+              )
         : const Offstage();
   }
 

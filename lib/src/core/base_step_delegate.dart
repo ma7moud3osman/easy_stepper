@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 enum BaseStepElem { step, title }
 
 class BaseStepDelegate extends MultiChildLayoutDelegate {
-  final double stepRadius;
-  final Axis direction;
-  final bool placeTitleAtStart;
-  final TextDirection textDirection;
 
   BaseStepDelegate({
     required this.stepRadius,
@@ -14,6 +10,10 @@ class BaseStepDelegate extends MultiChildLayoutDelegate {
     this.placeTitleAtStart = false,
     required this.textDirection,
   });
+  final double stepRadius;
+  final Axis direction;
+  final bool placeTitleAtStart;
+  final TextDirection textDirection;
 
   @override
   void performLayout(Size size) {

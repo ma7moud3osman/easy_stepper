@@ -1,4 +1,5 @@
 import 'package:example/widgets/fixed_stepper.dart';
+import 'package:example/widgets/flexible_stepper.dart';
 import 'package:example/widgets/icon_stepper_progress.dart';
 import 'package:example/widgets/image_stepper.dart';
 import 'package:example/widgets/reached_steps_stepper.dart';
@@ -80,6 +81,11 @@ class _MyAppState extends State<MyApp> {
                     NavigatorButton(
                       title: 'Vertical Stepper',
                       screen: VerticalStepper(),
+                    ),
+                    SizedBox(height: 20),
+                    NavigatorButton(
+                      title: 'Flexible Stepper (Full Width/Height)',
+                      screen: FlexibleStepper(),
                     ),
                   ],
                 ),
