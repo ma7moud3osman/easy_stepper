@@ -1,6 +1,12 @@
+## 1.0.1
+
+### Wednesday, 31st Dec, 2025
+* **Chore**: Applied `dart format` to all package files.
+* **Chore**: Internal code cleanup and minor refinements.
+
 ## 1.0.0
 
-### Tuesday, 31st Dec, 2025
+### Wednesday, 31st Dec, 2025
 * **Stable Release**: Official 1.0.0 release for production use.
 * **Feat**: Implemented **Flexible Line Length** support. Use `lineLength: double.infinity` to allow lines to fill available space (Fixes [#30](https://github.com/ma7moud3osman/easy_stepper/issues/30) and [#56](https://github.com/ma7moud3osman/easy_stepper/issues/56)).
 * **Feat**: Horizontal flexible lines now dynamically calculate available width to ensure title wrapping and prevent container overflow.

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 enum BaseStepElem { step, title }
 
 class BaseStepDelegate extends MultiChildLayoutDelegate {
-
   BaseStepDelegate({
     required this.stepRadius,
     required this.direction,
