@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'vertical_title_placement.dart';
+
 enum BaseStepElem { step, title }
 
 class BaseStepDelegate extends MultiChildLayoutDelegate {
@@ -8,27 +10,24 @@ class BaseStepDelegate extends MultiChildLayoutDelegate {
     required this.direction,
     this.placeTitleAtStart = false,
     required this.textDirection,
+    this.verticalTitlePlacement = VerticalTitlePlacement.belowIcon,
   });
   final double stepRadius;
   final Axis direction;
   final bool placeTitleAtStart;
   final TextDirection textDirection;
+  final VerticalTitlePlacement verticalTitlePlacement;
 
   @override
   void performLayout(Size size) {
     assert(hasChild(BaseStepElem.step));
 
+    const titleGap = 8.0;
+
     final stepSize = layoutChild(
       BaseStepElem.step,
       BoxConstraints.loose(size),
     );
-
-    final stepOffset = Offset(
-      (size.width - stepSize.width) / 2,
-      direction == Axis.horizontal ? 0 : (size.height - stepSize.height) / 2,
-    );
-
-    positionChild(BaseStepElem.step, stepOffset);
 
     if (hasChild(BaseStepElem.title)) {
       final titleSize = layoutChild(
@@ -36,39 +35,54 @@ class BaseStepDelegate extends MultiChildLayoutDelegate {
         const BoxConstraints(),
       );
 
-      Offset titleOffset;
+      if (direction == Axis.horizontal ||
+          verticalTitlePlacement == VerticalTitlePlacement.belowIcon) {
+        final stepOffset = Offset(
+          (size.width - stepSize.width) / 2,
+          direction == Axis.horizontal
+              ? 0
+              : (placeTitleAtStart ? titleSize.height + titleGap : 0),
+        );
 
-      if (direction == Axis.horizontal) {
-        // Horizontal: above or below the step
+        positionChild(BaseStepElem.step, stepOffset);
+
         final titleX =
             stepOffset.dx + (stepSize.width / 2) - (titleSize.width / 2);
         final titleY = placeTitleAtStart
-            ? stepOffset.dy - titleSize.height - 8
-            : stepOffset.dy + stepSize.height + 8;
-        titleOffset = Offset(titleX, titleY);
+            ? stepOffset.dy - titleSize.height - titleGap
+            : stepOffset.dy + stepSize.height + titleGap;
+        positionChild(BaseStepElem.title, Offset(titleX, titleY));
       } else {
-        // Vertical: at logical END or START depending on topTitle & textDirection
+        final stepOffset = Offset(
+          (size.width - stepSize.width) / 2,
+          (size.height - stepSize.height) / 2,
+        );
+
+        positionChild(BaseStepElem.step, stepOffset);
+
         final isRtl = textDirection == TextDirection.rtl;
 
         double titleX;
         if (placeTitleAtStart) {
-          // At the logical START
           titleX = isRtl
-              ? stepOffset.dx + stepSize.width + 12 // right in RTL
-              : stepOffset.dx - titleSize.width - 12; // left in LTR
+              ? stepOffset.dx + stepSize.width + 12
+              : stepOffset.dx - titleSize.width - 12;
         } else {
-          // At the logical END
           titleX = isRtl
-              ? stepOffset.dx - titleSize.width - 12 // left in RTL
-              : stepOffset.dx + stepSize.width + 12; // right in LTR
+              ? stepOffset.dx - titleSize.width - 12
+              : stepOffset.dx + stepSize.width + 12;
         }
 
         final titleY =
             stepOffset.dy + (stepSize.height / 2) - (titleSize.height / 2);
-        titleOffset = Offset(titleX, titleY);
+        positionChild(BaseStepElem.title, Offset(titleX, titleY));
       }
-
-      positionChild(BaseStepElem.title, titleOffset);
+    } else {
+      final stepOffset = Offset(
+        (size.width - stepSize.width) / 2,
+        0,
+      );
+      positionChild(BaseStepElem.step, stepOffset);
     }
   }
 
@@ -77,6 +91,7 @@ class BaseStepDelegate extends MultiChildLayoutDelegate {
     return stepRadius != oldDelegate.stepRadius ||
         direction != oldDelegate.direction ||
         placeTitleAtStart != oldDelegate.placeTitleAtStart ||
-        textDirection != oldDelegate.textDirection;
+        textDirection != oldDelegate.textDirection ||
+        verticalTitlePlacement != oldDelegate.verticalTitlePlacement;
   }
 }

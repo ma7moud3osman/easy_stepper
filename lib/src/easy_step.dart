@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 export 'package:easy_stepper/src/core/base_step.dart';
 export 'package:easy_stepper/src/core/easy_line.dart';
+export 'package:easy_stepper/src/core/vertical_title_placement.dart';
 export 'package:easy_stepper/src/easy_step.dart';
 
 /// Defines the properties of each step in the stepper.
