@@ -269,6 +269,19 @@ Example:
 
 ![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif?raw=true)        ![Vertical-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_3.gif?raw=true)    ![Vertical-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif?raw=true)   ![Vertical-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_line.gif?raw=true)     
 
+When using `verticalTitlePlacement: VerticalTitlePlacement.belowIcon`, you can add extra spacing around the vertical line:
+
+```dart
+EasyStepper(
+  direction: Axis.vertical,
+  verticalTitlePlacement: VerticalTitlePlacement.belowIcon,
+  lineStyle: const LineStyle(
+    verticalLinePadding: EdgeInsets.symmetric(vertical: 8),
+  ),
+  // ...
+)
+```
+
 
 
 ## Contributions

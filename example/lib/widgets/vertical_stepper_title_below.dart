@@ -20,6 +20,7 @@ class _VerticalStepperTitleBelowState extends State<VerticalStepperTitleBelow> {
       body: EasyStepper(
         lineStyle: const LineStyle(
           lineType: LineType.normal,
+          verticalLinePadding: EdgeInsets.symmetric(vertical: 8),
           // lineThickness: 250,
         ),
         activeStep: activeStep,
