@@ -1,3 +1,10 @@
+## 1.1.0
+
+### Tuesday, 19th May, 2026
+* **Feat**: Added `verticalTitlePlacement` to `EasyStepper`, allowing vertical stepper titles to be rendered either beside the icon (`VerticalTitlePlacement.side`, default) or below the icon (`VerticalTitlePlacement.belowIcon`), with correct LTR/RTL handling.
+* **Feat**: Added `LineStyle.verticalLinePadding` to add extra spacing around the connecting line when titles are placed below the icon.
+* **Chore**: Added a "Vertical Stepper (Title Below)" example screen.
+
 ## 1.0.1
 
 ### Wednesday, 31st Dec, 2025
