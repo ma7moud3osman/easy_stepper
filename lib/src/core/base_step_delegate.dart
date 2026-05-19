@@ -35,15 +35,10 @@ class BaseStepDelegate extends MultiChildLayoutDelegate {
         const BoxConstraints(),
       );
 
-      if (direction == Axis.horizontal ||
-          verticalTitlePlacement == VerticalTitlePlacement.belowIcon) {
-        final stepOffset = Offset(
-          (size.width - stepSize.width) / 2,
-          direction == Axis.horizontal
-              ? 0
-              : (placeTitleAtStart ? titleSize.height + titleGap : 0),
-        );
-
+      if (direction == Axis.horizontal) {
+        // Horizontal stepper: keep the existing behavior (step at the top,
+        // title either above or below depending on `placeTitleAtStart`).
+        final stepOffset = Offset((size.width - stepSize.width) / 2, 0);
         positionChild(BaseStepElem.step, stepOffset);
 
         final titleX =
@@ -52,7 +47,31 @@ class BaseStepDelegate extends MultiChildLayoutDelegate {
             ? stepOffset.dy - titleSize.height - titleGap
             : stepOffset.dy + stepSize.height + titleGap;
         positionChild(BaseStepElem.title, Offset(titleX, titleY));
+      } else if (verticalTitlePlacement == VerticalTitlePlacement.belowIcon) {
+        // Vertical stepper with title below the icon:
+        // `BaseStep` reserves extra height using an estimated title height.
+        // Center the actual content block (title + gap + step) within that
+        // reserved height so the connector line doesn't appear too far below
+        // the title.
+        final contentHeight = stepSize.height + titleGap + titleSize.height;
+        final contentTop = (size.height - contentHeight) / 2;
+
+        final stepOffset = Offset(
+          (size.width - stepSize.width) / 2,
+          contentTop + (placeTitleAtStart ? titleSize.height + titleGap : 0),
+        );
+        positionChild(BaseStepElem.step, stepOffset);
+
+        final titleX =
+            stepOffset.dx + (stepSize.width / 2) - (titleSize.width / 2);
+        final titleY = placeTitleAtStart
+            ? contentTop
+            : stepOffset.dy + stepSize.height + titleGap;
+        positionChild(BaseStepElem.title, Offset(titleX, titleY));
       } else {
+        // Vertical stepper with side title: center the step vertically and
+        // place the title to the left/right depending on RTL and
+        // `placeTitleAtStart`.
         final stepOffset = Offset(
           (size.width - stepSize.width) / 2,
           (size.height - stepSize.height) / 2,
