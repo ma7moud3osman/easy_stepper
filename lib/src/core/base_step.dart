@@ -56,6 +56,7 @@ class BaseStep extends StatelessWidget {
     required this.showScrollBar,
     required this.maxTitleLines,
     required this.titleTextStyle,
+    required this.verticalTitlePlacement,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -96,26 +97,37 @@ class BaseStep extends StatelessWidget {
   final Axis direction;
   final int maxTitleLines;
   final TextStyle? titleTextStyle;
+  final VerticalTitlePlacement verticalTitlePlacement;
 
   @override
   Widget build(BuildContext context) {
     final textHight = max(1, maxTitleLines) * 20 + 15;
+    const titleGap = 8.0;
+    final isVertical = direction == Axis.vertical;
+    final showVerticalTitleBelow = showTitle &&
+        isVertical &&
+        verticalTitlePlacement == VerticalTitlePlacement.belowIcon;
     return SizedBox(
       width: direction == Axis.vertical ? null : (radius * 2) + (padding ?? 0),
       height: showScrollBar
           ? 20 +
               (showTitle && direction == Axis.horizontal
                   ? radius * 2 + textHight
-                  : radius * 2)
+                  : showVerticalTitleBelow
+                      ? radius * 2 + textHight + titleGap
+                      : radius * 2)
           : (showTitle && direction == Axis.horizontal
               ? radius * 2 + textHight
-              : radius * 2),
+              : showVerticalTitleBelow
+                  ? radius * 2 + textHight + titleGap
+                  : radius * 2),
       child: CustomMultiChildLayout(
         delegate: BaseStepDelegate(
           stepRadius: radius,
           placeTitleAtStart: step.placeTitleAtStart || step.topTitle,
           direction: direction,
           textDirection: textDirection ?? Directionality.of(context),
+          verticalTitlePlacement: verticalTitlePlacement,
         ),
         children: [
           LayoutId(

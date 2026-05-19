@@ -13,6 +13,7 @@ class LineStyle {
     this.lineWidth = 4,
     this.lineThickness = 1,
     this.lineSpace = 5,
+    this.verticalLinePadding = EdgeInsets.zero,
     this.unreachedLineType,
     this.progressColor,
     this.progress,
@@ -47,6 +48,12 @@ class LineStyle {
 
   /// The space between individual dot within the line that separates the steps.
   final double lineSpace;
+
+  /// Extra padding around vertical lines when using [VerticalTitlePlacement.belowIcon].
+  ///
+  /// This helps avoid the line visually touching the next step icon when the
+  /// title is rendered below the icon.
+  final EdgeInsetsGeometry verticalLinePadding;
 
   /// The type of the lines [normal, dotted].
   final LineType lineType;

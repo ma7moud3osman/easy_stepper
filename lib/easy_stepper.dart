@@ -70,6 +70,7 @@ class EasyStepper extends StatefulWidget {
     this.lineStyle,
     this.maxTitleLines = 2,
     this.titleTextStyle,
+    this.verticalTitlePlacement = VerticalTitlePlacement.side,
   })  : assert(maxReachedStep == null || reachedSteps == null,
             'only "maxReachedStep" or "reachedSteps" allowed'),
         super(key: key);
@@ -223,6 +224,9 @@ class EasyStepper extends StatefulWidget {
 
   /// The text style of step title
   final TextStyle? titleTextStyle;
+
+  /// Where to render titles for a vertical stepper.
+  final VerticalTitlePlacement verticalTitlePlacement;
 
   @override
   State<EasyStepper> createState() => _EasyStepperState();
@@ -472,6 +476,7 @@ class _EasyStepperState extends State<EasyStepper> {
             direction: widget.direction,
             maxTitleLines: widget.maxTitleLines,
             titleTextStyle: widget.titleTextStyle,
+            verticalTitlePlacement: widget.verticalTitlePlacement,
             enableStepTapping: widget.enableStepTapping,
             steppingEnabled: widget.steppingEnabled,
             selectedIndex: _selectedIndex,
@@ -565,6 +570,7 @@ class _EasyStepperState extends State<EasyStepper> {
                     direction: widget.direction,
                     maxTitleLines: widget.maxTitleLines,
                     titleTextStyle: widget.titleTextStyle,
+                    verticalTitlePlacement: widget.verticalTitlePlacement,
                     enableStepTapping: widget.enableStepTapping,
                     steppingEnabled: widget.steppingEnabled,
                     selectedIndex: _selectedIndex,
@@ -633,6 +639,7 @@ class _EasyStepperState extends State<EasyStepper> {
                     direction: widget.direction,
                     maxTitleLines: widget.maxTitleLines,
                     titleTextStyle: widget.titleTextStyle,
+                    verticalTitlePlacement: widget.verticalTitlePlacement,
                     enableStepTapping: widget.enableStepTapping,
                     steppingEnabled: widget.steppingEnabled,
                     selectedIndex: _selectedIndex,
@@ -676,6 +683,12 @@ class _EasyStepperState extends State<EasyStepper> {
   Widget _buildLine(int index, Axis axis) {
     final step = widget.steps[index];
     final isVertical = axis == Axis.vertical;
+    final EdgeInsetsGeometry verticalTitleBelowLinePadding =
+        widget.direction == Axis.vertical &&
+                widget.verticalTitlePlacement ==
+                    VerticalTitlePlacement.belowIcon
+            ? lineStyle.verticalLinePadding
+            : EdgeInsets.zero;
 
     return index < widget.steps.length - 1
         ? isVertical
@@ -693,7 +706,7 @@ class _EasyStepperState extends State<EasyStepper> {
                                   (lineStyle.lineThickness / 2))
                               : 0,
                           bottom: 0,
-                        ),
+                        ).add(verticalTitleBelowLinePadding),
                         child: lineStyle.progress != null &&
                                 index == widget.activeStep
                             ? _buildProgressLine(index, axis)
@@ -708,7 +721,7 @@ class _EasyStepperState extends State<EasyStepper> {
                                 (lineStyle.lineThickness / 2))
                             : 0,
                         bottom: 0,
-                      ),
+                      ).add(verticalTitleBelowLinePadding),
                       child: lineStyle.progress != null &&
                               index == widget.activeStep
                           ? _buildProgressLine(index, axis)

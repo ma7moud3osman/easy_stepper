@@ -45,6 +45,7 @@ class StepBuilder extends StatelessWidget {
     required this.direction,
     required this.maxTitleLines,
     required this.titleTextStyle,
+    required this.verticalTitlePlacement,
     required this.enableStepTapping,
     required this.steppingEnabled,
     required this.selectedIndex,
@@ -93,6 +94,7 @@ class StepBuilder extends StatelessWidget {
   final Axis direction;
   final int maxTitleLines;
   final TextStyle? titleTextStyle;
+  final VerticalTitlePlacement verticalTitlePlacement;
   final bool enableStepTapping;
   final bool steppingEnabled;
   final int selectedIndex;
@@ -140,6 +142,7 @@ class StepBuilder extends StatelessWidget {
       direction: direction,
       maxTitleLines: maxTitleLines,
       titleTextStyle: titleTextStyle,
+      verticalTitlePlacement: verticalTitlePlacement,
       onStepSelected: enableStepTapping ? onStepSelected : null,
     );
   }
