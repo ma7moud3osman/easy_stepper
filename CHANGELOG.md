@@ -1,3 +1,11 @@
+## 1.1.1
+
+### Thursday, 23rd July, 2026
+* **Docs**: Refreshed branding — new logo and cover image, plus a square package logo shown on pub.dev (via `screenshots`).
+* **Docs**: Rebuilt the README around stepper types, each with animated demos and collapsible, per-type example code.
+* **Docs**: Added an app-mockup showcase at the top of the README.
+* **Chore**: Updated the package description.
+
 ## 1.1.0
 
 ### Tuesday, 19th May, 2026

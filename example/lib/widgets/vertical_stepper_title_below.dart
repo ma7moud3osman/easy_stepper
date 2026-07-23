@@ -6,7 +6,8 @@ class VerticalStepperTitleBelow extends StatefulWidget {
   const VerticalStepperTitleBelow({super.key});
 
   @override
-  State<VerticalStepperTitleBelow> createState() => _VerticalStepperTitleBelowState();
+  State<VerticalStepperTitleBelow> createState() =>
+      _VerticalStepperTitleBelowState();
 }
 
 class _VerticalStepperTitleBelowState extends State<VerticalStepperTitleBelow> {

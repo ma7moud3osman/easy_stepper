@@ -18,6 +18,13 @@
 
 Easy Stepper guides your users through a flow one step at a time — showing progress or collecting information in clear, organized steps.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_horizontal.gif" width="200" alt="Horizontal checkout" />
+  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_vertical.gif" width="200" alt="Vertical order tracking" />
+  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_delivery.gif" width="200" alt="Delivery status" />
+  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_onboarding.gif" width="200" alt="Onboarding" />
+</p>
+
 ## Install
 
 In the `pubspec.yaml` of your flutter project, add the following dependency:
@@ -50,7 +57,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 
 ## 🎬 Stepper types
 
-`EasyStepper` is one widget with many looks. Each type below shows a **full app example** (how it feels inside a real screen) followed by the **variations** you can produce, and a collapsible code snippet.
+`EasyStepper` is one widget with many looks. The app mockups above show these types inside real screens — below, each type lists the **variations** you can produce, with a collapsible code snippet.
 
 ---
 
@@ -58,32 +65,30 @@ import 'package:easy_stepper/easy_stepper.dart';
 
 Icons or custom content in a row, with titles above/below/none and dotted or solid connectors — the everyday wizard.
 
-<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_horizontal.gif" width="300" alt="Horizontal checkout flow" />
-
 **Variations**
 
 <table>
 <tr>
 <td align="center">
 
-**Titles below · dotted**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_titles_dotted.gif" width="340" alt="Titles below · dotted" />
+<b>Titles below · dotted</b><br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_titles_dotted.gif" width="340" alt="Titles below · dotted" />
 
 </td>
 <td align="center">
 
-**No titles · solid**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_notitle_solid.gif" width="340" alt="No titles · solid" />
+<b>No titles · solid</b><br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_notitle_solid.gif" width="340" alt="No titles · solid" />
 
 </td>
 </tr>
 <tr>
 <td align="center">
 
-**Rounded rectangle**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_rrect.gif" width="340" alt="Rounded rectangle" />
+<b>Rounded rectangle</b><br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_rrect.gif" width="340" alt="Rounded rectangle" />
 
 </td>
 <td align="center">
 
-**Line text**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_linetext.gif" width="340" alt="Line text" />
+<b>Line text</b><br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_linetext.gif" width="340" alt="Line text" />
 
 </td>
 </tr>
@@ -127,8 +132,6 @@ EasyStepper(
 ### 🧵 Vertical
 
 Set `direction: Axis.vertical` for timelines and tracking screens.
-
-<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_vertical.gif" width="300" alt="Vertical order-tracking flow" />
 
 **Variation**
 
@@ -188,8 +191,6 @@ EasyStepper(
 
 Minimal dots with titles alternating above and below the line — great for compact status bars.
 
-<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_delivery.gif" width="300" alt="Delivery status flow" />
-
 **Variation**
 
 <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/dots_topbottom.gif" width="680" alt="Alternating top and bottom titles" />
@@ -238,8 +239,6 @@ EasyStepper(
 ### 🖼️ Custom image
 
 Any widget can be a step via `customStep` — here, images make an onboarding flow.
-
-<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_onboarding.gif" width="300" alt="Image onboarding flow" />
 
 **Variation**
 

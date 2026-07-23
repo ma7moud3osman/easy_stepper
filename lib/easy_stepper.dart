@@ -683,12 +683,11 @@ class _EasyStepperState extends State<EasyStepper> {
   Widget _buildLine(int index, Axis axis) {
     final step = widget.steps[index];
     final isVertical = axis == Axis.vertical;
-    final EdgeInsetsGeometry verticalTitleBelowLinePadding =
-        widget.direction == Axis.vertical &&
-                widget.verticalTitlePlacement ==
-                    VerticalTitlePlacement.belowIcon
-            ? lineStyle.verticalLinePadding
-            : EdgeInsets.zero;
+    final EdgeInsetsGeometry verticalTitleBelowLinePadding = widget.direction ==
+                Axis.vertical &&
+            widget.verticalTitlePlacement == VerticalTitlePlacement.belowIcon
+        ? lineStyle.verticalLinePadding
+        : EdgeInsets.zero;
 
     return index < widget.steps.length - 1
         ? isVertical
