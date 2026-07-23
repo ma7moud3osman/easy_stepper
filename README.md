@@ -1,4 +1,4 @@
-![Easy Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/logo.png?raw=true)
+![Easy Stepper](https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/logo.png)
 
 ## About
 
@@ -12,11 +12,11 @@
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](https://github.com/ma7moud3osman/easy_stepper/blob/main/LICENSE)
 
 
-A fully customizable, beautiful and easy to use stepper widgets with different variations.
+**Guide users, step by step.** A fully customizable, beautiful and easy-to-use stepper widget with different variations.
 
 ## Description
 
-The stepper widgets help you to show or collect information from users using organized steps.
+Easy Stepper guides your users through a flow one step at a time — showing progress or collecting information in clear, organized steps.
 
 ## Install
 

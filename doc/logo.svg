@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Easy Stepper">
+  <defs>
+    <linearGradient id="v" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9A6BFF"/><stop offset="1" stop-color="#5B21B6"/>
+    </linearGradient>
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C3AED"/><stop offset="1" stop-color="#FB8C3E"/>
+    </linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9A6BFF"/><stop offset="1" stop-color="#FB8C3E"/>
+    </linearGradient>
+    <radialGradient id="g" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FB8C3E" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FB8C3E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg" cx="82%" cy="8%" r="95%">
+      <stop offset="0" stop-color="#241C36"/><stop offset="55%" stop-color="#1B1628"/><stop offset="100%" stop-color="#131019"/>
+    </radialGradient>
+    <style>
+      .pulse{transform-box:fill-box;transform-origin:center;opacity:0}
+      @media (prefers-reduced-motion:no-preference){
+        .pulse{animation:es-pulse 2.6s ease-out infinite}
+        @keyframes es-pulse{0%{transform:scale(1);opacity:.5}70%{transform:scale(1.7);opacity:0}100%{opacity:0}}
+      }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="300" rx="28" fill="url(#bg)"/>
+
+  <!-- wordmark (rounded geometric face; outline for a fully portable asset) -->
+  <g font-family="'SF Pro Rounded','Nunito','Quicksand',system-ui,sans-serif" font-weight="800" letter-spacing="-1.6">
+    <text x="82" y="158" font-size="76" fill="#F7F5FB">Easy <tspan fill="url(#word)">Stepper</tspan></text>
+  </g>
+  <text x="86" y="200" font-family="'SF Pro Rounded','Nunito',system-ui,sans-serif" font-weight="700" font-size="16" letter-spacing="2.6" fill="#9A93AD">GUIDE USERS · STEP BY STEP</text>
+
+  <!-- the mark: finished · active · upcoming -->
+  <g transform="translate(730,95)">
+    <!-- progress connector (done -> active) — rect (not a line) so the gradient resolves in all renderers;
+         runs from under the done circle's centre to under the active node, so no gap shows -->
+    <rect x="52" y="50.5" width="100" height="9" rx="4.5" fill="url(#p)"/>
+    <!-- remaining connector (active -> upcoming) -->
+    <line x1="213" y1="55" x2="282" y2="55" stroke="#3A3348" stroke-width="9" stroke-linecap="round" stroke-dasharray="2 15"/>
+
+    <!-- step 1 : FINISHED -->
+    <circle cx="52" cy="55" r="26" fill="url(#v)"/>
+    <path d="M41 55 l8 8 l16 -18" fill="none" stroke="#F7F5FB" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- step 2 : ACTIVE -->
+    <circle class="pulse" cx="180" cy="55" r="30" fill="none" stroke="#FB8C3E" stroke-width="3"/>
+    <circle cx="180" cy="55" r="42" fill="url(#g)"/>
+    <circle cx="180" cy="55" r="30" fill="#FFFFFF" stroke="#FB8C3E" stroke-width="5.5"/>
+    <circle cx="180" cy="55" r="8.5" fill="#FB8C3E"/>
+
+    <!-- step 3 : UPCOMING -->
+    <circle cx="308" cy="55" r="25" fill="none" stroke="#6C6484" stroke-width="3.5" stroke-dasharray="4 6"/>
+    <circle cx="308" cy="55" r="5" fill="#6C6484" opacity=".55"/>
+  </g>
+</svg>
