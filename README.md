@@ -48,238 +48,128 @@ import 'package:easy_stepper/easy_stepper.dart';
 * To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
 
-## Features
+## 🎬 Stepper types
 
-Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. [See Example](https://pub.dev/packages/easy_stepper/example).
+`EasyStepper` is one widget with many looks. Each type below shows a **full app example** (how it feels inside a real screen) followed by the **variations** you can produce, and a collapsible code snippet.
 
- 
+---
 
-* __Top And Bottom Title:__  
+### 🧭 Horizontal
 
-![topAndBottomTitle](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/topAndBottomTitle.gif?raw=true)
+Icons or custom content in a row, with titles above/below/none and dotted or solid connectors — the everyday wizard.
 
-Example:
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_horizontal.gif" width="300" alt="Horizontal checkout flow" />
 
-```dart
-    EasyStepper(
-        activeStep: activeStep,
-        lineLength: 70,
-        lineSpace: 0,
-        lineType: LineType.normal,
-        defaultLineColor: Colors.white,
-        finishedLineColor: Colors.orange,
-        activeStepTextColor: Colors.black87,
-        finishedStepTextColor: Colors.black87,
-        internalPadding: 0,
-        showLoadingAnimation: false,
-        stepRadius: 8,
-        showStepBorder: false,
-        lineDotRadius: 1.5,
-        steps: [
-          EasyStep(
-            customStep: CircleAvatar(
-              radius: 8,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                    activeStep >= 0 ? Colors.orange : Colors.white,
-              ),
-            ),
-            title: 'Waiting',
-          ),
-          EasyStep(
-            customStep: CircleAvatar(
-              radius: 8,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                    activeStep >= 1 ? Colors.orange : Colors.white,
-              ),
-            ),
-            title: 'Order Received',
-            placeTitleAtStart: true,
-          ),
-          EasyStep(
-            customStep: CircleAvatar(
-              radius: 8,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                    activeStep >= 2 ? Colors.orange : Colors.white,
-              ),
-            ),
-            title: 'Preparing',
-          ),
-          EasyStep(
-            customStep: CircleAvatar(
-              radius: 8,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                    activeStep >= 3 ? Colors.orange : Colors.white,
-              ),
-            ),
-            title: 'On Way',
-            placeTitleAtStart: true,
-          ),
-          EasyStep(
-            customStep: CircleAvatar(
-              radius: 8,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                    activeStep >= 4 ? Colors.orange : Colors.white,
-              ),
-            ),
-            title: 'Delivered',
-          ),
-        ],
-        onStepReached: (index) =>
-            setState(() => activeStep = index),
-    ),
-```
+**Variations**
 
-## Custom-Stepper
+<table>
+<tr>
+<td align="center">
 
-* __With Image:__  
+**Titles below · dotted**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_titles_dotted.gif" width="340" alt="Titles below · dotted" />
 
-![dash-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/dash_stepper.gif?raw=true)
+</td>
+<td align="center">
 
-Example:
+**No titles · solid**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_notitle_solid.gif" width="340" alt="No titles · solid" />
+
+</td>
+</tr>
+<tr>
+<td align="center">
+
+**Rounded rectangle**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_rrect.gif" width="340" alt="Rounded rectangle" />
+
+</td>
+<td align="center">
+
+**Line text**<br/><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_linetext.gif" width="340" alt="Line text" />
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>View example code</b> &nbsp;·&nbsp; 25 lines</summary>
 
 ```dart
- EasyStepper(
-                  activeStep: activeStep,
-                  lineLength: 50,
-                  stepShape: StepShape.rRectangle,
-                  stepBorderRadius: 15,
-                  borderThickness: 2,
-                  padding: 20,
-                  stepRadius: 28,
-                  finishedStepBorderColor: Colors.deepOrange,
-                  finishedStepTextColor: Colors.deepOrange,
-                  finishedStepBackgroundColor: Colors.deepOrange,
-                  activeStepIconColor: Colors.deepOrange,
-                  showLoadingAnimation: false,
-                  steps: [
-                    EasyStep(
-                      customStep: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Opacity(
-                          opacity: activeStep >= 0 ? 1 : 0.3,
-                          child: Image.asset('assets/1.png'),
-                        ),
-                      ),
-                      customTitle: const Text(
-                        'Dash 1',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    EasyStep(
-                      customStep: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Opacity(
-                          opacity: activeStep >= 1 ? 1 : 0.3,
-                          child: Image.asset('assets/2.png'),
-                        ),
-                      ),
-                      customTitle: const Text(
-                        'Dash 2',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    EasyStep(
-                      customStep: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Opacity(
-                          opacity: activeStep >= 2 ? 1 : 0.3,
-                          child: Image.asset('assets/3.png'),
-                        ),
-                      ),
-                      customTitle: const Text(
-                        'Dash 3',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    EasyStep(
-                      customStep: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Opacity(
-                          opacity: activeStep >= 3 ? 1 : 0.3,
-                          child: Image.asset('assets/4.png'),
-                        ),
-                      ),
-                      customTitle: const Text(
-                        'Dash 4',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    EasyStep(
-                      customStep: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Opacity(
-                          opacity: activeStep >= 4 ? 1 : 0.3,
-                          child: Image.asset('assets/5.png'),
-                        ),
-                      ),
-                      customTitle: const Text(
-                        'Dash 5',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                  onStepReached: (index) => setState(() => activeStep = index),
-                ),
+EasyStepper(
+  activeStep: activeStep,
+  stepRadius: 28,
+  showLoadingAnimation: false,
+  stepBorderRadius: 15,
+  finishedStepBackgroundColor: const Color(0xFF7C3AED),
+  activeStepBackgroundColor: const Color(0xFF7C3AED),
+  finishedStepTextColor: const Color(0xFF7C3AED),
+  lineStyle: const LineStyle(
+    lineLength: 60,
+    lineType: LineType.normal,
+    lineThickness: 3,
+    unreachedLineType: LineType.dashed,
+    defaultLineColor: Color(0xFFDCD7E8),
+    finishedLineColor: Color(0xFF7C3AED),
+  ),
+  steps: const [
+    EasyStep(icon: Icon(Icons.shopping_cart), title: 'Cart'),
+    EasyStep(icon: Icon(Icons.person), title: 'Address'),
+    EasyStep(icon: Icon(Icons.receipt_long), title: 'Checkout'),
+    EasyStep(icon: Icon(Icons.star), title: 'Review'),
+    EasyStep(icon: Icon(Icons.check_circle), title: 'Done'),
+  ],
+  onStepReached: (index) => setState(() => activeStep = index),
+)
 ```
 
+</details>
 
-## Horizontal-Stepper
+---
 
-* __With Title:__  
+### 🧵 Vertical
 
-![Horizontal-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper-horizontal.gif?raw=true)
+Set `direction: Axis.vertical` for timelines and tracking screens.
 
-![horizontal_dotted](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_dotted.gif?raw=true)
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_vertical.gif" width="300" alt="Vertical order-tracking flow" />
 
+**Variation**
 
-* __Without Title:__  
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/v_icons.gif" width="320" alt="Vertical icons with titles beside" />
 
-![Horizontal-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_horizontal_2.gif?raw=true)
+<details>
+<summary><b>View example code</b> &nbsp;·&nbsp; 20 lines</summary>
 
+```dart
+EasyStepper(
+  activeStep: activeStep,
+  direction: Axis.vertical,
+  showTitle: true,
+  stepRadius: 26,
+  finishedStepBackgroundColor: const Color(0xFF7C3AED),
+  activeStepBackgroundColor: const Color(0xFF7C3AED),
+  lineStyle: const LineStyle(
+    lineType: LineType.dotted,
+    unreachedLineType: LineType.dashed,
+  ),
+  steps: const [
+    EasyStep(icon: Icon(Icons.shopping_cart), title: 'Order placed'),
+    EasyStep(icon: Icon(Icons.verified), title: 'Confirmed'),
+    EasyStep(icon: Icon(Icons.inventory_2), title: 'Preparing'),
+    EasyStep(icon: Icon(Icons.local_shipping), title: 'Shipped'),
+    EasyStep(icon: Icon(Icons.home), title: 'Delivered'),
+  ],
+  onStepReached: (index) => setState(() => activeStep = index),
+)
+```
 
-* __With Line Text:__  
+</details>
 
-![horizontal_with_text](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/Horizontal_with_text.gif?raw=true)
+#### Title placement
 
-![Horizontal-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/horizontal_text_line.gif?raw=true)
+For vertical steppers you can control where each step title is rendered using `verticalTitlePlacement`:
 
+* `VerticalTitlePlacement.side` *(default)* — title beside the icon (left/right depending on text direction and `placeTitleAtStart`).
+* `VerticalTitlePlacement.belowIcon` — title below the icon.
 
-* __Round Rectangle Border:__  
-
-![RRect_Horizontal_Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/RRect_Horizontal_Stepper.gif?raw=true)
- 
-
-
-## Vertical-Stepper
-
-![Vertical-Stepper](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical.gif?raw=true)        ![Vertical-Stepper-3](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_3.gif?raw=true)    ![Vertical-Stepper-2](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/stepper_vertical_2.gif?raw=true)   ![Vertical-Stepper-4](https://github.com/ma7moud3osman/showcase/blob/main/easy_stepper/vertical_line.gif?raw=true)     
-
-### Title placement
-
-For vertical steppers you can control where each step title is rendered using
-`verticalTitlePlacement`:
-
-* `VerticalTitlePlacement.side` *(default)* — title is placed beside the icon
-  (left/right depending on text direction and `placeTitleAtStart`).
-* `VerticalTitlePlacement.belowIcon` — title is placed below the icon.
-
-When using `VerticalTitlePlacement.belowIcon`, you can add extra spacing around
-the connecting line via `LineStyle.verticalLinePadding`:
+When using `VerticalTitlePlacement.belowIcon`, add extra spacing around the connecting line via `LineStyle.verticalLinePadding`:
 
 ```dart
 EasyStepper(
@@ -292,6 +182,104 @@ EasyStepper(
 )
 ```
 
+---
+
+### ⚪ Dots · top &amp; bottom titles
+
+Minimal dots with titles alternating above and below the line — great for compact status bars.
+
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_delivery.gif" width="300" alt="Delivery status flow" />
+
+**Variation**
+
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/dots_topbottom.gif" width="680" alt="Alternating top and bottom titles" />
+
+<details>
+<summary><b>View example code</b> &nbsp;·&nbsp; 31 lines</summary>
+
+```dart
+EasyStepper(
+  activeStep: activeStep,
+  stepRadius: 8,
+  showStepBorder: false,
+  showLoadingAnimation: false,
+  titlesAreLargerThanSteps: true,
+  lineStyle: const LineStyle(
+    lineLength: 70,
+    lineType: LineType.normal,
+    finishedLineColor: Color(0xFF7C3AED),
+  ),
+  steps: [
+    EasyStep(
+      customStep: CircleAvatar(
+        radius: 8,
+        backgroundColor: activeStep >= 0 ? violet : grey,
+      ),
+      title: 'Waiting',
+    ),
+    EasyStep(
+      customStep: CircleAvatar(
+        radius: 8,
+        backgroundColor: activeStep >= 1 ? violet : grey,
+      ),
+      title: 'Received',
+      placeTitleAtStart: true,
+    ),
+    // ...remaining steps
+  ],
+  onStepReached: (index) => setState(() => activeStep = index),
+)
+```
+
+</details>
+
+---
+
+### 🖼️ Custom image
+
+Any widget can be a step via `customStep` — here, images make an onboarding flow.
+
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_onboarding.gif" width="300" alt="Image onboarding flow" />
+
+**Variation**
+
+<img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/h_image.gif" width="680" alt="Circular image steps" />
+
+<details>
+<summary><b>View example code</b> &nbsp;·&nbsp; 28 lines</summary>
+
+```dart
+EasyStepper(
+  activeStep: activeStep,
+  stepShape: StepShape.rRectangle,
+  stepBorderRadius: 15,
+  stepRadius: 28,
+  borderThickness: 2,
+  finishedStepBackgroundColor: const Color(0xFF7C3AED),
+  activeStepIconColor: const Color(0xFF7C3AED),
+  lineStyle: const LineStyle(
+    lineLength: 50,
+    lineType: LineType.normal,
+    unreachedLineType: LineType.dashed,
+  ),
+  steps: [
+    for (int i = 0; i < 5; i++)
+      EasyStep(
+        customStep: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Opacity(
+            opacity: activeStep >= i ? 1 : 0.3,
+            child: Image.asset('assets/${i + 1}.png'),
+          ),
+        ),
+        customTitle: Text('Dash ${i + 1}', textAlign: TextAlign.center),
+      ),
+  ],
+  onStepReached: (index) => setState(() => activeStep = index),
+)
+```
+
+</details>
 
 
 ## Contributions
