@@ -57,6 +57,7 @@ class BaseStep extends StatelessWidget {
     required this.maxTitleLines,
     required this.titleTextStyle,
     required this.verticalTitlePlacement,
+    this.verticalAlignment = CrossAxisAlignment.center,
   }) : super(key: key);
   final EasyStep step;
   final bool isActive;
@@ -99,6 +100,9 @@ class BaseStep extends StatelessWidget {
   final TextStyle? titleTextStyle;
   final VerticalTitlePlacement verticalTitlePlacement;
 
+  /// Horizontal alignment of the icon within a vertical stepper.
+  final CrossAxisAlignment verticalAlignment;
+
   @override
   Widget build(BuildContext context) {
     final textHight = max(1, maxTitleLines) * 20 + 15;
@@ -128,6 +132,7 @@ class BaseStep extends StatelessWidget {
           direction: direction,
           textDirection: textDirection ?? Directionality.of(context),
           verticalTitlePlacement: verticalTitlePlacement,
+          verticalAlignment: verticalAlignment,
         ),
         children: [
           LayoutId(

@@ -4,6 +4,7 @@ import 'package:example/widgets/icon_stepper_progress.dart';
 import 'package:example/widgets/image_stepper.dart';
 import 'package:example/widgets/reached_steps_stepper.dart';
 import 'package:example/widgets/top_titles_stepper.dart';
+import 'package:example/widgets/vertical_alignment_stepper.dart';
 import 'package:example/widgets/vertical_stepper.dart';
 import 'package:example/widgets/vertical_stepper_title_below.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,11 @@ class _MyAppState extends State<MyApp> {
                     NavigatorButton(
                       title: 'Vertical Stepper (Title Below)',
                       screen: VerticalStepperTitleBelow(),
+                    ),
+                    SizedBox(height: 20),
+                    NavigatorButton(
+                      title: 'Vertical Stepper (Alignment)',
+                      screen: VerticalAlignmentStepper(),
                     ),
                     SizedBox(height: 20),
                     NavigatorButton(

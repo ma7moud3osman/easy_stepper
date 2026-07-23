@@ -48,6 +48,7 @@ class EasyStepper extends StatefulWidget {
     this.disableScroll = false,
     this.showTitle = true,
     this.alignment = Alignment.center,
+    this.verticalAlignment,
     this.fitWidth = true,
     this.showScrollbar = false,
     this.padding,
@@ -164,6 +165,16 @@ class EasyStepper extends StatefulWidget {
 
   /// Specifies the alignment of IconStepper widget.
   final AlignmentGeometry alignment;
+
+  /// Horizontal alignment of the steps when [direction] is [Axis.vertical].
+  ///
+  /// Defaults to `null`, which keeps the previous behavior (steps fill the
+  /// available width and stay centered). Set it to [CrossAxisAlignment.start]
+  /// to align the steps to the leading edge, [CrossAxisAlignment.end] to the
+  /// trailing edge, or [CrossAxisAlignment.center] to center them
+  /// (start/end respect the ambient text direction). Has no effect on
+  /// horizontal steppers.
+  final CrossAxisAlignment? verticalAlignment;
 
   /// The amount of padding around every step.
   final double internalPadding;
@@ -477,6 +488,8 @@ class _EasyStepperState extends State<EasyStepper> {
             maxTitleLines: widget.maxTitleLines,
             titleTextStyle: widget.titleTextStyle,
             verticalTitlePlacement: widget.verticalTitlePlacement,
+            verticalAlignment:
+                widget.verticalAlignment ?? CrossAxisAlignment.center,
             enableStepTapping: widget.enableStepTapping,
             steppingEnabled: widget.steppingEnabled,
             selectedIndex: _selectedIndex,
@@ -571,6 +584,8 @@ class _EasyStepperState extends State<EasyStepper> {
                     maxTitleLines: widget.maxTitleLines,
                     titleTextStyle: widget.titleTextStyle,
                     verticalTitlePlacement: widget.verticalTitlePlacement,
+                    verticalAlignment:
+                        widget.verticalAlignment ?? CrossAxisAlignment.center,
                     enableStepTapping: widget.enableStepTapping,
                     steppingEnabled: widget.steppingEnabled,
                     selectedIndex: _selectedIndex,
@@ -640,6 +655,8 @@ class _EasyStepperState extends State<EasyStepper> {
                     maxTitleLines: widget.maxTitleLines,
                     titleTextStyle: widget.titleTextStyle,
                     verticalTitlePlacement: widget.verticalTitlePlacement,
+                    verticalAlignment:
+                        widget.verticalAlignment ?? CrossAxisAlignment.center,
                     enableStepTapping: widget.enableStepTapping,
                     steppingEnabled: widget.steppingEnabled,
                     selectedIndex: _selectedIndex,
@@ -680,6 +697,33 @@ class _EasyStepperState extends State<EasyStepper> {
         Theme.of(context).colorScheme.primary;
   }
 
+  /// Shifts the vertical connector line so it stays centered under the step
+  /// icon for the current [EasyStepper.verticalAlignment]. Returns [line]
+  /// unchanged for the default (centered) behavior.
+  Widget _alignVerticalLine(Widget line) {
+    final align = widget.verticalAlignment;
+    if (align == null || align == CrossAxisAlignment.center) {
+      return line;
+    }
+    final isStart = align == CrossAxisAlignment.start;
+    final pad = max(0.0, widget.stepRadius - lineStyle.lineThickness / 2);
+    return SizedBox(
+      width: double.infinity,
+      child: Align(
+        alignment: isStart
+            ? AlignmentDirectional.centerStart
+            : AlignmentDirectional.centerEnd,
+        child: Padding(
+          padding: EdgeInsetsDirectional.only(
+            start: isStart ? pad : 0,
+            end: isStart ? 0 : pad,
+          ),
+          child: line,
+        ),
+      ),
+    );
+  }
+
   Widget _buildLine(int index, Axis axis) {
     final step = widget.steps[index];
     final isVertical = axis == Axis.vertical;
@@ -691,7 +735,7 @@ class _EasyStepperState extends State<EasyStepper> {
 
     return index < widget.steps.length - 1
         ? isVertical
-            ? Stack(
+            ? _alignVerticalLine(Stack(
                 alignment: Alignment.center,
                 children: [
                   if (lineStyle.lineLength == double.infinity)
@@ -739,7 +783,7 @@ class _EasyStepperState extends State<EasyStepper> {
                           ),
                     ),
                 ],
-              )
+              ))
             : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

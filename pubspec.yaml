@@ -4,7 +4,7 @@ description: Guide users step by step. A fully customizable, beautiful and
   easy-to-use Flutter stepper to show progress or collect information in
   organized steps.
 
-version: 1.1.1
+version: 1.2.0
 
 homepage: https://github.com/ma7moud3osman
 repository: https://github.com/ma7moud3osman/easy_stepper.git

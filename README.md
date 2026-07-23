@@ -18,12 +18,14 @@
 
 Easy Stepper guides your users through a flow one step at a time — showing progress or collecting information in clear, organized steps.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_horizontal.gif" width="200" alt="Horizontal checkout" />
-  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_vertical.gif" width="200" alt="Vertical order tracking" />
-  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_delivery.gif" width="200" alt="Delivery status" />
-  <img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_onboarding.gif" width="200" alt="Onboarding" />
-</p>
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_horizontal.gif" width="150" alt="Horizontal checkout" /></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_vertical.gif" width="150" alt="Vertical order tracking" /></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_delivery.gif" width="150" alt="Delivery status" /></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/ma7moud3osman/easy_stepper/main/doc/demos/mock_onboarding.gif" width="150" alt="Onboarding" /></td>
+  </tr>
+</table>
 
 ## Install
 
@@ -181,6 +183,19 @@ EasyStepper(
   lineStyle: const LineStyle(
     verticalLinePadding: EdgeInsets.symmetric(vertical: 8),
   ),
+  // ...
+)
+```
+
+#### Horizontal alignment
+
+Use `verticalAlignment` to align the steps to the leading edge, center, or
+trailing edge of a vertical stepper (defaults to centered):
+
+```dart
+EasyStepper(
+  direction: Axis.vertical,
+  verticalAlignment: CrossAxisAlignment.start, // .center (default) / .end
   // ...
 )
 ```

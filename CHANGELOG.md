@@ -1,3 +1,11 @@
+## 1.2.0
+
+### Thursday, 23rd July, 2026
+* **Feat**: Added `verticalAlignment` to align the steps of a vertical stepper to the start, center, or end — the connector line and titles follow the icons (resolves [#62](https://github.com/ma7moud3osman/easy_stepper/issues/62)).
+* **Docs**: Placed the four app mockups in a single row and made all variation demos a uniform size (equal aspect ratio).
+* **Chore**: Refined the pub.dev package logo — smaller mark with padding so it reads well as a thumbnail.
+* **Chore**: Added a "Vertical Stepper (Alignment)" example screen.
+
 ## 1.1.1
 
 ### Thursday, 23rd July, 2026

@@ -3,7 +3,7 @@
     <linearGradient id="v" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#9A6BFF"/><stop offset="1" stop-color="#5B21B6"/>
     </linearGradient>
-    <linearGradient id="pline" gradientUnits="userSpaceOnUse" x1="256" y1="150" x2="256" y2="200">
+    <linearGradient id="pline" gradientUnits="userSpaceOnUse" x1="256" y1="184" x2="256" y2="214">
       <stop offset="0" stop-color="#7C3AED"/><stop offset="1" stop-color="#FB8C3E"/>
     </linearGradient>
     <radialGradient id="glow" cx="50%" cy="50%" r="50%">
@@ -14,25 +14,25 @@
     </radialGradient>
   </defs>
 
-  <!-- tile (same dark ground as the cover) -->
+  <!-- tile -->
   <rect width="512" height="512" rx="112" fill="url(#bg)"/>
 
-  <!-- connectors first, so the nodes sit on top and hide the tucked-in ends -->
-  <!-- progress connector (done -> active): violet->amber gradient, runs under both nodes -->
-  <rect x="249" y="100" width="14" height="155" rx="7" fill="url(#pline)"/>
-  <!-- remaining connector (active -> upcoming): straight, faint, only reaches the upcoming node's border -->
-  <rect x="250" y="255" width="12" height="105" rx="6" fill="#6C6484" opacity=".4"/>
+  <!-- connectors first, so the nodes sit on top -->
+  <!-- progress connector (done -> active): violet->amber gradient -->
+  <rect x="250.5" y="140" width="11" height="116" rx="5.5" fill="url(#pline)"/>
+  <!-- remaining connector (active -> upcoming): faint, only reaches the upcoming node's border -->
+  <rect x="251" y="256" width="10" height="84" rx="5" fill="#6C6484" opacity=".4"/>
 
   <!-- step 1 : FINISHED -->
-  <circle cx="256" cy="100" r="54" fill="url(#v)"/>
-  <path d="M232 100 l16 16 l32 -36" fill="none" stroke="#F7F5FB" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="140" r="42" fill="url(#v)"/>
+  <path d="M237 140 l12 13 l25 -28" fill="none" stroke="#F7F5FB" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- step 2 : ACTIVE -->
-  <circle cx="256" cy="255" r="94" fill="url(#glow)"/>
-  <circle cx="256" cy="255" r="56" fill="#FFFFFF" stroke="#FB8C3E" stroke-width="13"/>
-  <circle cx="256" cy="255" r="18" fill="#FB8C3E"/>
+  <circle cx="256" cy="256" r="74" fill="url(#glow)"/>
+  <circle cx="256" cy="256" r="44" fill="#FFFFFF" stroke="#FB8C3E" stroke-width="11"/>
+  <circle cx="256" cy="256" r="14" fill="#FB8C3E"/>
 
   <!-- step 3 : UPCOMING -->
-  <circle cx="256" cy="410" r="50" fill="none" stroke="#6C6484" stroke-width="8" stroke-dasharray="6 12"/>
-  <circle cx="256" cy="410" r="9" fill="#6C6484"/>
+  <circle cx="256" cy="372" r="32" fill="none" stroke="#6C6484" stroke-width="6" stroke-dasharray="5 9"/>
+  <circle cx="256" cy="372" r="6" fill="#6C6484"/>
 </svg>
