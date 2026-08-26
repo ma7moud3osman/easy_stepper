@@ -1,5 +1,5 @@
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Demonstrates [EasyStepper.verticalAlignment], which controls the horizontal
 /// alignment of the steps in a vertical stepper (start / center / end).

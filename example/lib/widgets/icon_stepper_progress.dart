@@ -1,6 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 class IconStepperProgress extends StatefulWidget {
   const IconStepperProgress({super.key});

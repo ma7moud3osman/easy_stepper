@@ -1,5 +1,5 @@
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Defines the style of the lines separating steps.
 class LineStyle {

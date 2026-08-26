@@ -1,5 +1,5 @@
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SquareStepper extends StatefulWidget {
   const SquareStepper({super.key});

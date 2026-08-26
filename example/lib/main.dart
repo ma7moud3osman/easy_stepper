@@ -7,7 +7,7 @@ import 'package:example/widgets/top_titles_stepper.dart';
 import 'package:example/widgets/vertical_alignment_stepper.dart';
 import 'package:example/widgets/vertical_stepper.dart';
 import 'package:example/widgets/vertical_stepper_title_below.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'widgets/square_stepper.dart';
 
