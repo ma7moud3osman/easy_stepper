@@ -6,7 +6,7 @@ import 'package:easy_stepper/src/core/custom_scroll_behavior.dart';
 import 'package:easy_stepper/src/core/line_style.dart';
 import 'package:easy_stepper/src/core/step_builder.dart';
 import 'package:easy_stepper/src/easy_step.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'src/utils/platform_stub.dart'
     if (dart.library.io) 'src/utils/platform_io.dart';

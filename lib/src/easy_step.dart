@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 export 'package:easy_stepper/src/core/base_step.dart';
 export 'package:easy_stepper/src/core/easy_line.dart';
